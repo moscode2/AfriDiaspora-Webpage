@@ -1,0 +1,14 @@
+$ vite --port "3000" --host
+
+  VITE v6.2.0  ready in 807 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://169.254.0.21:3000/
+Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+10:57:06 AM [vite] (client) hmr update /src/components/Navbar.tsx, /src/index.css
+10:57:18 AM [vite] (client) hmr update /src/components/Hero.tsx, /src/index.css
+10:57:29 AM [vite] (client) hmr update /src/components/Section.tsx, /src/index.css
+10:57:38 AM [vite] (client) hmr update /src/components/Newsletter.tsx, /src/index.css
+10:57:52 AM [vite] (client) hmr update /src/components/Footer.tsx, /src/index.css
