@@ -1,46 +1,15 @@
-// src/pages/Category.tsx
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../data/firebase";
-
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ArticleCard from "../components/ArticleCard";
+import { useStaticData } from "../Hooks/useStaticData";
 
 export default function CategoryPage() {
   const { slug } = useParams<{ slug: string }>();
-  const [articles, setArticles] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!slug) return;
-
-    const fetchArticles = async () => {
-      setLoading(true);
-      try {
-        const q = query(
-          collection(db, "articles"),
-          where("category_slug", "==", slug),   // ✅ filter by category_slug
-          where("status", "==", "published")   // ✅ only show published
-        );
-
-        const snapshot = await getDocs(q);
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setArticles(data);
-      } catch (err) {
-        console.error("Error fetching category articles:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchArticles();
-  }, [slug]);
+  const { categories, loading, getArticlesByCategory } = useStaticData();
+  
+  const category = categories.find(cat => cat.slug === slug) || null;
+  const articles = category ? getArticlesByCategory(slug!) : [];
 
   if (loading) {
     return (
@@ -53,16 +22,32 @@ export default function CategoryPage() {
     );
   }
 
+  if (!category) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Category Not Found</h1>
+            <p className="text-gray-600">The category you're looking for doesn't exist.</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Category Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {slug?.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h1>
+          {category.description && (
+            <p className="text-gray-600 text-lg">{category.description}</p>
+          )}
         </div>
 
         {/* Articles Grid */}
@@ -74,9 +59,7 @@ export default function CategoryPage() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">
-              No articles found in this category yet.
-            </p>
+            <p className="text-gray-600 text-lg">No articles found in this category yet.</p>
           </div>
         )}
       </div>

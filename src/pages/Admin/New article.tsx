@@ -12,15 +12,16 @@ function slugify(text: string) {
     .replace(/(^-|-$)+/g, "");   // remove leading/trailing "-"
 }
 
+// ✅ categories with both name + slug
 const categories = [
-  "News",
-  "Policy & Migration",
-  "Culture & Lifestyles",
-  "Profiles & Voices",
-  "Travel & Mobility",
-  "Business & Jobs",
-  "Events",
-  "Latest Stories",
+  { name: "News", slug: "news" },
+  { name: "Policy & Migration", slug: "policy-and-migration" },
+  { name: "Culture & Lifestyles", slug: "culture-and-lifestyles" },
+  { name: "Profiles & Voices", slug: "profiles-and-voices" },
+  { name: "Travel & Mobility", slug: "travel-and-mobility" },
+  { name: "Business & Jobs", slug: "business-and-jobs" },
+  { name: "Events", slug: "events" },
+  { name: "Latest Stories", slug: "latest-stories" },
 ];
 
 export default function NewArticle() {
@@ -28,7 +29,7 @@ export default function NewArticle() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
-  const [category, setCategory] = useState(categories[0]); // default = first
+  const [category, setCategory] = useState(categories[0].slug); // default slug
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,13 +42,15 @@ export default function NewArticle() {
     setLoading(true);
     try {
       const slug = slugify(title);
+      const categoryData = categories.find((c) => c.slug === category);
 
       await addDoc(collection(db, "articles"), {
         title,
         content,
         slug,
         status,
-        category,               // ✅ add category
+        category_name: categoryData?.name || "",
+        category_slug: categoryData?.slug || "",
         created_at: Timestamp.now(),
       });
 
@@ -98,8 +101,8 @@ export default function NewArticle() {
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
           >
             {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
+              <option key={cat.slug} value={cat.slug}>
+                {cat.name}
               </option>
             ))}
           </select>
@@ -118,6 +121,7 @@ export default function NewArticle() {
           </select>
         </div>
 
+        {/* Submit */}
         <button
           type="submit"
           disabled={loading}
