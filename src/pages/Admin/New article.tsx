@@ -5,6 +5,14 @@ import { db } from "../../data/firebase";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-") // replace spaces & special chars with "-"
+    .replace(/(^-|-$)+/g, "");   // remove leading/trailing "-"
+}
+
 export default function NewArticle() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -21,12 +29,16 @@ export default function NewArticle() {
 
     setLoading(true);
     try {
+      const slug = slugify(title);
+
       await addDoc(collection(db, "articles"), {
         title,
         content,
+        slug,                 // ✅ store slug
         status,
         created_at: Timestamp.now(),
       });
+
       toast.success("Article created!");
       navigate("/admin/dashboard"); // back to dashboard
     } catch (err) {

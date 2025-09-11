@@ -6,8 +6,6 @@ import Header from "../../components/Header.tsx";
 import Footer from "../../components/Footer.tsx";
 import { db } from "../../data/firebase";
 import {
-  doc,
-  getDoc,
   collection,
   query,
   where,
@@ -35,17 +33,7 @@ export default function ArticlePage() {
   async function fetchArticle() {
     setLoading(true);
     try {
-      // 1) Try fetch by document id (fast). This assumes you used slug as doc id.
-      const directRef = doc(db, "articles", slugDecoded as string);
-      const directSnap = await getDoc(directRef);
-
-      if (directSnap.exists()) {
-        setArticle({ id: directSnap.id, ...directSnap.data() });
-        setLoading(false);
-        return;
-      }
-
-      // 2) Fallback: query by slug field
+      // ✅ Always fetch by slug field
       const q = query(collection(db, "articles"), where("slug", "==", slugDecoded));
       const snap = await getDocs(q);
 
@@ -65,7 +53,6 @@ export default function ArticlePage() {
 
   function formatDate(value: unknown) {
     if (!value) return "";
-    // Firestore Timestamp
     if (value instanceof Timestamp) {
       return value.toDate().toLocaleDateString(undefined, {
         year: "numeric",
@@ -73,7 +60,6 @@ export default function ArticlePage() {
         day: "numeric",
       });
     }
-    
     if (value && typeof value === "object" && (value as Timestamp).toDate) {
       return (value as Timestamp).toDate().toLocaleDateString(undefined, {
         year: "numeric",
@@ -81,16 +67,14 @@ export default function ArticlePage() {
         day: "numeric",
       });
     }
-    // Strings / ISO dates
     const d = new Date(String(value));
-    if (!isNaN(d.getTime())) {
-      return d.toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    }
-    return String(value);
+    return !isNaN(d.getTime())
+      ? d.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : String(value);
   }
 
   const handleShare = async () => {
@@ -105,7 +89,6 @@ export default function ArticlePage() {
         await navigator.share(shareData);
       } else {
         await navigator.clipboard.writeText(window.location.href);
-        // TODO: replace with nicer UI in production
         alert("Article link copied to clipboard!");
       }
     } catch {
@@ -150,10 +133,10 @@ export default function ArticlePage() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4 text-gray-600">
               {article.author && <span className="font-medium">By {article.author}</span>}
-              {article.published_at && (
+              {article.created_at && (
                 <div className="flex items-center space-x-1">
                   <Clock className="h-4 w-4" />
-                  <span>{formatDate(article.published_at)}</span>
+                  <span>{formatDate(article.created_at)}</span>
                 </div>
               )}
             </div>
@@ -167,18 +150,25 @@ export default function ArticlePage() {
             </button>
           </div>
 
-          {article.excerpt && <p className="text-xl text-gray-700 leading-relaxed mb-6">{article.excerpt}</p>}
+          {article.excerpt && (
+            <p className="text-xl text-gray-700 leading-relaxed mb-6">{article.excerpt}</p>
+          )}
         </header>
 
         {article.featured_image_url && (
           <div className="mb-8">
-            <img src={article.featured_image_url} alt={article.title} className="w-full h-64 lg:h-96 object-cover rounded-lg" />
+            <img
+              src={article.featured_image_url}
+              alt={article.title}
+              className="w-full h-64 lg:h-96 object-cover rounded-lg"
+            />
           </div>
         )}
 
         <div className="prose prose-lg max-w-none">
-          {/* preserve paragraphs & line breaks safely */}
-          <div className="text-gray-800 leading-relaxed whitespace-pre-line">{article.content || ""}</div>
+          <div className="text-gray-800 leading-relaxed whitespace-pre-line">
+            {article.content || ""}
+          </div>
         </div>
       </article>
 
