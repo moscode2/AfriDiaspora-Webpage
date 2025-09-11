@@ -15,11 +15,11 @@ function slugify(text: string) {
 // ✅ categories with both name + slug
 const categories = [
   { name: "News", slug: "news" },
-  { name: "Policy & Migration", slug: "policy-and-migration" },
-  { name: "Culture & Lifestyles", slug: "culture-and-lifestyles" },
-  { name: "Profiles & Voices", slug: "profiles-and-voices" },
-  { name: "Travel & Mobility", slug: "travel-and-mobility" },
-  { name: "Business & Jobs", slug: "business-and-jobs" },
+  { name: "Policy & Migration", slug: "policy-migration" },
+  { name: "Culture & Lifestyles", slug: "culture-lifestyles" },
+  { name: "Profiles & Voices", slug: "profiles-voices" },
+  { name: "Travel & Mobility", slug: "travel-mobility" },
+  { name: "Business & Jobs", slug: "business-jobs" },
   { name: "Events", slug: "events" },
   { name: "Latest Stories", slug: "latest-stories" },
 ];
@@ -43,6 +43,7 @@ export default function NewArticle() {
     try {
       const slug = slugify(title);
       const categoryData = categories.find((c) => c.slug === category);
+      const now = Timestamp.now();
 
       await addDoc(collection(db, "articles"), {
         title,
@@ -51,7 +52,9 @@ export default function NewArticle() {
         status,
         category_name: categoryData?.name || "",
         category_slug: categoryData?.slug || "",
-        created_at: Timestamp.now(),
+        created_at: now,
+        updated_at: now,                            // ✅ added
+        published_at: status === "published" ? now : null, // ✅ added
       });
 
       toast.success("Article created!");

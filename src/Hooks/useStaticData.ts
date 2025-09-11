@@ -1,31 +1,72 @@
 import { useState, useEffect } from "react";
-import { Article } from "../types";
+import { Article, Category } from "../types";
 import { db } from "../data/firebase";
-import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 
 export function useStaticData() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Define categories manually (since you’re not saving them in Firestore)
-  const categories = [
-    { id: "news", name: "News", slug: "news" },
-    { id: "policy-and-migration", name: "Policy & Migration", slug: "policy-and-migration" },
-    { id: "culture-and-lifestyles", name: "Culture & Lifestyles", slug: "culture-and-lifestyles" },
-    { id: "profiles-and-voices", name: "Profiles & Voices", slug: "profiles-and-voices" },
-    { id: "travel-and-mobility", name: "Travel & Mobility", slug: "travel-and-mobility" },
-    { id: "business-and-jobs", name: "Business & Jobs", slug: "business-and-jobs" },
-    { id: "events", name: "Events", slug: "events" },
-    { id: "latest-stories", name: "Latest Stories", slug: "latest-stories" },
+  const staticCategories: Category[] = [
+    {
+      id: 1, name: "News", slug: "news",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
+    {
+      id: 2, name: "Policy & Migration", slug: "policy-migration",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
+    {
+      id: 3, name: "Culture & Lifestyles", slug: "culture-lifestyles",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
+    {
+      id: 4, name: "Profiles & Voices", slug: "profiles-voices",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
+    {
+      id: 5, name: "Travel & Mobility", slug: "travel-mobility",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
+    {
+      id: 6, name: "Business & Jobs", slug: "business-jobs",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
+    {
+      id: 7, name: "Events", slug: "events",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
+    {
+      id: 8, name: "Latest Stories", slug: "latest-stories",
+      description: null,
+      created_at: "",
+      updated_at: ""
+    },
   ];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // ✅ Only published articles, sorted by published_at
         const articleQuery = query(
           collection(db, "articles"),
           where("status", "==", "published"),
-          orderBy("created_at", "desc")
+          orderBy("published_at", "desc")
         );
         const articleSnap = await getDocs(articleQuery);
 
@@ -34,14 +75,18 @@ export function useStaticData() {
           return {
             id: doc.id,
             ...data,
-            created_at: data.created_at?.toDate
-              ? data.created_at.toDate().toISOString()
-              : data.created_at,
-            category: data.category, // ✅ use category string
+            published_at: data.published_at?.toDate
+              ? data.published_at.toDate().toISOString()
+              : null,
+            updated_at: data.updated_at?.toDate
+              ? data.updated_at.toDate().toISOString()
+              : null,
+            category: data.category || "Uncategorized",
           } as unknown as Article;
         });
 
         setArticles(articlesData);
+        setCategories(staticCategories);
       } catch (error) {
         console.error("❌ Error fetching Firestore data:", error);
       } finally {
@@ -52,13 +97,12 @@ export function useStaticData() {
     fetchData();
   }, []);
 
-  // Helpers
+  const normalize = (str: string) =>
+    str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-");
+
   const getArticlesByCategory = (categorySlug: string) => {
-    const category = categories.find((cat) => cat.slug === categorySlug);
-    if (!category) return [];
     return articles.filter(
-      (article) =>
-        article.category.toLowerCase().replace(/[^a-z0-9]+/g, "-") === category.slug
+      (article) => normalize(article.category) === categorySlug
     );
   };
 
