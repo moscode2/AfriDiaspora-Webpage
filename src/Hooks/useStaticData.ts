@@ -22,31 +22,32 @@ export function useStaticData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Try fetching published articles, but allow fallback if field is missing
         let articleQuery;
         try {
+          // ✅ primary query: published + order by published_at
           articleQuery = query(
             collection(db, "articles"),
-            where("status", "in", ["published", "Published"]), // allow both cases
+            where("status", "in", ["published", "Published"]),
             orderBy("published_at", "desc")
           );
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
-          // fallback: if published_at is missing in some docs, just query all
+          console.warn("⚠️ Falling back to basic query (no published_at order)");
           articleQuery = query(collection(db, "articles"));
         }
 
         const articleSnap = await getDocs(articleQuery);
+        console.log("🔥 Firestore returned", articleSnap.size, "docs");
+
+        const normalizeDate = (value: unknown) => {
+          if (!value) return null;
+          if ((value as { toDate?: () => Date }).toDate)
+            return (value as { toDate: () => Date }).toDate().toISOString();
+          return new Date(value as string).toISOString();
+        };
 
         const articlesData: Article[] = articleSnap.docs.map((doc) => {
           const data = doc.data();
-
-          // timestamp normalization
-          const normalizeDate = (value: unknown) => {
-            if (!value) return null;
-            if ((value as { toDate?: () => Date }).toDate) return (value as { toDate: () => Date }).toDate().toISOString();
-            return new Date(value as string).toISOString();
-          };
 
           return {
             id: doc.id,
@@ -54,11 +55,12 @@ export function useStaticData() {
             created_at: normalizeDate(data.created_at),
             published_at: normalizeDate(data.published_at),
             updated_at: normalizeDate(data.updated_at),
-
-            // ✅ fallbacks for category
             category_name: data.category_name || data.category || "Uncategorized",
-            category_slug: data.category_slug || 
-                           (data.category ? data.category.toLowerCase().replace(/[^a-z0-9]+/g, "-") : "uncategorized"),
+            category_slug:
+              data.category_slug ||
+              (data.category
+                ? data.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+                : "uncategorized"),
           } as unknown as Article;
         });
 
@@ -75,7 +77,6 @@ export function useStaticData() {
     fetchData();
   }, []);
 
-  // normalize slug helper
   const normalize = (str: string) =>
     str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-");
 
