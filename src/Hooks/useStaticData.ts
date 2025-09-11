@@ -22,31 +22,49 @@ export function useStaticData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // ✅ Only fetch published articles, sorted by published_at
-        const articleQuery = query(
-          collection(db, "articles"),
-          where("status", "==", "published"),
-          orderBy("published_at", "desc")
-        );
+        // Try fetching published articles, but allow fallback if field is missing
+        let articleQuery;
+        try {
+          articleQuery = query(
+            collection(db, "articles"),
+            where("status", "in", ["published", "Published"]), // allow both cases
+            orderBy("published_at", "desc")
+          );
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (err) {
+          // fallback: if published_at is missing in some docs, just query all
+          articleQuery = query(collection(db, "articles"));
+        }
+
         const articleSnap = await getDocs(articleQuery);
 
         const articlesData: Article[] = articleSnap.docs.map((doc) => {
           const data = doc.data();
+
+          // timestamp normalization
+          const normalizeDate = (value: unknown) => {
+            if (!value) return null;
+            if ((value as { toDate?: () => Date }).toDate) return (value as { toDate: () => Date }).toDate().toISOString();
+            return new Date(value as string).toISOString();
+          };
+
           return {
             id: doc.id,
             ...data,
-            // normalize timestamps
-            created_at: data.created_at?.toDate ? data.created_at.toDate().toISOString() : null,
-            published_at: data.published_at?.toDate ? data.published_at.toDate().toISOString() : null,
-            updated_at: data.updated_at?.toDate ? data.updated_at.toDate().toISOString() : null,
-            // ✅ match with saved structure
-            category_name: data.category_name || "Uncategorized",
-            category_slug: data.category_slug || "uncategorized",
+            created_at: normalizeDate(data.created_at),
+            published_at: normalizeDate(data.published_at),
+            updated_at: normalizeDate(data.updated_at),
+
+            // ✅ fallbacks for category
+            category_name: data.category_name || data.category || "Uncategorized",
+            category_slug: data.category_slug || 
+                           (data.category ? data.category.toLowerCase().replace(/[^a-z0-9]+/g, "-") : "uncategorized"),
           } as unknown as Article;
         });
 
         setArticles(articlesData);
         setCategories(staticCategories);
+        console.log("✅ Loaded articles:", articlesData);
       } catch (error) {
         console.error("❌ Error fetching Firestore data:", error);
       } finally {
@@ -57,23 +75,20 @@ export function useStaticData() {
     fetchData();
   }, []);
 
-  // ✅ normalize slug helper
+  // normalize slug helper
   const normalize = (str: string) =>
     str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-");
 
-  // ✅ get articles by category slug
   const getArticlesByCategory = (categorySlug: string) => {
     return articles.filter(
       (article) => normalize(article.category_slug as unknown as string) === categorySlug
     );
   };
 
-  // ✅ get featured
   const getFeaturedArticles = () => {
     return articles.filter((article) => article.is_featured);
   };
 
-  // ✅ get article by slug
   const getArticleBySlug = (slug: string) => {
     return articles.find((article) => article.slug === slug) || null;
   };
