@@ -1,5 +1,6 @@
 export interface Article {
-  category: any;
+  category_slug(category_slug: unknown): unknown;
+  category: unknown;
   id: number;
   title: string;
   slug: string;

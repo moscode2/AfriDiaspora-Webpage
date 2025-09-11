@@ -15,11 +15,11 @@ function slugify(text: string) {
 // ✅ categories with both name + slug
 const categories = [
   { name: "News", slug: "news" },
-  { name: "Policy & Migration", slug: "policy-migration" },
-  { name: "Culture & Lifestyles", slug: "culture-lifestyles" },
-  { name: "Profiles & Voices", slug: "profiles-voices" },
-  { name: "Travel & Mobility", slug: "travel-mobility" },
-  { name: "Business & Jobs", slug: "business-jobs" },
+  { name: "Policy & Migration", slug: "policy-and-migration" },
+  { name: "Culture & Lifestyles", slug: "culture-and-lifestyles" },
+  { name: "Profiles & Voices", slug: "profiles-and-voices" },
+  { name: "Travel & Mobility", slug: "travel-and-mobility" },
+  { name: "Business & Jobs", slug: "business-and-jobs" },
   { name: "Events", slug: "events" },
   { name: "Latest Stories", slug: "latest-stories" },
 ];

@@ -4,11 +4,28 @@ import { Clock, Share2 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { db } from "../data/firebase";
-import { collection, query, where, getDocs, DocumentData } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
+
+// type-safe Article
+interface Article {
+  id: string;
+  title: string;
+  content: string;
+  slug: string;
+  excerpt?: string;
+  author?: string;
+  featured_image_url?: string;
+  status: "draft" | "published";
+  category_name: string;
+  category_slug: string;
+  created_at?: string;
+  updated_at?: string;
+  published_at?: string;
+}
 
 export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
-  const [article, setArticle] = useState<DocumentData | null>(null);
+  const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Load article by slug from Firestore
@@ -20,12 +37,26 @@ export default function ArticlePage() {
         const snap = await getDocs(q);
 
         if (!snap.empty) {
-          setArticle({ id: snap.docs[0].id, ...snap.docs[0].data() });
+          const data = snap.docs[0].data();
+          setArticle({
+            id: snap.docs[0].id,
+            ...data,
+            created_at: data.created_at?.toDate
+              ? data.created_at.toDate().toISOString()
+              : null,
+            updated_at: data.updated_at?.toDate
+              ? data.updated_at.toDate().toISOString()
+              : null,
+            published_at: data.published_at?.toDate
+              ? data.published_at.toDate().toISOString()
+              : null,
+          } as Article);
         } else {
           setArticle(null);
         }
       } catch (err) {
-        console.error("Error fetching article:", err);
+        console.error("❌ Error fetching article:", err);
+        setArticle(null);
       } finally {
         setLoading(false);
       }
@@ -34,14 +65,9 @@ export default function ArticlePage() {
     fetchArticle();
   }, [slug]);
 
-  const formatDate = (dateValue: unknown) => {
-    if (!dateValue) return "";
-    let date;
-    if (dateValue.toDate) {
-      date = dateValue.toDate(); // Firestore Timestamp
-    } else {
-      date = new Date(dateValue); // String or ISO date
-    }
+  const formatDate = (isoDate?: string) => {
+    if (!isoDate) return "";
+    const date = new Date(isoDate);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -50,9 +76,10 @@ export default function ArticlePage() {
   };
 
   const handleShare = async () => {
+    if (!article) return;
     const shareData = {
-      title: article?.title || "AfriEuropa Article",
-      text: article?.excerpt || "Check out this article from AfriEuropa.",
+      title: article.title,
+      text: article.excerpt || "Check out this article from AfriEuropa.",
       url: window.location.href,
     };
 
