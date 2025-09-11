@@ -16,7 +16,10 @@ function slugify(text: string) {
 export default function NewArticle() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
+  const [author, setAuthor] = useState("Admin"); // default admin
+  const [featuredImage, setFeaturedImage] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [loading, setLoading] = useState(false);
 
@@ -33,10 +36,14 @@ export default function NewArticle() {
 
       await addDoc(collection(db, "articles"), {
         title,
+        excerpt: excerpt || content.slice(0, 150) + "...", // fallback
         content,
-        slug,                 // ✅ store slug
+        slug,                        // ✅ store slug
+        author,
+        featured_image_url: featuredImage || null,
         status,
         created_at: Timestamp.now(),
+        published_at: status === "published" ? Timestamp.now() : null,
       });
 
       toast.success("Article created!");
@@ -64,6 +71,16 @@ export default function NewArticle() {
           />
         </div>
         <div>
+          <label className="block text-sm font-medium text-gray-700">Excerpt</label>
+          <textarea
+            value={excerpt}
+            onChange={(e) => setExcerpt(e.target.value)}
+            rows={2}
+            placeholder="Short summary of the article"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
+          />
+        </div>
+        <div>
           <label className="block text-sm font-medium text-gray-700">Content</label>
           <textarea
             value={content}
@@ -71,6 +88,25 @@ export default function NewArticle() {
             rows={6}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
             required
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Author</label>
+          <input
+            type="text"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Featured Image URL</label>
+          <input
+            type="text"
+            value={featuredImage}
+            onChange={(e) => setFeaturedImage(e.target.value)}
+            placeholder="https://example.com/image.jpg"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
           />
         </div>
         <div>

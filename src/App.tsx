@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { analytics } from "./data/firebase"; // ⬅️ import firebase setup
+import { analytics } from "./data/firebase";
 
 import HomePage from "./pages/Home";
 import CategoryPage from "./pages/Category.tsx";
@@ -11,11 +11,9 @@ import PrivacyPage from "./pages/Privacy.tsx";
 import EditorialPage from "./pages/Editorial.tsx";
 import AdminLogin from "./pages/Admin/Login.tsx";
 import AdminDashboard from "./pages/Admin/Dashboard.tsx";
-import ArticleForm from "./pages/Admin/ArticleForm.tsx";
+import NewArticle from "./pages/Admin/New article.tsx";   // ✅ use new one
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
-
-// ✅ Import NewsletterBanner
 import NewsletterBanner from "./components/Newsletter.tsx";
 
 export default function App() {
@@ -35,6 +33,8 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/editorial" element={<EditorialPage />} />
+
+            {/* 🔑 Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin/dashboard"
@@ -48,22 +48,22 @@ export default function App() {
               path="/admin/articles/new"
               element={
                 <ProtectedRoute requireAdmin>
-                  <ArticleForm />
+                  <NewArticle />   {/* ✅ swapped */}
                 </ProtectedRoute>
               }
             />
+            {/* keep edit if you implement later */}
             <Route
               path="/admin/articles/edit/:id"
               element={
                 <ProtectedRoute requireAdmin>
-                  <ArticleForm />
+                  <NewArticle />   {/* reuse form for editing later */}
                 </ProtectedRoute>
               }
             />
           </Routes>
         </main>
 
-        {/* ✅ Newsletter Banner (always visible at bottom unless closed) */}
         <NewsletterBanner />
       </div>
     </Router>
