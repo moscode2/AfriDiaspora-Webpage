@@ -19,7 +19,7 @@ export default function AboutPage() {
     {
       name: "Hae-Won Jeon",
       role: "CTO",
-      image: "/images/David.jpeg",
+      image: "https://t3.ftcdn.net/jpg/01/96/42/96/240_F_196429667_WXnNvlMkcrzjabpwoukvqJtEbyJIM7Gj.jpg",
       bio: "A dynamic journalist and event organizer dedicated to capturing authentic diaspora experiences. Hae-Won combines sharp writing skills with hands-on community engagement, bringing stories and events that resonate with Africans across Europe.",
     },
   ];

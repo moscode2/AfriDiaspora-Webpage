@@ -74,9 +74,8 @@ export default function ArticlePage() {
       });
     }
     
-    if (value && typeof value === "object" && typeof (value as unknown).toDate === "function") {
-    
-      return (value as unknown).toDate().toLocaleDateString(undefined, {
+    if (value && typeof value === "object" && (value as Timestamp).toDate) {
+      return (value as Timestamp).toDate().toLocaleDateString(undefined, {
         year: "numeric",
         month: "long",
         day: "numeric",
