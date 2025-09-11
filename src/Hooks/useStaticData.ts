@@ -1,30 +1,31 @@
 import { useState, useEffect } from "react";
-import { Article, Category } from "../types";
+import { Article } from "../types";
 import { db } from "../data/firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { mockArticles, mockCategories } from "../data/mockData";
+import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
 
 export function useStaticData() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // 🔹 Define categories manually (since you’re not saving them in Firestore)
+  const categories = [
+    { id: "news", name: "News", slug: "news" },
+    { id: "policy-and-migration", name: "Policy & Migration", slug: "policy-and-migration" },
+    { id: "culture-and-lifestyles", name: "Culture & Lifestyles", slug: "culture-and-lifestyles" },
+    { id: "profiles-and-voices", name: "Profiles & Voices", slug: "profiles-and-voices" },
+    { id: "travel-and-mobility", name: "Travel & Mobility", slug: "travel-and-mobility" },
+    { id: "business-and-jobs", name: "Business & Jobs", slug: "business-and-jobs" },
+    { id: "events", name: "Events", slug: "events" },
+    { id: "latest-stories", name: "Latest Stories", slug: "latest-stories" },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
-      // ✅ If in dev mode → use mock data
-      if (process.env.NODE_ENV === "development") {
-        console.warn("⚠️ Using mock data (development mode)");
-        setArticles(mockArticles);
-        setCategories(mockCategories);
-        setLoading(false);
-        return;
-      }
-
-      // ✅ Otherwise → fetch from Firebase
       try {
         const articleQuery = query(
           collection(db, "articles"),
-          orderBy("published_at", "desc")
+          where("status", "==", "published"),
+          orderBy("created_at", "desc")
         );
         const articleSnap = await getDocs(articleQuery);
 
@@ -33,24 +34,14 @@ export function useStaticData() {
           return {
             id: doc.id,
             ...data,
-            published_at: data.published_at?.toDate
-              ? data.published_at.toDate().toISOString()
-              : data.published_at,
-            category_id: String(data.category_id),
+            created_at: data.created_at?.toDate
+              ? data.created_at.toDate().toISOString()
+              : data.created_at,
+            category: data.category, // ✅ use category string
           } as unknown as Article;
         });
 
-        const categorySnap = await getDocs(collection(db, "categories"));
-        const categoriesData: Category[] = categorySnap.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: String(doc.id),
-            ...data,
-          } as unknown as Category;
-        });
-
         setArticles(articlesData);
-        setCategories(categoriesData);
       } catch (error) {
         console.error("❌ Error fetching Firestore data:", error);
       } finally {
@@ -66,7 +57,8 @@ export function useStaticData() {
     const category = categories.find((cat) => cat.slug === categorySlug);
     if (!category) return [];
     return articles.filter(
-      (article) => String(article.category_id) === String(category.id)
+      (article) =>
+        article.category.toLowerCase().replace(/[^a-z0-9]+/g, "-") === category.slug
     );
   };
 
