@@ -1,9 +1,10 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../data/firebase'; // make sure this path points to your firebase.ts
 
 export default function AdminLogin() {
     const [email, setEmail] = useState('');
@@ -23,25 +24,25 @@ export default function AdminLogin() {
         e.preventDefault();
         setLoading(true);
 
-        // This import should be at the top of the file
+        try {
+            // 🔑 Real Firebase login
+            await signInWithEmailAndPassword(auth, email, password);
 
-                try {
-                        
-                        // No need to check for userCredential.error
-                        toast.success('Login successful!');
-                        navigate('/admin/dashboard');
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                } catch (error) {
-                        toast.error('An unexpected error occurred');
-                } finally {
-                        setLoading(false);
-                }
+            toast.success('Login successful!');
+            navigate('/admin/dashboard'); // redirect after login
+        } catch (error) {
+            console.error("Login error:", error);
+            const errorMessage = (error as { message?: string }).message || 'Login failed. Please try again.';
+            toast.error(errorMessage);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <Toaster position="top-right" />
-            
+
             <div className="max-w-md w-full space-y-8">
                 <div className="bg-white rounded-lg shadow-lg p-8">
                     <div className="text-center mb-8">
@@ -53,6 +54,7 @@ export default function AdminLogin() {
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Email */}
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                                 Email Address
@@ -71,6 +73,7 @@ export default function AdminLogin() {
                             </div>
                         </div>
 
+                        {/* Password */}
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                                 Password
@@ -96,6 +99,7 @@ export default function AdminLogin() {
                             </div>
                         </div>
 
+                        {/* Button */}
                         <button
                             type="submit"
                             disabled={loading}

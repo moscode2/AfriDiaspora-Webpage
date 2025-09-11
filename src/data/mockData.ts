@@ -83,7 +83,7 @@ Applications for funding will open in September 2024, with the first projects ex
   featured_image_url: "https://mocha-cdn.com/0198dbb7-3dc2-734a-94c7-68f472e12814/news-conference.jpg",
   category_id: 2,
   author: "Maria Santos",
-  is_featured: true,
+  is_featured: false,
   status: "published",
   published_at: "2024-08-20T09:00:00Z",
   created_at: "2024-08-20T09:00:00Z",

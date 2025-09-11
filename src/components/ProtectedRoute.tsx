@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { auth } from "../data/firebase"; // ✅ Firebase auth
+import { auth } from "../data/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 
 interface ProtectedRouteProps {
@@ -31,13 +31,13 @@ export default function ProtectedRoute({
     );
   }
 
-  // Not logged in → redirect to login
+  // Not logged in → go to login
   if (!user) {
     return <Navigate to="/admin/login" replace />;
   }
 
-  // Check admin (for now, just match email)
-  const isAdminUser = user.email === "admin@afrieuropa.com";
+  // ✅ Admin check (hardcoded for now)
+  const isAdminUser = user.email?.toLowerCase() === "admin@afrieuropa.com";
 
   if (requireAdmin && !isAdminUser) {
     return <Navigate to="/" replace />;
