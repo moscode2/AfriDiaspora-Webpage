@@ -111,7 +111,7 @@ export default function AdminLogin() {
 
                     <div className="mt-6 text-center">
                         <p className="text-sm text-gray-600">
-                            Demo credentials: admin@afrieuropa.com / admin123
+                            Welcome!
                         </p>
                     </div>
                 </div>

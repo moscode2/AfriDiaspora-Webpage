@@ -1,4 +1,3 @@
-// src/pages/admin/NewArticle.tsx
 import { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../data/firebase";
@@ -13,14 +12,23 @@ function slugify(text: string) {
     .replace(/(^-|-$)+/g, "");   // remove leading/trailing "-"
 }
 
+const categories = [
+  "News",
+  "Policy & Migration",
+  "Culture & Lifestyles",
+  "Profiles & Voices",
+  "Travel & Mobility",
+  "Business & Jobs",
+  "Events",
+  "Latest Stories",
+];
+
 export default function NewArticle() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("Admin"); // default admin
-  const [featuredImage, setFeaturedImage] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
+  const [category, setCategory] = useState(categories[0]); // default = first
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,18 +44,15 @@ export default function NewArticle() {
 
       await addDoc(collection(db, "articles"), {
         title,
-        excerpt: excerpt || content.slice(0, 150) + "...", // fallback
         content,
-        slug,                        // ✅ store slug
-        author,
-        featured_image_url: featuredImage || null,
+        slug,
         status,
+        category,               // ✅ add category
         created_at: Timestamp.now(),
-        published_at: status === "published" ? Timestamp.now() : null,
       });
 
       toast.success("Article created!");
-      navigate("/admin/dashboard"); // back to dashboard
+      navigate("/admin/dashboard");
     } catch (err) {
       console.error("create article error:", err);
       toast.error("Failed to create article");
@@ -60,6 +65,7 @@ export default function NewArticle() {
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow">
       <h1 className="text-2xl font-bold mb-6">Create New Article</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Title */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Title</label>
           <input
@@ -70,16 +76,8 @@ export default function NewArticle() {
             required
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Excerpt</label>
-          <textarea
-            value={excerpt}
-            onChange={(e) => setExcerpt(e.target.value)}
-            rows={2}
-            placeholder="Short summary of the article"
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div>
+
+        {/* Content */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Content</label>
           <textarea
@@ -90,25 +88,24 @@ export default function NewArticle() {
             required
           />
         </div>
+
+        {/* Category */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Author</label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+          <label className="block text-sm font-medium text-gray-700">Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
-          />
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Featured Image URL</label>
-          <input
-            type="text"
-            value={featuredImage}
-            onChange={(e) => setFeaturedImage(e.target.value)}
-            placeholder="https://example.com/image.jpg"
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div>
+
+        {/* Status */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Status</label>
           <select
@@ -120,6 +117,7 @@ export default function NewArticle() {
             <option value="published">Published</option>
           </select>
         </div>
+
         <button
           type="submit"
           disabled={loading}
