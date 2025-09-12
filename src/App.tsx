@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { analytics } from "./data/firebase";
 
@@ -11,10 +11,16 @@ import PrivacyPage from "./pages/Privacy.tsx";
 import EditorialPage from "./pages/Editorial.tsx";
 import AdminLogin from "./pages/Admin/Login.tsx";
 import AdminDashboard from "./pages/Admin/Dashboard.tsx";
-import NewArticle from "./pages/Admin/New article.tsx";   // ✅ use new one
+import NewArticle from "./pages/Admin/New article.tsx"; // ✅ use new one
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 import NewsletterBanner from "./components/Newsletter.tsx";
+
+// ✅ Wrapper ensures CategoryPage remounts on slug change
+function CategoryPageWrapper() {
+  const { slug } = useParams();
+  return <CategoryPage key={slug} />;
+}
 
 export default function App() {
   useEffect(() => {
@@ -27,7 +33,10 @@ export default function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/category/:slug" element={<CategoryPage />} />
+
+            {/* ✅ use wrapper instead of CategoryPage directly */}
+            <Route path="/category/:slug" element={<CategoryPageWrapper />} />
+
             <Route path="/article/:slug" element={<ArticlePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
@@ -48,17 +57,28 @@ export default function App() {
               path="/admin/articles/new"
               element={
                 <ProtectedRoute requireAdmin>
-                  <NewArticle />   {/* ✅ swapped */}
+                  <NewArticle /> {/* ✅ swapped */}
                 </ProtectedRoute>
               }
             />
-            {/* keep edit if you implement later */}
             <Route
               path="/admin/articles/edit/:id"
               element={
                 <ProtectedRoute requireAdmin>
-                  <NewArticle />   {/* reuse form for editing later */}
+                  <NewArticle /> {/* reuse form for editing later */}
                 </ProtectedRoute>
+              }
+            />
+
+            {/* 404 Fallback */}
+            <Route
+              path="*"
+              element={
+                <div className="min-h-screen flex items-center justify-center">
+                  <h1 className="text-2xl font-bold text-gray-800">
+                    404 - Page Not Found
+                  </h1>
+                </div>
               }
             />
           </Routes>
