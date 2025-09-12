@@ -8,9 +8,11 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, featured = false }: ArticleCardProps) {
+  // ✅ Safer date formatter
   const formatDate = (dateString: string) => {
-    if (!dateString) return "Unknown date";
+    if (!dateString || dateString.trim() === "") return null;
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) return null;
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
@@ -19,7 +21,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
   };
 
   // ✅ Fallback values
-  const slug = article.slug || article.id || "unknown-article";
+  const slug = article.slug || String(article.id) || "unknown-article";
   const title = article.title || "Untitled Article";
   const excerpt = article.excerpt || "No summary available.";
   const author = article.author || "Unknown Author";

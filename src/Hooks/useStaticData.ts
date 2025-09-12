@@ -59,7 +59,7 @@ export function useStaticData() {
             (c) => c.id.toString() === data.category_id?.toString()
           ) || {
             id: 0,
-            name: "Uncategorized",
+            name: "uncategorized",
             slug: "uncategorized",
             description: null,
             created_at: "",

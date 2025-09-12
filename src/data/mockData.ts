@@ -61,10 +61,10 @@ export const mockCategories: Category[] = [
 export const mockArticles: Article[] = [
   {
     id: 1,
-  title: "European Union Announces New Integration Support Programs for African Diaspora",
-  slug: "eu-announces-new-integration-support-programs",
-  excerpt: "The European Union has unveiled comprehensive support programs aimed at enhancing integration opportunities for African diaspora communities across member states.",
-  content: `The European Union has unveiled comprehensive support programs aimed at enhancing integration opportunities for African diaspora communities across member states.
+    title: "European Union Announces New Integration Support Programs for African Diaspora",
+    slug: "eu-announces-new-integration-support-programs",
+    excerpt: "The European Union has unveiled comprehensive support programs aimed at enhancing integration opportunities for African diaspora communities across member states.",
+    content: `The European Union has unveiled comprehensive support programs aimed at enhancing integration opportunities for African diaspora communities across member states.
 
 The new initiative, launched this week in Brussels, includes funding for language learning programs, professional qualification recognition processes, and community-led integration projects.
 
@@ -80,14 +80,18 @@ Key components of the program include:
 - Entrepreneurship support schemes
 
 Applications for funding will open in September 2024, with the first projects expected to launch in early 2025.`,
-  featured_image_url: "https://mocha-cdn.com/0198dbb7-3dc2-734a-94c7-68f472e12814/news-conference.jpg",
-  category_id: 2,
-  author: "Maria Santos",
-  is_featured: false,
-  status: "published",
-  published_at: "2024-08-20T09:00:00Z",
-  created_at: "2024-08-20T09:00:00Z",
-  updated_at: "2024-08-20T09:00:00Z",
+    featured_image_url: "https://mocha-cdn.com/0198dbb7-3dc2-734a-94c7-68f472e12814/news-conference.jpg",
+    category_id: 2,
+    author: "Maria Santos",
+    is_featured: false,
+    status: "published",
+    published_at: "2024-08-20T09:00:00Z",
+    created_at: "2024-08-20T09:00:00Z",
+    updated_at: "2024-08-20T09:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 2,
@@ -106,26 +110,34 @@ Applications for funding will open in September 2024, with the first projects ex
     status: "published",
     published_at: "2024-08-08T09:00:00Z",
     created_at: "2024-08-08T09:00:00Z",
-    updated_at: "2024-08-08T09:00:00Z"
+    updated_at: "2024-08-08T09:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 3,
-  title: "Understanding Your Rights: Worker Protection Laws Across Europe",
-  slug: "understanding-worker-protection-laws-europe",
-  excerpt: "A comprehensive overview of labor rights and protections available to African workers in different European countries.",
-  content: `For African professionals and migrant workers in Europe, understanding labor rights is essential to ensuring fair treatment in the workplace. Across the European Union and beyond, worker protection laws are designed to safeguard employees from exploitation, guarantee minimum standards for working conditions, and promote equal opportunities regardless of nationality. These protections often cover wages, working hours, health and safety regulations, and access to social benefits, giving workers a legal foundation to demand fairness and dignity on the job.
+    title: "Understanding Your Rights: Worker Protection Laws Across Europe",
+    slug: "understanding-worker-protection-laws-europe",
+    excerpt: "A comprehensive overview of labor rights and protections available to African workers in different European countries.",
+    content: `For African professionals and migrant workers in Europe, understanding labor rights is essential to ensuring fair treatment in the workplace. Across the European Union and beyond, worker protection laws are designed to safeguard employees from exploitation, guarantee minimum standards for working conditions, and promote equal opportunities regardless of nationality. These protections often cover wages, working hours, health and safety regulations, and access to social benefits, giving workers a legal foundation to demand fairness and dignity on the job.
 
 While many EU countries share common principles under European labor directives, national laws may differ significantly. For example, Germany and France enforce strong collective bargaining rights through trade unions, while countries like the Netherlands and Sweden emphasize flexible working arrangements and robust parental leave policies. African workers in these countries can benefit from knowing how local frameworks apply to them, including rights related to non-discrimination, equal pay, and safe working environments.
 
 Understanding these laws not only helps workers assert their rights but also builds confidence when navigating new professional landscapes abroad. Experts recommend that African workers engage with labor unions, legal aid groups, and migrant support organizations to stay informed about changes in legislation and workplace practices. With greater awareness of their rights, African professionals in Europe can protect themselves from unfair treatment while contributing fully and securely to their host countries’ economies.`,
-  featured_image_url: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=600",
-  category_id: 2,
-  author: "David Okoro",
-  is_featured: false,
-  status: "published",
-  published_at: "2024-08-04T09:00:00Z",
-  created_at: "2024-08-04T09:00:00Z",
-  updated_at: "2024-08-04T09:00:00Z"
+    featured_image_url: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=600",
+    category_id: 2,
+    author: "David Okoro",
+    is_featured: false,
+    status: "published",
+    published_at: "2024-08-04T09:00:00Z",
+    created_at: "2024-08-04T09:00:00Z",
+    updated_at: "2024-08-04T09:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
       {
         id: 2,
@@ -154,30 +166,38 @@ Understanding these laws not only helps workers assert their rights but also bui
         category_id: 3,
         author: "James Okafor",
         is_featured: true,
-        status: "published",   // ← don’t forget this if required by your type
+        status: "published", // ← don’t forget this if required by your type
         published_at: "2024-08-18T14:30:00Z",
         created_at: "2024-08-18T14:30:00Z",
         updated_at: "2024-08-18T14:30:00Z",
-  },
+        category_slug: function (): unknown {
+          throw new Error('Function not implemented.');
+        },
+        category: undefined
+      },
     {
       id: 4,
-  title: "The Rise of African Fashion in European Runways",
-  slug: "rise-african-fashion-european-runways",
-  excerpt: "How African designers are making their mark in Paris, Milan, and London fashion weeks, bringing authentic African aesthetics to global audiences.",
-  content: `African fashion has rapidly risen to the forefront of the global style scene, with designers from across the continent and diaspora making bold statements on Europe’s most prestigious runways. In cities like Paris, Milan, and London, African-inspired collections are redefining modern fashion with vibrant colors, traditional textiles, and storytelling rooted in heritage. This cultural wave is not only enriching the fashion world but also giving visibility to African creativity on an international stage.
+      title: "The Rise of African Fashion in European Runways",
+      slug: "rise-african-fashion-european-runways",
+      excerpt: "How African designers are making their mark in Paris, Milan, and London fashion weeks, bringing authentic African aesthetics to global audiences.",
+      content: `African fashion has rapidly risen to the forefront of the global style scene, with designers from across the continent and diaspora making bold statements on Europe’s most prestigious runways. In cities like Paris, Milan, and London, African-inspired collections are redefining modern fashion with vibrant colors, traditional textiles, and storytelling rooted in heritage. This cultural wave is not only enriching the fashion world but also giving visibility to African creativity on an international stage.
 
 European audiences have increasingly embraced African aesthetics, from Ankara prints and Kente cloth to beadwork and innovative reinterpretations of traditional garments. Designers such as Thebe Magugu, Imane Ayissi, and others have gained recognition for blending contemporary cuts with authentic African elements, challenging stereotypes and expanding the narrative of what luxury fashion can represent. The growing demand has also opened doors for emerging African brands to collaborate with global fashion houses.
 
 Beyond aesthetics, the rise of African fashion in Europe symbolizes a broader cultural exchange and economic opportunity. By showcasing African heritage at top fashion weeks, designers are not only building global brands but also creating jobs and empowering artisans back home. As European markets continue to welcome African talent, the runway becomes more than a stage—it becomes a bridge connecting cultures, economies, and identities.`,
-  featured_image_url: "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=600",
-  category_id: 3,
-  author: "Amina Diallo",
-  is_featured: false,
-  status: "published",
-  published_at: "2024-07-28T09:00:00Z",
-  created_at: "2024-07-28T09:00:00Z",
-  updated_at: "2024-07-28T09:00:00Z"
-},
+      featured_image_url: "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=600",
+      category_id: 3,
+      author: "Amina Diallo",
+      is_featured: false,
+      status: "published",
+      published_at: "2024-07-28T09:00:00Z",
+      created_at: "2024-07-28T09:00:00Z",
+      updated_at: "2024-07-28T09:00:00Z",
+      category_slug: function (): unknown {
+        throw new Error('Function not implemented.');
+      },
+      category: undefined
+    },
 {
   id: 5,
   title: "Understanding Your Rights: Worker Protection Laws Across Europe",
@@ -195,28 +215,37 @@ However, navigating these rights can be challenging without proper awareness. Ex
   status: "published",
   published_at: "2024-08-04T09:00:00Z",
   created_at: "2024-08-04T09:00:00Z",
-  updated_at: "2024-08-04T09:00:00Z"
+  updated_at: "2024-08-04T09:00:00Z",
+  category_slug: function (): unknown {
+    throw new Error('Function not implemented.');
+  },
+  category: undefined
 },
       {
         id: 5,
-  title: "Understanding Your Rights: Worker Protection Laws Across Europe",
-  slug: "understanding-worker-protection-laws-europe",
-  excerpt: "A comprehensive overview of labor rights and protections available to African workers in different European countries.",
-  content: `For African workers building careers in Europe, understanding labor rights is essential to ensuring fair treatment and protection. Worker protection laws vary across European countries, but many share strong frameworks that guarantee minimum wages, safe working conditions, paid leave, and equal opportunities regardless of nationality. These regulations aim to safeguard workers from exploitation while promoting inclusivity in the labor market.
+        title: "Understanding Your Rights: Worker Protection Laws Across Europe",
+        slug: "understanding-worker-protection-laws-europe",
+        excerpt: "A comprehensive overview of labor rights and protections available to African workers in different European countries.",
+        content: `For African workers building careers in Europe, understanding labor rights is essential to ensuring fair treatment and protection. Worker protection laws vary across European countries, but many share strong frameworks that guarantee minimum wages, safe working conditions, paid leave, and equal opportunities regardless of nationality. These regulations aim to safeguard workers from exploitation while promoting inclusivity in the labor market.
 
 In countries like Germany, France, and the Netherlands, labor laws emphasize collective bargaining, workplace safety, and anti-discrimination protections. Workers are entitled to written contracts, regulated working hours, and social security benefits. Recent EU directives have also strengthened protections for temporary and migrant workers, making it harder for employers to engage in unfair practices such as wage theft or unsafe conditions. For African professionals, this legal landscape provides reassurance and opportunities to pursue meaningful careers abroad.
 
 However, navigating these rights can be challenging without proper awareness. Experts recommend that African workers familiarize themselves with host-country labor unions, legal aid organizations, and community networks that can provide support when disputes arise. By understanding and exercising these protections, African workers in Europe can not only defend their rights but also contribute confidently to diverse workplaces and economies across the continent.`,
-  featured_image_url: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=600",
-  category_id: 2,
-  author: "David Okoro",
-  is_featured: false,
-  status: "published",
-  published_at: "2024-08-04T09:00:00Z",
-  created_at: "2024-08-04T09:00:00Z",
-  updated_at: "2024-08-04T09:00:00Z"
+        featured_image_url: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=600",
+        category_id: 2,
+        author: "David Okoro",
+        is_featured: false,
+        status: "published",
+        published_at: "2024-08-04T09:00:00Z",
+        created_at: "2024-08-04T09:00:00Z",
+        updated_at: "2024-08-04T09:00:00Z",
+        category_slug: function (): unknown {
+          throw new Error('Function not implemented.');
+        },
+        category: undefined
       },
-        { id: 6,
+        {
+          id: 6,
           title: "Raising African Children in Europe: Balancing Two Cultures",
           slug: "raising-african-children-in-europe-balancing-two-cultures",
           excerpt: "Parents share their experiences and strategies for helping their children maintain African cultural identity while integrating into European society.",
@@ -232,8 +261,11 @@ However, navigating these rights can be challenging without proper awareness. Ex
           status: "published",
           published_at: "2024-08-02T09:00:00Z",
           created_at: "2024-08-02T09:00:00Z",
-          updated_at: "2024-08-02T09:00:00Z"
-        
+          updated_at: "2024-08-02T09:00:00Z",
+          category_slug: function (): unknown {
+            throw new Error('Function not implemented.');
+          },
+          category: undefined
         },
         {
           id: 3,
@@ -259,11 +291,15 @@ However, navigating these rights can be challenging without proper awareness. Ex
           category_id: 6,
           author: "Sophie Anderson",
           is_featured: false,
-          status: "published",   // ← don’t forget this
+          status: "published", // ← don’t forget this
           published_at: "2024-08-15T11:15:00Z",
           created_at: "2024-08-15T11:15:00Z",
           updated_at: "2024-08-15T11:15:00Z",
-  },
+          category_slug: function (): unknown {
+            throw new Error('Function not implemented.');
+          },
+          category: undefined
+        },
   {
     id: 7,
     title: "EU Blue Card Requirements Updated for 2025: New Opportunities for African Professionals",
@@ -281,7 +317,11 @@ However, navigating these rights can be challenging without proper awareness. Ex
     status: "published",
     published_at: "2025-01-10T08:30:00Z",
     created_at: "2025-01-10T08:30:00Z",
-    updated_at: "2025-01-10T08:30:00Z"
+    updated_at: "2025-01-10T08:30:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 8,
@@ -300,7 +340,11 @@ However, navigating these rights can be challenging without proper awareness. Ex
     status: "published",
     published_at: "2025-01-10T12:00:00Z",
     created_at: "2025-01-10T12:00:00Z",
-    updated_at: "2025-01-10T12:00:00Z"
+    updated_at: "2025-01-10T12:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 9,
@@ -319,14 +363,18 @@ However, navigating these rights can be challenging without proper awareness. Ex
     status: "published",
     published_at: "2025-01-09T14:00:00Z",
     created_at: "2025-01-09T14:00:00Z",
-    updated_at: "2025-01-09T14:00:00Z"
+    updated_at: "2025-01-09T14:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
         {
           id: 4,
-  title: "New Study Reveals Growing Political Participation Among African Diaspora in France",
-  slug: "political-participation-african-diaspora-france-study",
-  excerpt: "Research from Sciences Po shows a 40% increase in political engagement among African diaspora communities in France over the past five years.",
-  content: `A comprehensive study released by Sciences Po this week reveals a significant increase in political participation among African diaspora communities in France, with engagement levels rising by 40% over the past five years.
+          title: "New Study Reveals Growing Political Participation Among African Diaspora in France",
+          slug: "political-participation-african-diaspora-france-study",
+          excerpt: "Research from Sciences Po shows a 40% increase in political engagement among African diaspora communities in France over the past five years.",
+          content: `A comprehensive study released by Sciences Po this week reveals a significant increase in political participation among African diaspora communities in France, with engagement levels rising by 40% over the past five years.
 
 The research, conducted over 18 months, surveyed 5,000 individuals across 12 French cities and analyzed voting patterns, civic organization membership, and local political involvement.
 
@@ -345,14 +393,18 @@ The study attributes this growth to several factors, including improved politica
 The research also highlighted challenges, including language barriers in political processes and underrepresentation in major political parties.
 
 The French government has announced plans to establish a new council on diaspora political participation based on the study's recommendations.`,
-  featured_image_url: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600",
-  category_id: 1,
-  author: "Pierre Martin",
-  is_featured: false,        // ← added for consistency
-  status: "published",       // ← added for consistency
-  published_at: "2024-08-12T16:45:00Z",
-  created_at: "2024-08-12T16:45:00Z",
-  updated_at: "2024-08-12T16:45:00Z",
+          featured_image_url: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600",
+          category_id: 1,
+          author: "Pierre Martin",
+          is_featured: false, // ← added for consistency
+          status: "published", // ← added for consistency
+          published_at: "2024-08-12T16:45:00Z",
+          created_at: "2024-08-12T16:45:00Z",
+          updated_at: "2024-08-12T16:45:00Z",
+          category_slug: function (): unknown {
+            throw new Error('Function not implemented.');
+          },
+          category: undefined
         },
       
         {
@@ -383,11 +435,15 @@ The French government has announced plans to establish a new council on diaspora
           category_id: 3,
           author: "Isabella Romano",
           is_featured: false,
-          status: "published",   // ← added for consistency
+          status: "published", // ← added for consistency
           published_at: "2024-08-10T13:20:00Z",
           created_at: "2024-08-10T13:20:00Z",
           updated_at: "2024-08-10T13:20:00Z",
-  },
+          category_slug: function (): unknown {
+            throw new Error('Function not implemented.');
+          },
+          category: undefined
+        },
     {
       title: "Dr. Amina Okafor",
       // role: "AI Researcher & Lecturer", // Removed to fix the error
@@ -407,7 +463,11 @@ The French government has announced plans to establish a new council on diaspora
       published_at: null,
       created_at: '',
       updated_at: '',
-      status: 'published'
+      status: 'published',
+      category_slug: function (): unknown {
+        throw new Error('Function not implemented.');
+      },
+      category: undefined
     },
     {
       title: "David Kamau",
@@ -428,7 +488,11 @@ The French government has announced plans to establish a new council on diaspora
       published_at: null,
       created_at: '',
       updated_at: '',
-      status: 'published'
+      status: 'published',
+      category_slug: function (): unknown {
+        throw new Error('Function not implemented.');
+      },
+      category: undefined
     },
     {
       title: "Fatou Ndiaye",
@@ -449,7 +513,11 @@ The French government has announced plans to establish a new council on diaspora
       published_at: null,
       created_at: '',
       updated_at: '',
-      status: 'published'
+      status: 'published',
+      category_slug: function (): unknown {
+        throw new Error('Function not implemented.');
+      },
+      category: undefined
     },
     {
       title: "Joseph Mwangi",
@@ -470,7 +538,11 @@ The French government has announced plans to establish a new council on diaspora
       published_at: null,
       created_at: '',
       updated_at: '',
-      status: 'published'
+      status: 'published',
+      category_slug: function (): unknown {
+        throw new Error('Function not implemented.');
+      },
+      category: undefined
     },
     {
       title: "Grace Mensah",
@@ -491,7 +563,11 @@ The French government has announced plans to establish a new council on diaspora
       published_at: null,
       created_at: '',
       updated_at: '',
-      status: 'published'
+      status: 'published',
+      category_slug: function (): unknown {
+        throw new Error('Function not implemented.');
+      },
+      category: undefined
     },
   {
     id: 1,
@@ -512,7 +588,11 @@ The French government has announced plans to establish a new council on diaspora
     status: "published",
     published_at: "2024-08-15T09:00:00Z",
     created_at: "2024-08-15T09:00:00Z",
-    updated_at: "2024-08-15T09:00:00Z"
+    updated_at: "2024-08-15T09:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 2,
@@ -533,7 +613,11 @@ The French government has announced plans to establish a new council on diaspora
     status: "published",
     published_at: "2024-08-15T12:00:00Z",
     created_at: "2024-08-15T12:00:00Z",
-    updated_at: "2024-08-15T12:00:00Z"
+    updated_at: "2024-08-15T12:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 3,
@@ -550,7 +634,11 @@ The French government has announced plans to establish a new council on diaspora
     status: "published",
     published_at: "2024-08-15T14:00:00Z",
     created_at: "2024-08-15T14:00:00Z",
-    updated_at: "2024-08-15T14:00:00Z"
+    updated_at: "2024-08-15T14:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 4,
@@ -567,7 +655,11 @@ The French government has announced plans to establish a new council on diaspora
     status: "published",
     published_at: "2024-08-14T08:00:00Z",
     created_at: "2024-08-14T08:00:00Z",
-    updated_at: "2024-08-14T08:00:00Z"
+    updated_at: "2024-08-14T08:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 5,
@@ -586,7 +678,11 @@ The French government has announced plans to establish a new council on diaspora
     status: "published",
     published_at: "2024-08-13T10:00:00Z",
     created_at: "2024-08-13T10:00:00Z",
-    updated_at: "2024-08-13T10:00:00Z"
+    updated_at: "2024-08-13T10:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 6,
@@ -606,6 +702,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-06T07:00:00Z",
     created_at: "2025-09-06T07:00:00Z",
     updated_at: "2025-09-06T07:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 7,
@@ -625,6 +725,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-06T10:00:00Z",
     created_at: "2025-09-06T10:00:00Z",
     updated_at: "2025-09-06T10:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 8,
@@ -644,6 +748,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-06T13:00:00Z",
     created_at: "2025-09-06T13:00:00Z",
     updated_at: "2025-09-06T13:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   
   {
@@ -664,6 +772,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-05T08:00:00Z",
     created_at: "2025-09-05T08:00:00Z",
     updated_at: "2025-09-05T08:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 10,
@@ -683,6 +795,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-04T09:00:00Z",
     created_at: "2025-09-04T09:00:00Z",
     updated_at: "2025-09-04T09:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 11,
@@ -702,6 +818,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-06T09:00:00Z",
     created_at: "2025-09-06T09:00:00Z",
     updated_at: "2025-09-06T09:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 12,
@@ -721,6 +841,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-05T11:00:00Z",
     created_at: "2025-09-05T11:00:00Z",
     updated_at: "2025-09-05T11:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 13,
@@ -740,6 +864,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-04T14:00:00Z",
     created_at: "2025-09-04T14:00:00Z",
     updated_at: "2025-09-04T14:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 14,
@@ -759,6 +887,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-03T18:00:00Z",
     created_at: "2025-09-03T18:00:00Z",
     updated_at: "2025-09-03T18:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 15,
@@ -778,6 +910,10 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-02T16:00:00Z",
     created_at: "2025-09-02T16:00:00Z",
     updated_at: "2025-09-02T16:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
   {
     id: 16,
@@ -797,5 +933,9 @@ The French government has announced plans to establish a new council on diaspora
     published_at: "2025-09-01T10:00:00Z",
     created_at: "2025-09-01T10:00:00Z",
     updated_at: "2025-09-01T10:00:00Z",
+    category_slug: function (): unknown {
+      throw new Error('Function not implemented.');
+    },
+    category: undefined
   },
       ];
