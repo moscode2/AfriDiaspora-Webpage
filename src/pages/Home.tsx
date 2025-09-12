@@ -1,6 +1,6 @@
 // src/pages/Home.tsx
 import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import NewsletterBanner from "../components/Newsletter";
@@ -8,20 +8,18 @@ import ArticleCard from "../components/ArticleCard";
 import { useStaticData } from "../Hooks/useStaticData";
 
 export default function HomePage() {
-  const {
-    articles,
-    categories,
-    loading,
-    getFeaturedArticles,
-    getArticlesByCategory,
-  } = useStaticData();
-
+  const { articles, categories, loading, getFeaturedArticles, getArticlesByCategory } = useStaticData();
   const featuredArticles = getFeaturedArticles().slice(0, 3);
 
-  // Debugging
-  console.log("✅ Articles:", articles);
-  console.log("✅ Featured Articles:", featuredArticles);
-  console.log("✅ Categories:", categories);
+  const [activeCategory, setActiveCategory] = useState("all");
+
+
+  const handleTabClick = (slug: string) => setActiveCategory(slug);
+
+  const filteredArticles =
+    activeCategory === "all"
+      ? articles
+      : getArticlesByCategory(activeCategory);
 
   if (loading) {
     return (
@@ -72,7 +70,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured or fallback */}
+      {/* Featured Articles */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -86,11 +84,9 @@ export default function HomePage() {
 
         {featuredArticles.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* First Featured */}
             <div className="lg:col-span-2">
               <ArticleCard article={featuredArticles[0]} featured={true} />
             </div>
-            {/* Remaining */}
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-gray-900 border-b-2 border-orange-600 pb-2">
                 Latest Stories
@@ -101,7 +97,6 @@ export default function HomePage() {
             </div>
           </div>
         ) : articles.length > 0 ? (
-          /* Fallback: show all articles if no featured */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles.slice(0, 6).map((article) => (
               <ArticleCard key={article.id} article={article} />
@@ -114,39 +109,33 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* Category Sections */}
+      {/* Category Tabs */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {categories.length > 0 ? (
-          categories.map((category) => {
-            const categoryArticles = getArticlesByCategory(category.slug);
-            if (!categoryArticles.length) return null;
+        <div className="flex flex-wrap gap-2 mb-6">
+          <button
+            onClick={() => handleTabClick("all")}
+            className={`px-4 py-2 rounded ${activeCategory === "all" ? "bg-orange-600 text-white" : "bg-gray-200"}`}
+          >
+            All
+          </button>
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => handleTabClick(cat.slug)}
+              className={`px-4 py-2 rounded ${activeCategory === cat.slug ? "bg-orange-600 text-white" : "bg-gray-200"}`}
+            >
+              {cat.name || "Uncategorized"}
+            </button>
+          ))}
+        </div>
 
-            return (
-              <div key={category.id} className="mb-12">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    {category.name}
-                  </h2>
-                  <Link
-                    to={`/category/${category.slug}`}
-                    className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium"
-                  >
-                    See More
-                    <ChevronRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {categoryArticles.slice(0, 4).map((article) => (
-                    <ArticleCard key={article.id} article={article} />
-                  ))}
-                </div>
-              </div>
-            );
-          })
+        {filteredArticles.length === 0 ? (
+          <p className="text-center text-gray-500">No articles in this category.</p>
         ) : (
-          <div className="text-center text-gray-500">
-            No categories available yet.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredArticles.map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
           </div>
         )}
       </section>
