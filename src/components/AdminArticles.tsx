@@ -2,9 +2,8 @@ import { useState } from "react";
 import { deleteArticle } from "../lib/deleteArticles";
 
 interface Article {
-  id: string;
+  id: string | number;
   title: string;
-  // add other fields if needed
 }
 
 interface AdminArticlesProps {
@@ -14,10 +13,15 @@ interface AdminArticlesProps {
 export default function AdminArticles({ initialArticles }: AdminArticlesProps) {
   const [articles, setArticles] = useState(initialArticles);
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string | number) => {
     deleteArticle({
       articleId: id,
-      onDeleted: (deletedId) => setArticles((prev) => prev.filter((a) => a.id !== deletedId)),
+      onDeleted: (deletedId) => {
+        // filter safely for string or number
+        setArticles((prev) =>
+          prev.filter((a) => a.id.toString() !== deletedId)
+        );
+      },
     });
   };
 
