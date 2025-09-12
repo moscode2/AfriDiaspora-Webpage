@@ -4,24 +4,25 @@ import { db } from "../../data/firebase";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
+// Slug generator
 function slugify(text: string) {
   return text
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9]+/g, "-") // replace spaces & special chars with "-"
+    .replace(/[^a-z0-9]+/g, "-") // replace spaces & special chars
     .replace(/(^-|-$)+/g, "");   // remove leading/trailing "-"
 }
 
-// ✅ categories with both name + slug
+// Categories with both name + slug + id
 const categories = [
-  { name: "News", slug: "news" },
-  { name: "Policy & Migration", slug: "policy-and-migration" },
-  { name: "Culture & Lifestyles", slug: "culture-and-lifestyles" },
-  { name: "Profiles & Voices", slug: "profiles-and-voices" },
-  { name: "Travel & Mobility", slug: "travel-and-mobility" },
-  { name: "Business & Jobs", slug: "business-and-jobs" },
-  { name: "Events", slug: "events" },
-  { name: "Latest Stories", slug: "latest-stories" },
+  { id: 1, name: "News", slug: "news" },
+  { id: 2, name: "Policy & Migration", slug: "policy-and-migration" },
+  { id: 3, name: "Culture & Lifestyles", slug: "culture-and-lifestyles" },
+  { id: 4, name: "Profiles & Voices", slug: "profiles-and-voices" },
+  { id: 5, name: "Travel & Mobility", slug: "travel-and-mobility" },
+  { id: 6, name: "Business & Jobs", slug: "business-and-jobs" },
+  { id: 7, name: "Events", slug: "events" },
+  { id: 8, name: "Latest Stories", slug: "latest-stories" },
 ];
 
 export default function NewArticle() {
@@ -29,7 +30,7 @@ export default function NewArticle() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
-  const [category, setCategory] = useState(categories[0].slug); // default slug
+  const [category, setCategory] = useState(categories[0].id); // default ID
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,25 +43,33 @@ export default function NewArticle() {
     setLoading(true);
     try {
       const slug = slugify(title);
-      const categoryData = categories.find((c) => c.slug === category);
+      const categoryData = categories.find((c) => c.id === category);
       const now = Timestamp.now();
+
+      // Generate excerpt automatically (first 150 chars)
+      const excerpt = content.length > 150 ? content.slice(0, 150) + "..." : content;
 
       await addDoc(collection(db, "articles"), {
         title,
         content,
         slug,
         status,
+        category_id: categoryData?.id || 0,         // crucial for mapping
         category_name: categoryData?.name || "",
         category_slug: categoryData?.slug || "",
         created_at: now,
-        updated_at: now,                            // ✅ added
-        published_at: status === "published" ? now : null, // ✅ added
+        updated_at: now,
+        published_at: status === "published" ? now : null,
+        author: "Admin",                             // optional, can be dynamic
+        is_featured: false,                          // default false
+        excerpt,
+        featured_image_url: "",                       // optional
       });
 
-      toast.success("Article created!");
+      toast.success("Article created successfully!");
       navigate("/admin/dashboard");
     } catch (err) {
-      console.error("create article error:", err);
+      console.error("Create article error:", err);
       toast.error("Failed to create article");
     } finally {
       setLoading(false);
@@ -100,11 +109,11 @@ export default function NewArticle() {
           <label className="block text-sm font-medium text-gray-700">Category</label>
           <select
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => setCategory(Number(e.target.value))}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
           >
             {categories.map((cat) => (
-              <option key={cat.slug} value={cat.slug}>
+              <option key={cat.id} value={cat.id}>
                 {cat.name}
               </option>
             ))}

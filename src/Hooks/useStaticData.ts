@@ -34,7 +34,6 @@ export function useStaticData() {
             updated_at: normalizeDate(data.updated_at),
           };
         });
-
         setCategories(categoriesData);
 
         // 2️⃣ Fetch articles
@@ -46,7 +45,7 @@ export function useStaticData() {
             orderBy("published_at", "desc")
           );
         } catch (err) {
-          console.warn("⚠️ Falling back to basic query (no published_at order)");
+          console.warn("⚠️ Falling back to basic query (no orderBy)");
           articleQuery = query(collection(db, "articles"));
         }
 
@@ -54,8 +53,11 @@ export function useStaticData() {
 
         const articlesData: Article[] = articleSnap.docs.map((doc) => {
           const data = doc.data() as Partial<Article>;
+
           // Match category by ID
-          const category = categoriesData.find((c) => c.id === data.category_id) || {
+          const category = categoriesData.find(
+            (c) => c.id.toString() === data.category_id?.toString()
+          ) || {
             id: 0,
             name: "Uncategorized",
             slug: "uncategorized",
@@ -68,7 +70,7 @@ export function useStaticData() {
             id: data.id?.toString() || doc.id,
             title: data.title || "Untitled",
             slug: data.slug || normalizeSlug(data.title || "untitled"),
-            excerpt: data.excerpt || "",
+            excerpt: data.excerpt || (data.content ? data.content.slice(0, 150) + "..." : ""),
             content: data.content || "",
             category_id: data.category_id || category.id,
             category: category.name,
