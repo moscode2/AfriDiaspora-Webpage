@@ -169,8 +169,8 @@ export default function ContactPage() {
                   <Mail className="h-6 w-6 text-orange-600 mt-1" />
                   <div>
                     <h3 className="font-medium text-gray-900">Email</h3>
-                    <p className="text-gray-600">hello@diasporalens.eu</p>
-                    <p className="text-gray-600">editorial@diasporalens.eu</p>
+                    <p className="text-gray-600">afrieuropamedia.com</p>
+                    <p className="text-gray-600">afrieuropamedia.com</p>
                   </div>
                 </div>
 

@@ -13,11 +13,11 @@ export default function PrivacyPage() {
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Privacy Policy</h1>
           
           <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="text-sm text-gray-500 mb-8">Last updated: August 24, 2024</p>
+            <p className="text-sm text-gray-500 mb-8">Last updated: September, 2025</p>
             
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Introduction</h2>
             <p>
-              Diaspora Lens ("we," "our," or "us") respects your privacy and is committed to protecting 
+              AfriEuropa ("we," "our," or "us") respects your privacy and is committed to protecting 
               your personal information. This Privacy Policy explains how we collect, use, and safeguard 
               your information when you visit our website or subscribe to our services.
             </p>
@@ -110,8 +110,8 @@ export default function PrivacyPage() {
               If you have any questions about this Privacy Policy or our data practices, please contact us at:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg mt-4">
-              <p><strong>Email:</strong> privacy@diasporalens.eu</p>
-              <p><strong>Address:</strong> Diaspora Lens Media, 123 Rue de la Paix, 75001 Paris, France</p>
+              <p><strong>Email:</strong> privacy@Europanews.com</p>
+              <p><strong>Address:</strong> AfriEuropa Media, 123 Berlin, Germany</p>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ function slugify(text: string) {
     .replace(/(^-|-$)+/g, "");   // remove leading/trailing "-"
 }
 
-// Categories with both name + slug + id
+// Categories with ID, name, slug
 const categories = [
   { id: 1, name: "News", slug: "news" },
   { id: 2, name: "Policy & Migration", slug: "policy-and-migration" },
@@ -30,7 +30,8 @@ export default function NewArticle() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
-  const [category, setCategory] = useState(categories[0].id); // default ID
+  const [category, setCategory] = useState(categories[0].id);
+  const [featuredImageUrl, setFeaturedImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,8 +46,6 @@ export default function NewArticle() {
       const slug = slugify(title);
       const categoryData = categories.find((c) => c.id === category);
       const now = Timestamp.now();
-
-      // Generate excerpt automatically (first 150 chars)
       const excerpt = content.length > 150 ? content.slice(0, 150) + "..." : content;
 
       await addDoc(collection(db, "articles"), {
@@ -54,16 +53,16 @@ export default function NewArticle() {
         content,
         slug,
         status,
-        category_id: categoryData?.id || 0,         // crucial for mapping
+        category_id: categoryData?.id || 0,
         category_name: categoryData?.name || "",
         category_slug: categoryData?.slug || "",
         created_at: now,
         updated_at: now,
         published_at: status === "published" ? now : null,
-        author: "Admin",                             // optional, can be dynamic
-        is_featured: false,                          // default false
+        author: "Admin",
+        is_featured: false,
         excerpt,
-        featured_image_url: "",                       // optional
+        featured_image_url: featuredImageUrl || "",
       });
 
       toast.success("Article created successfully!");
@@ -102,6 +101,25 @@ export default function NewArticle() {
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
             required
           />
+        </div>
+
+        {/* Featured Image URL */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Featured Image URL</label>
+          <input
+            type="text"
+            value={featuredImageUrl}
+            onChange={(e) => setFeaturedImageUrl(e.target.value)}
+            placeholder="https://example.com/photo.jpg"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
+          />
+          {featuredImageUrl && (
+            <img
+              src={featuredImageUrl}
+              alt="Preview"
+              className="mt-2 w-full max-h-64 object-cover rounded"
+            />
+          )}
         </div>
 
         {/* Category */}

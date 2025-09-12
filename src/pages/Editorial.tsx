@@ -19,7 +19,7 @@ export default function EditorialPage() {
             
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Our Editorial Mission</h2>
             <p>
-              We are is committed to providing accurate, fair, and balanced news coverage that serves 
+              We are  committed to providing accurate, fair, and balanced news coverage that serves 
               the African diaspora communities across Europe. We strive to inform, educate, and empower our 
               readers with quality journalism that respects diversity and promotes understanding.
             </p>
@@ -122,9 +122,9 @@ export default function EditorialPage() {
               For editorial inquiries, story tips, or concerns about our coverage, please contact:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg mt-4">
-              <p><strong>Editorial Email:</strong> editorial@diasporalens.eu</p>
-              <p><strong>News Tips:</strong> tips@diasporalens.eu</p>
-              <p><strong>Corrections:</strong> corrections@diasporalens.eu</p>
+              <p><strong>Editorial Email:</strong> afrieuropamedia.com</p>
+              <p><strong>News Tips:</strong> afrieuropamedia.com</p>
+              <p><strong>Corrections:</strong> afriuropamedia.com</p>
             </div>
           </div>
         </div>
