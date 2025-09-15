@@ -1,6 +1,5 @@
 // src/pages/Home.tsx
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import NewsletterBanner from "../components/Newsletter";
@@ -8,18 +7,8 @@ import ArticleCard from "../components/ArticleCard";
 import { useStaticData } from "../Hooks/useStaticData";
 
 export default function HomePage() {
-  const { articles, categories, loading, getFeaturedArticles, getArticlesByCategory } = useStaticData();
+  const { articles, loading, getFeaturedArticles } = useStaticData();
   const featuredArticles = getFeaturedArticles().slice(0, 3);
-
-  const [activeCategory, setActiveCategory] = useState("all");
-
-
-  const handleTabClick = (slug: string) => setActiveCategory(slug);
-
-  const filteredArticles =
-    activeCategory === "all"
-      ? articles
-      : getArticlesByCategory(activeCategory);
 
   if (loading) {
     return (
@@ -106,41 +95,6 @@ export default function HomePage() {
           <p className="text-center text-gray-500">
             No articles available yet.
           </p>
-        )}
-      </section>
-
-      {/* Category Tabs */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-wrap gap-2 mb-6">
-          <button
-            onClick={() => handleTabClick("all")}
-            className={`px-4 py-2 rounded ${activeCategory === "all" ? "bg-orange-600 text-white" : "bg-gray-200"}`}
-          >
-            All
-          </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => handleTabClick(cat.slug)}
-              className={`px-4 py-2 rounded ${activeCategory === cat.slug ? "bg-orange-600 text-white" : "bg-gray-200"}`}
-            >
-              {cat.name || "Uncategorized"}
-            </button>
-          ))}
-        </div>
-
-        {filteredArticles.length === 0 ? (
-          <p className="text-center text-gray-500">No articles in this category.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredArticles.map((article) => (
-                      <ArticleCard 
-                      key={article.id || article.slug || Math.random()} 
-                        article={article} 
-                              />
-               ))}
-
-          </div>
         )}
       </section>
 

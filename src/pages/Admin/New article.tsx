@@ -32,12 +32,13 @@ export default function NewArticle() {
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [category, setCategory] = useState(categories[0].id);
   const [featuredImageUrl, setFeaturedImageUrl] = useState("");
+  const [author, setAuthor] = useState(""); // 👈 new state
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !content.trim()) {
-      toast.error("Title and content are required");
+    if (!title.trim() || !content.trim() || !author.trim()) {
+      toast.error("Title, content, and author are required");
       return;
     }
 
@@ -59,7 +60,7 @@ export default function NewArticle() {
         created_at: now,
         updated_at: now,
         published_at: status === "published" ? now : null,
-        author: "Admin",
+        author, // 👈 now uses typed value
         is_featured: false,
         excerpt,
         featured_image_url: featuredImageUrl || "",
@@ -86,6 +87,19 @@ export default function NewArticle() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
+            required
+          />
+        </div>
+
+        {/* Author */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Author</label>
+          <input
+            type="text"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            placeholder="Enter author's name"
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
             required
           />
