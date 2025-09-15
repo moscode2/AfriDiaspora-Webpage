@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
+// ✅ Firebase config using .env variables
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -15,6 +16,10 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+// 🔎 Debug: check values
+console.log("Firebase config check:", firebaseConfig);
+
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // Services
