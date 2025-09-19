@@ -8,7 +8,6 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, featured = false }: ArticleCardProps) {
-  // ✅ Safer date formatter
   const formatDate = (dateString: string) => {
     if (!dateString || dateString.trim() === "") return null;
     const date = new Date(dateString);
@@ -20,7 +19,6 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
     });
   };
 
-  // ✅ Fallback values
   const slug = article.slug || String(article.id) || "unknown-article";
   const title = article.title || "Untitled Article";
   const excerpt = article.excerpt || "No summary available.";
@@ -29,6 +27,7 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
   const imageUrl =
     article.featured_image_url ||
     "https://via.placeholder.com/800x450?text=No+Image";
+  const category = article.category || "Uncategorized";
 
   if (featured) {
     return (
@@ -41,6 +40,10 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+            {/* Category */}
+            <span className="inline-block text-sm font-semibold bg-orange-600 px-2 py-1 rounded-full mb-2">
+              {category || "Uncategorized"}
+            </span>
             <h2 className="text-2xl lg:text-3xl font-bold mb-2 group-hover:text-orange-300 transition-colors">
               {title}
             </h2>
@@ -63,12 +66,16 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
   return (
     <Link to={`/article/${slug}`} className="group block">
       <article className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-        <div className="aspect-[16/9] overflow-hidden">
+        <div className="aspect-[16/9] overflow-hidden relative">
           <img
             src={imageUrl}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
+          {/* Category badge */}
+          <span className="absolute top-2 left-2 inline-block text-xs font-semibold bg-orange-600 text-white px-2 py-1 rounded-full">
+            {category || "Uncategorized"}
+          </span>
         </div>
         <div className="p-4">
           <h3 className="font-semibold text-lg text-gray-900 group-hover:text-orange-600 transition-colors mb-2 line-clamp-2">

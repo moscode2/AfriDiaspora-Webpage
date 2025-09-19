@@ -1,0 +1,26 @@
+{
+  "footer": {
+    "brandName": "AfriEuropa Nieuws",
+    "tagline": "Brug tussen continenten",
+    "description": "Uw betrouwbare bron voor artikelen en kansen van de Afrikaanse diaspora in Europa.",
+    "categories": {
+      "title": "Categorieën",
+      "africa": "Afrika",
+      "europe": "Europa",
+      "diaspora": "Diaspora Stemmen",
+      "opinion": "Opinies",
+      "business": "Economie & Bedrijf",
+      "culture": "Cultuur",
+      "travel": "Reizen"
+    },
+    "company": {
+      "title": "Bedrijf",
+      "about": "Over ons",
+      "editorial": "Redactiebeleid",
+      "contact": "Contact",
+      "privacy": "Privacybeleid"
+    },
+    "followUs": "Volg ons",
+    "copyright": "AfriEuropa Nieuws. Alle rechten voorbehouden."
+  }
+}

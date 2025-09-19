@@ -1,94 +1,105 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 const Hero = () => {
   const featuredStory = {
+    id: "1",
     title: "Germany Expands Chancenkarte Program: What It Means for African Migrants in 2025",
-    excerpt: "New opportunities emerge as Germany's points-based immigration system opens doors for skilled workers from Africa. Here's everything you need to know about the expanded program.",
-    image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
+    excerpt:
+      "New opportunities emerge as Germany's points-based immigration system opens doors for skilled workers from Africa. Here's everything you need to know about the expanded program.",
+    image:
+      "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200",
     category: "Policy & Migration",
-    readTime: "5 min read"
+    readTime: "5 min read",
   };
 
-  const highlightStories = [
-    {
-      title: "African Entrepreneurs Thrive in Berlin's Tech Scene",
-      excerpt: "Meet the innovators building bridges between Africa and Europe through technology.",
-      image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=400",
-      category: "Business & Jobs"
-    },
-    {
-      title: "Celebrating Afrobeats: How African Music is Reshaping European Culture",
-      excerpt: "From underground clubs to mainstream festivals, African music continues to influence European cultural landscape.",
-      image: "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=400",
-      category: "Culture & Lifestyle"
-    },
-    {
-      title: "Budget Travel Tips: Exploring Europe on €50 a Day",
-      excerpt: "Practical advice for diaspora travelers looking to explore Europe without breaking the bank.",
-      image: "https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=400",
-      category: "Travel & Mobility"
-    }
+  const breakingHeadlines = [
+    { id: "2", title: "African Entrepreneurs Thrive in Berlin's Tech Scene" },
+    { id: "3", title: "Afrobeats Reshaping European Culture in 2025" },
+    { id: "4", title: "Budget Travel Tips: Exploring Europe on €50 a Day" },
+    { id: "5", title: "France Announces New Visa Pathways for Skilled Workers" },
   ];
 
+  const [tickerIndex, setTickerIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTickerIndex((i) => (i + 1) % breakingHeadlines.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Featured Story */}
-          <div className="lg:col-span-2">
-            <div className="relative bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="aspect-w-16 aspect-h-9">
-                <img
-                  src={featuredStory.image}
-                  alt={featuredStory.title}
-                  className="w-full h-64 lg:h-80 object-cover"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <span className="inline-block bg-green-600 text-white px-3 py-1 rounded-full text-base font-medium mb-3">
-                  {featuredStory.category}
-                </span>
-                <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight">
-                  {featuredStory.title}
-                </h2>
-                <p className="text-gray-200 mb-4 line-clamp-2 text-lg">
-                  {featuredStory.excerpt}
-                </p>
-                <div className="flex items-center text-base text-gray-300">
-                  <span>{featuredStory.readTime}</span>
-                  <span className="mx-2">•</span>
-                  <span>2 hours ago</span>
-                </div>
-              </div>
+    <section className="relative">
+      <div className="relative h-[420px] md:h-[520px] overflow-hidden">
+        {/* Background Image + Gradient */}
+        <img
+          src={featuredStory.image}
+          alt={featuredStory.title}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+        {/* Overlay content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between">
+          {/* Left: Featured Story */}
+          <div className="w-full lg:w-2/3 text-white mb-6 lg:mb-0">
+            <span className="inline-block bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
+              {featuredStory.category}
+            </span>
+            <h1 className="font-serif text-3xl md:text-5xl font-bold leading-tight drop-shadow-lg">
+              {featuredStory.title}
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg md:text-xl text-orange-100 drop-shadow-md">
+              {featuredStory.excerpt}
+            </p>
+            <div className="mt-6">
+              <Link
+                to={`/article/${featuredStory.id}`}
+                className="inline-block px-6 py-3 border-2 border-white rounded-md text-white font-semibold hover:bg-white hover:text-orange-600 transition transform hover:scale-105"
+              >
+                Read More
+              </Link>
             </div>
           </div>
 
-          {/* Highlight Stories */}
-          <div className="space-y-6">
-            {highlightStories.map((story, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div className="flex">
-                  <div className="w-24 h-24 flex-shrink-0">
-                    <img
-                      src={story.image}
-                      alt={story.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 p-4">
-                    <span className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium mb-2">
-                      {story.category}
-                    </span>
-                    <h3 className="font-semibold text-base mb-2 line-clamp-2 leading-tight">
-                      {story.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm line-clamp-2">
-                      {story.excerpt}
-                    </p>
-                  </div>
-                </div>
+          {/* Right: Breaking News Ticker (desktop only) */}
+          <div className="hidden lg:block w-1/3 pl-8">
+            <div className="bg-white/95 text-gray-900 p-4 rounded-lg shadow">
+              <div className="text-sm font-semibold mb-2 text-orange-600">Breaking</div>
+              <div className="h-32 overflow-hidden relative">
+                <ul
+                  className="absolute top-0 left-0 transition-transform duration-500"
+                  style={{ transform: `translateY(-${tickerIndex * 100}%)` }}
+                >
+                  {breakingHeadlines.map((item) => (
+                    <li key={item.id} className="h-32 flex items-center">
+                      <Link to={`/article/${item.id}`} className="font-medium hover:underline">
+                        {item.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
+              <div className="text-xs text-gray-500 mt-2">Latest headlines</div>
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile ticker below main story */}
+      <div className="lg:hidden bg-white">
+        <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
+          <div className="text-sm font-semibold text-orange-600">Breaking</div>
+          {breakingHeadlines.map((item) => (
+            <Link
+              key={item.id}
+              to={`/article/${item.id}`}
+              className="block font-medium border-b border-gray-200 py-2 hover:text-orange-500 transition"
+            >
+              {item.title}
+            </Link>
+          ))}
         </div>
       </div>
     </section>
