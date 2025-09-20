@@ -5,13 +5,12 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    'News',
-    'Policy & Migration',
-    'Culture & Lifestyle',
-    'Profiles & Voices',
-    'Travel & Mobility',
-    'Business & Jobs',
-    'Events'
+    'Africa News',
+    'Europe News',
+    'Diaspora Voices',
+    'Opinions',
+    'Business & Economy',
+    'Culture & Travel',
   ];
 
   return (

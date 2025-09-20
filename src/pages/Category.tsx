@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -7,9 +8,16 @@ import { useStaticData } from "../Hooks/useStaticData";
 export default function CategoryPage() {
   const { slug } = useParams<{ slug: string }>();
   const { categories, loading, getArticlesByCategory } = useStaticData();
-  
-  const category = categories.find(cat => cat.slug === slug) || null;
-  const articles = category ? getArticlesByCategory(slug!) : [];
+
+  const category = useMemo(
+    () => categories.find((cat) => cat.slug.toLowerCase() === slug?.toLowerCase()) || null,
+    [categories, slug]
+  );
+
+  const articles = useMemo(
+    () => (category ? getArticlesByCategory(category.slug) : []),
+    [category, getArticlesByCategory]
+  );
 
   if (loading) {
     return (
@@ -26,11 +34,9 @@ export default function CategoryPage() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Category Not Found</h1>
-            <p className="text-gray-600">The category you're looking for doesn't exist.</p>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Category Not Found</h1>
+          <p className="text-gray-600">The category you're looking for doesn't exist.</p>
         </div>
         <Footer />
       </div>
@@ -40,19 +46,13 @@ export default function CategoryPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Category Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h1>
-          {category.description && (
-            <p className="text-gray-600 text-lg">{category.description}</p>
-          )}
-        </div>
 
-        {/* Articles Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h1>
+        {category.description && <p className="text-gray-600 text-lg">{category.description}</p>}
+
         {articles.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             {articles.map((article) => (
               <ArticleCard key={article.id} article={article} />
             ))}
