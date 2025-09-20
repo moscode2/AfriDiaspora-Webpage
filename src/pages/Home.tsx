@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-// // ✅ Translations
+// ✅ Translations
 const translations = {
   en: {
     brand: "AfriEuropa News",
@@ -18,7 +18,6 @@ const translations = {
     support: "Featured News",
     noArticles: "No articles available yet.",
 
-    // Navigation
     africaNews: "Africa News",
     europeNews: "Europe News",
     diasporaVoices: "Diaspora Voices",
@@ -76,7 +75,6 @@ const translations = {
   },
 };
 
-
 // ✅ Header Component
 function Header({
   onLanguageChange,
@@ -88,13 +86,14 @@ function Header({
   const [menuOpen, setMenuOpen] = useState(false);
   const t = translations[language];
 
+  // 🔑 Use Firestore-friendly slugs
   const navItems = [
-    { path: "/africa", label: t.africaNews },
-    { path: "/europe", label: t.europeNews },
-    { path: "/diaspora", label: t.diasporaVoices },
-    { path: "/opinion", label: t.opinion },
-    { path: "/business", label: t.businessEconomy },
-    { path: "/culture", label: t.cultureTravel },
+    { path: "/category/africa-news", label: t.africaNews },
+    { path: "/category/europe-news", label: t.europeNews },
+    { path: "/category/diaspora-voices", label: t.diasporaVoices },
+    { path: "/category/opinion", label: t.opinion },
+    { path: "/category/business-economy", label: t.businessEconomy },
+    { path: "/category/culture-travel", label: t.cultureTravel },
   ];
 
   const languages = [
@@ -137,7 +136,9 @@ function Header({
             {languages.map((lang) => (
               <button
                 key={lang.code}
-                onClick={() => onLanguageChange(lang.code as "en" | "nl" | "fr" | "es")}
+                onClick={() =>
+                  onLanguageChange(lang.code as "en" | "nl" | "fr" | "es")
+                }
                 className="hover:opacity-80 transition"
               >
                 <img
@@ -197,7 +198,7 @@ function Header({
 
 // ✅ HomePage
 export default function HomePage() {
-  const { loading, getArticlesByCategory } = useStaticData();
+  const { loading, getArticlesByCategory, getFeaturedArticles } = useStaticData();
   const [language, setLanguage] = useState<"en" | "nl" | "fr" | "es">("en");
   const t = translations[language];
 
@@ -209,13 +210,14 @@ export default function HomePage() {
     );
   }
 
+  // 🔑 Use Firestore slugs
   const categories = [
-    { key: "africaNews", title: t.africaNews },
-    { key: "europeNews", title: t.europeNews },
-    { key: "diasporaVoices", title: t.diasporaVoices },
+    { key: "africa-news", title: t.africaNews },
+    { key: "europe-news", title: t.europeNews },
+    { key: "diaspora-voices", title: t.diasporaVoices },
     { key: "opinion", title: t.opinion },
-    { key: "businessEconomy", title: t.businessEconomy },
-    { key: "cultureTravel", title: t.cultureTravel },
+    { key: "business-economy", title: t.businessEconomy },
+    { key: "culture-travel", title: t.cultureTravel },
   ];
 
   return (
@@ -232,17 +234,21 @@ export default function HomePage() {
           />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">{t.welcome}</h1>
-          <p className="text-xl lg:text-2xl text-orange-100 max-w-3xl mx-auto mb-8">{t.newsletterTitle}</p>
+          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+            {t.welcome}
+          </h1>
+          <p className="text-xl lg:text-2xl text-orange-100 max-w-3xl mx-auto mb-8">
+            {t.newsletterTitle}
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/category/news"
+              to="/category/africa-news"
               className="inline-flex items-center px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-orange-600 transition-colors"
             >
               {t.latest}
             </Link>
             <Link
-              to="/category/business-jobs"
+              to="/category/business-economy"
               className="inline-flex items-center px-8 py-3 bg-white text-orange-600 font-semibold rounded-lg hover:bg-orange-50 transition-colors"
             >
               {t.support}
@@ -251,13 +257,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Category Sections */}
+      {/* ✅ Featured Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">{t.support}</h2>
+        {getFeaturedArticles().length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {getFeaturedArticles()
+              .slice(0, 3)
+              .map((article) => (
+                <ArticleCard key={article.id} article={article} featured={true} />
+              ))}
+          </div>
+        ) : (
+          <p className="text-gray-500">{t.noArticles}</p>
+        )}
+      </section>
+
+      {/* ✅ Category Sections */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
         {categories.map((cat) => {
           const articles = getArticlesByCategory(cat.key).slice(0, 3);
           return (
             <div key={cat.key}>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">{cat.title}</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                {cat.title}
+              </h2>
               {articles.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {articles.map((article) => (

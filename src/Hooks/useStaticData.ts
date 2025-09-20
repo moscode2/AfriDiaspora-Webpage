@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Article, Category } from "../types";
 import { db } from "../data/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 
 export function useStaticData() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -11,14 +11,20 @@ export function useStaticData() {
 
   const normalizeDate = (value: unknown) => {
     if (!value) return null;
-    if ((value as { toDate?: () => Date }).toDate) {
+    if ((value as { toDate?: () => Date }).toDate)
       return (value as { toDate: () => Date }).toDate().toISOString();
-    }
     return new Date(value as string).toISOString();
   };
 
   const normalizeSlug = (str: string | undefined | null) =>
     str ? str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-") : "uncategorized";
+
+  // ✅ normalize is_featured from Firestore (boolean | string | undefined)
+  const normalizeFeatured = (value: unknown): boolean => {
+    if (typeof value === "boolean") return value;
+    if (typeof value === "string") return value.toLowerCase() === "true";
+    return false;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +34,9 @@ export function useStaticData() {
         const categoriesData: Category[] = categoriesSnap.docs.map((doc) => {
           const data = doc.data();
           return {
-            id: doc.id, // ✅ Firestore doc.id is the identifier
+            id: data.id,
             name: data.name || "Uncategorized",
-            slug: normalizeSlug(data.name || doc.id), // ✅ fallback to doc.id
+            slug: data.slug || normalizeSlug(data.name || "uncategorized"),
             description: data.description || null,
             created_at: normalizeDate(data.created_at),
             updated_at: normalizeDate(data.updated_at),
@@ -43,11 +49,11 @@ export function useStaticData() {
         try {
           articleQuery = query(
             collection(db, "articles"),
-            where("status", "in", ["published", "Published"])
-            // removed orderBy("published_at") since your docs don’t have it
+            where("status", "in", ["published", "Published"]),
+            orderBy("published_at", "desc")
           );
         } catch (err) {
-          console.warn("⚠️ Falling back to basic query (no filters)");
+          console.warn("⚠️ Falling back to basic query (no orderBy)");
           articleQuery = query(collection(db, "articles"));
         }
 
@@ -56,22 +62,23 @@ export function useStaticData() {
         const articlesData: Article[] = articleSnap.docs.map((doc) => {
           const data = doc.data() as Partial<Article>;
 
-          // Match category by doc.id
-          const category = categoriesData.find(
-            (c) => c.id === data.category_id
-          ) || {
-            id: "uncategorized",
-            name: "Uncategorized",
-            slug: "uncategorized",
-            description: null,
-            created_at: "",
-            updated_at: "",
-          };
+          // Match category by ID
+          const category =
+            categoriesData.find(
+              (c) => c.id.toString() === data.category_id?.toString()
+            ) || {
+              id: 0,
+              name: "uncategorized",
+              slug: "uncategorized",
+              description: null,
+              created_at: "",
+              updated_at: "",
+            };
 
           return {
-            id: doc.id, // ✅ always fallback to doc.id
+            id: data.id?.toString() || doc.id,
             title: data.title || "Untitled",
-            slug: normalizeSlug(data.title || doc.id),
+            slug: data.slug || normalizeSlug(data.title || "untitled"),
             excerpt:
               data.excerpt ||
               (data.content ? data.content.slice(0, 150) + "..." : ""),
@@ -80,7 +87,7 @@ export function useStaticData() {
             category: category.name,
             category_name: category.name,
             category_slug: category.slug,
-            is_featured: data.is_featured || false,
+            is_featured: normalizeFeatured(data.is_featured),
             featured_image_url: data.featured_image_url || "",
             created_at: normalizeDate(data.created_at),
             published_at: normalizeDate(data.published_at),
@@ -91,8 +98,6 @@ export function useStaticData() {
         });
 
         setArticles(articlesData);
-
-        // Debugging logs
         console.log("✅ Loaded categories:", categoriesData);
         console.log("✅ Loaded articles:", articlesData);
       } catch (error) {
@@ -105,7 +110,6 @@ export function useStaticData() {
     fetchData();
   }, []);
 
-  // ✅ Helper functions
   const getArticlesByCategory = (categorySlug: string) =>
     articles.filter((article) => article.category_slug === categorySlug);
 
