@@ -73,19 +73,44 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("followUs")}</h3>
             <div className="flex space-x-4">
-              <a href="https://www.linkedin.com/company/afrieuropa-news/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.linkedin.com/company/afrieuropa-news/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="h-6 w-6" />
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61580768934040" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.facebook.com/profile.php?id=61580768934040"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
                 <Facebook className="h-6 w-6" />
               </a>
-              <a href="https://x.com/afrieuropa" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://x.com/afrieuropa"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter (X)"
+              >
                 <span className="font-bold text-lg">X</span>
               </a>
-              <a href="https://www.instagram.com/afrieuropa_news" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.instagram.com/afrieuropa_news"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href="https://www.youtube.com/@AfriEuropaNews" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.youtube.com/@AfriEuropaNews"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
                 <Youtube className="h-6 w-6" />
               </a>
             </div>

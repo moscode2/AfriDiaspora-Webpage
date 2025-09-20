@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import styles from "./Ticker.module.css"; // import CSS module
 
 const Hero = () => {
   const featuredStory = {
     id: "1",
-    title: "Germany Expands Chancenkarte Program: What It Means for African Migrants in 2025",
+    title:
+      "Germany Expands Chancenkarte Program: What It Means for African Migrants in 2025",
     excerpt:
       "New opportunities emerge as Germany's points-based immigration system opens doors for skilled workers from Africa. Here's everything you need to know about the expanded program.",
     image:
@@ -27,7 +29,7 @@ const Hero = () => {
       setTickerIndex((i) => (i + 1) % breakingHeadlines.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [breakingHeadlines.length]);
 
   return (
     <section className="relative">
@@ -66,15 +68,19 @@ const Hero = () => {
           {/* Right: Breaking News Ticker (desktop only) */}
           <div className="hidden lg:block w-1/3 pl-8">
             <div className="bg-white/95 text-gray-900 p-4 rounded-lg shadow">
-              <div className="text-sm font-semibold mb-2 text-orange-600">Breaking</div>
+              <div className="text-sm font-semibold mb-2 text-orange-600">
+                Breaking
+              </div>
               <div className="h-32 overflow-hidden relative">
                 <ul
-                  className="absolute top-0 left-0 transition-transform duration-500"
-                  style={{ transform: `translateY(-${tickerIndex * 100}%)` }}
+                  className={`${styles.tickerList} ${styles[`t${tickerIndex}`]}`}
                 >
                   {breakingHeadlines.map((item) => (
                     <li key={item.id} className="h-32 flex items-center">
-                      <Link to={`/article/${item.id}`} className="font-medium hover:underline">
+                      <Link
+                        to={`/article/${item.id}`}
+                        className="font-medium hover:underline"
+                      >
                         {item.title}
                       </Link>
                     </li>

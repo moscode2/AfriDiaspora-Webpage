@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@supabase/supabase-js": "^2.56.1",
+    "dotenv": "^17.2.2",
     "firebase": "^12.3.0",
     "framer-motion": "^12.4.7",
     "i18next": "^25.5.2",
