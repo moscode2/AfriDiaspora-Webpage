@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Article, Category } from "../types";
 import { db } from "../data/firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import { Article, Category } from "../types";
 
 export function useStaticData() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -9,55 +9,45 @@ export function useStaticData() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const normalizeDate = (value: unknown) => {
-    if (!value) return null;
-    if (typeof value === "object" && value !== null && "toDate" in value) {
-      return (value as { toDate: () => Date }).toDate().toISOString();
-    }
-    return new Date(value as string).toISOString();
-  };
-
-  const normalizeSlug = (str: string | undefined | null) =>
-    str ? str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-") : "uncategorized";
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
+
       try {
-        // Fetch categories
-        const categoriesSnap = await getDocs(collection(db, "categories"));
-        const categoriesData: Category[] = categoriesSnap.docs.map((doc) => {
+        // 1️⃣ Categories
+        const catSnap = await getDocs(collection(db, "categories"));
+        const categoriesData: Category[] = catSnap.docs.map((doc) => {
           const data = doc.data();
           return {
-            id: data.id || doc.id,
+            id: doc.id, // keep string
             name: data.name || "Uncategorized",
-            slug: normalizeSlug(data.slug || data.name),
+            slug: (data.slug || data.name || "uncategorized").toLowerCase(),
             description: data.description || null,
-            created_at: normalizeDate(data.created_at) || "",
-            updated_at: normalizeDate(data.updated_at) || "",
+            created_at: data.created_at || "",
+            updated_at: data.updated_at || "",
           };
         });
         setCategories(categoriesData);
 
-        // Fetch articles
-        let articleQuery;
+        // 2️⃣ Articles
+        let q;
         try {
-          articleQuery = query(
+          q = query(
             collection(db, "articles"),
-            orderBy("published_at", "desc")
+            where("status", "==", "published"),
+            orderBy("title", "asc") // 🔑 use a field that exists
           );
         } catch {
-          articleQuery = collection(db, "articles");
+          q = collection(db, "articles");
         }
 
-        const articleSnap = await getDocs(articleQuery);
-        const articlesData: Article[] = articleSnap.docs.map((doc) => {
-          const data = doc.data() as Partial<Article>;
+        const artSnap = await getDocs(q);
+        const articlesData: Article[] = artSnap.docs.map((doc) => {
+          const data = doc.data();
           const category =
-            categoriesData.find((c) => c.id.toString() === data.category_id?.toString()) ||
-            {
-              id: 0,
+            categoriesData.find((c) => c.slug === data.category_id) || {
+              id: "0",
               name: "Uncategorized",
               slug: "uncategorized",
               description: null,
@@ -66,29 +56,30 @@ export function useStaticData() {
             };
 
           return {
-            id: data.id?.toString() || doc.id,
+            id: doc.id,
             title: data.title || "Untitled",
-            slug: normalizeSlug(data.slug || data.title),
-            excerpt:
-              data.excerpt || (data.content ? data.content.slice(0, 150) + "..." : ""),
+            slug: (data.slug || data.title || "untitled")
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-"),
+            excerpt: data.excerpt || "",
             content: data.content || "",
-            category_id: data.category_id || category.id,
+            featured_image_url: data.featured_image_url || "",
+            category_id: data.category_id,
             category: category.name,
             category_slug: category.slug,
-            is_featured: data.is_featured || false,
-            featured_image_url: data.featured_image_url || "",
-            created_at: normalizeDate(data.created_at),
-            published_at: normalizeDate(data.published_at),
-            updated_at: normalizeDate(data.updated_at),
+            is_featured: !!data.is_featured,
             author: data.author || "Anonymous",
             status: data.status || "draft",
+            published_at: data.published_at || null,
+            created_at: data.created_at || "",
+            updated_at: data.updated_at || "",
           };
         });
 
         setArticles(articlesData);
       } catch (err) {
         console.error("❌ Error fetching Firestore data:", err);
-        setError("Failed to fetch articles. Please try again later.");
+        setError("Failed to fetch articles");
       } finally {
         setLoading(false);
       }
@@ -97,24 +88,5 @@ export function useStaticData() {
     fetchData();
   }, []);
 
-  // Simple getters (no memoization issues)
-  const getArticlesByCategory = (categorySlug: string) =>
-    articles.filter(
-      (article) => article.category_slug.toLowerCase() === categorySlug.toLowerCase()
-    );
-
-  const getFeaturedArticles = () => articles.filter((article) => article.is_featured);
-
-  const getArticleBySlug = (slug: string) =>
-    articles.find((article) => article.slug === slug) || null;
-
-  return {
-    articles,
-    categories,
-    loading,
-    error,
-    getArticlesByCategory,
-    getFeaturedArticles,
-    getArticleBySlug,
-  };
+  return { articles, categories, loading, error };
 }

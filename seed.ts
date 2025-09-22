@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 // --------------------
 // Firebase Setup
@@ -29,6 +29,7 @@ const db = getFirestore(app);
 type Category = {
   id: string;
   name: string;
+  slug?: string;
 };
 
 type Article = {
@@ -45,14 +46,13 @@ type Article = {
 // Data
 // --------------------
 const categories: Category[] = [
-  { id: "africa-news", name: "Africa News" },
-  { id: "europe-news", name: "Europe News" },
-  { id: "diaspora-voices", name: "Diaspora Voices" },
-  { id: "opinion", name: "Opinion / Editorial" },
-  { id: "business-economy", name: "Business & Economy" },
-  { id: "culture-travel", name: "Culture & Travel" },
+  { id: "africa-news", name: "Africa News", slug: "africa-news" },
+  { id: "europe-news", name: "Europe News", slug: "europe-news" },
+  { id: "diaspora-voices", name: "Diaspora Voices", slug: "diaspora-voices" },
+  { id: "opinion", name: "Opinion / Editorial", slug: "opinion" },
+  { id: "business-economy", name: "Business & Economy", slug: "business-economy" },
+  { id: "culture-travel", name: "Culture & Travel", slug: "culture-travel" },
 ];
-
 const articles: Article[] = [
   // 🌍 Africa News
   {
@@ -78,7 +78,7 @@ const articles: Article[] = [
     excerpt: "Nigeria invests in technology hubs to drive youth innovation...",
     content: "Full article content here...",
     category_id: "africa-news",
-    author: "Moses Onyango",
+    author: "Akra Rotimi",
     featured_image_url: "https://source.unsplash.com/600x400/?nigeria,tech",
     status: "published",
   },
@@ -91,6 +91,15 @@ const articles: Article[] = [
     featured_image_url: "https://source.unsplash.com/600x400/?southafrica,energy",
     status: "published",
   },
+    {
+      title: "ECOWAS Plans for Regional Stability",
+      excerpt: "West African states strengthen unity amidst political transitions.",
+      content: "ECOWAS leaders have announced new frameworks to support peaceful power transitions in member states...",
+      category_id: "africa-news",
+      author: "Samuel Okoye",
+      featured_image_url: "https://source.unsplash.com/600x400/?africa,politics",
+      status: "published",
+    },
 
   // 🇪🇺 Europe News
   {
@@ -129,6 +138,25 @@ const articles: Article[] = [
     featured_image_url: "https://source.unsplash.com/600x400/?italy,mediterranean",
     status: "published",
   },
+  {
+    title: "EU Expands Investment in African Green Energy",
+    excerpt: "Billions pledged for sustainable projects across the continent.",
+    content: "The European Union has unveiled a multi-billion euro plan to support solar and wind energy in Africa...",
+    category_id: "europe-news",
+    author: "Anna Müller",
+    featured_image_url: "https://source.unsplash.com/600x400/?europe,renewable-energy",
+    status: "published",
+  },
+  {
+    title: "Migration Talks Dominate Brussels Summit",
+    excerpt: "Leaders debate new policies on African migration to Europe.",
+    content: "At the EU-Africa summit, leaders discussed sustainable migration and integration policies...",
+    category_id: "europe-news",
+    author: "Marco Rossi",
+    featured_image_url: "https://source.unsplash.com/600x400/?brussels,conference",
+    status: "published",
+  },
+
 
   // 🌐 Diaspora Voices
   {
@@ -167,6 +195,25 @@ const articles: Article[] = [
     featured_image_url: "https://source.unsplash.com/600x400/?youth,identity",
     status: "published",
   },
+  {
+    title: "Africans Abroad Drive Remittances Growth",
+    excerpt: "Billions flow back home, fueling development.",
+    content: "Remittances from the African diaspora reached record highs last year, surpassing foreign aid contributions...",
+    category_id: "diaspora-voices",
+    author: "Fatima Diallo",
+    featured_image_url: "https://source.unsplash.com/600x400/?africandiaspora,finance",
+    status: "published",
+  },
+  {
+    title: "Diaspora Youth Shaping Global Culture",
+    excerpt: "From music to fashion, African influence dominates worldwide.",
+    content: "Young Africans in the diaspora are redefining global pop culture, especially in music and film...",
+    category_id: "diaspora-voices",
+    author: "Kwame Boateng",
+    featured_image_url: "https://source.unsplash.com/600x400/?africa,youth,culture",
+    status: "published",
+  },
+
 
   // 📝 Opinion
   {
@@ -282,8 +329,6 @@ const articles: Article[] = [
     status: "published",
   },
 ];
-
-// --------------------
 // Helpers
 // --------------------
 function slugify(text: string): string {
@@ -300,8 +345,6 @@ function validate(obj: Record<string, unknown>, name: string) {
     }
   }
 }
-
-// --------------------
 // Seeder
 // --------------------
 async function seed() {
@@ -312,7 +355,11 @@ async function seed() {
     for (const category of categories) {
       validate(category, `Category: ${category.id}`);
       const { id, ...data } = category;
-      await setDoc(doc(db, "categories", id), data);
+      await setDoc(doc(db, "categories", id), {
+        ...data,
+        created_at: serverTimestamp(),
+        updated_at: serverTimestamp(),
+      });
       console.log(`✅ Category added: ${category.name}`);
     }
 
@@ -320,7 +367,12 @@ async function seed() {
     for (const article of articles) {
       validate(article, `Article: ${article.title}`);
       const safeId = slugify(article.title);
-      await setDoc(doc(db, "articles", safeId), article);
+      await setDoc(doc(db, "articles", safeId), {
+        ...article,
+        created_at: serverTimestamp(),
+        updated_at: serverTimestamp(),
+        published_at: serverTimestamp(),
+      });
       console.log(`📰 Article added: ${article.title}`);
     }
 

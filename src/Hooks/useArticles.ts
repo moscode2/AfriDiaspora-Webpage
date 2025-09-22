@@ -11,64 +11,60 @@ import {
   DocumentData,
 } from "firebase/firestore";
 import { db } from "../data/firebase";
-import i18n from "../i18n";
 
 export interface Article {
   id: string;
-  category?: string;
-  publishedAt?: string;
-  thumbnail?: string;
-  featured?: boolean;
-  views?: number;
+  category_id: string;
+  author: string;
   title: string;
   excerpt: string;
-  body?: string;
+  content: string;
+  featured_image_url: string;
+  status: string;
+  publishedAt?: Date | null;
+  views?: number;
+  featured?: boolean;
 }
 
-/**
- * useArticles - real-time hook pulling Firestore "articles" collection.
- * - opts.category: filter by category
- * - opts.limit: number
- * - opts.featured: boolean
- *
- * Listens for i18n.language and returns translated article fields
- */
 export function useArticles(opts?: { category?: string; limit?: number; featured?: boolean }) {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const { category, featured, limit } = opts || {};
+
   useEffect(() => {
     setLoading(true);
 
-    const constraints: QueryConstraint[] = [orderBy("publishedAt", "desc")];
+    const constraints: QueryConstraint[] = [where("status", "==", "published")];
 
-    if (opts?.category) constraints.push(where("category", "==", opts.category));
-    if (opts?.featured) constraints.push(where("featured", "==", true));
-    if (opts?.limit) constraints.push(limitQ(opts.limit));
+    if (category) constraints.push(where("category_id", "==", category));
+    if (featured) constraints.push(where("featured", "==", true));
+    if (limit) constraints.push(limitQ(limit));
+
+    // Important: Only orderBy if field exists in Firestore
+    constraints.push(orderBy("publishedAt", "desc"));
 
     const q = query(collection(db, "articles"), ...constraints);
 
     const unsubscribe = onSnapshot(
       q,
       (snap) => {
-        const lang = i18n.language || "en";
-
         const data: Article[] = snap.docs.map((doc) => {
           const raw = doc.data() as DocumentData;
-          const t = raw.translations || {};
-          const trans = t[lang] ?? t["en"] ?? {};
 
           return {
             id: doc.id,
-            category: raw.category ?? "",
-            publishedAt: raw.publishedAt ?? "",
-            thumbnail: raw.thumbnail ?? "",
-            featured: !!raw.featured,
+            category_id: raw.category_id ?? "",
+            author: raw.author ?? "Unknown",
+            title: raw.title ?? "Untitled",
+            excerpt: raw.excerpt ?? "",
+            content: raw.content ?? "",
+            featured_image_url: raw.featured_image_url ?? "",
+            status: raw.status ?? "draft",
+            publishedAt: raw.publishedAt?.toDate?.() ?? null, // ✅ convert Timestamp
             views: raw.views ?? 0,
-            title: trans.title ?? "Untitled",
-            excerpt: trans.excerpt ?? "",
-            body: trans.body ?? "",
-          } as Article;
+            featured: raw.featured ?? false,
+          };
         });
 
         setArticles(data);
@@ -81,8 +77,7 @@ export function useArticles(opts?: { category?: string; limit?: number; featured
     );
 
     return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opts?.category, opts?.featured, opts?.limit, i18n.language]);
+  }, [category, featured, limit]);
 
   return { articles, loading };
 }

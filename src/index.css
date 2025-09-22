@@ -1,11 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary: 220 15% 15%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 210 40% 98%;
+  --secondary-foreground: 220 13% 18%;
+  --accent: 25 95% 53%;
+  --accent-foreground: 0 0% 98%;
+  --background: 0 0% 100%;
+  --foreground: 220 13% 18%;
+  --muted: 210 40% 98%;
+  --muted-foreground: 220 13% 46%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 25 95% 53%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* Line clamp utilities for text truncation */

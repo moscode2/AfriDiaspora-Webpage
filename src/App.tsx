@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-
 import { useEffect } from "react";
 import { analytics } from "./data/firebase";
 
-import HomePage from "./pages/Home";
+import NewHome from "./pages/NewHome.tsx";
 import CategoryPage from "./pages/Category.tsx";
 import ArticlePage from "./pages/Article.tsx";
 import AboutPage from "./pages/About.tsx";
@@ -32,7 +32,7 @@ export default function App() {
       <div className="min-h-screen flex flex-col">
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<NewHome />} />
 
             {/* ✅ use wrapper instead of CategoryPage directly */}
             <Route path="/category/:slug" element={<CategoryPageWrapper />} />
