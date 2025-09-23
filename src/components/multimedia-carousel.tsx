@@ -1,9 +1,9 @@
 // src/components/multimedia-carousel.tsx
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Play, Headphones, X } from "lucide-react";
-import { Button } from "./Ui/button";
-import { Card, CardContent } from "./Ui/card";
-import { Badge } from "./Ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
+import { Badge } from "./ui/badge";
 import { MultimediaItem as MultimediaType } from "../Hooks/usefirestoredata";
 
 interface MultimediaCarouselProps {

@@ -7,8 +7,8 @@ import Footer from "../components/Footer";
 import NewsletterBanner from "../components/Newsletter";
 import TrendingSidebar from "../components/trending-sidebar"; // default import
 import { MultimediaCarousel } from "../components/multimedia-carousel";
-import { Card, CardContent } from "../components/Ui/card";
-import { Badge } from "../components/Ui/badge";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 import { useFirestoreData } from "../Hooks/usefirestoredata";
 
 export default function NewHomePage() {

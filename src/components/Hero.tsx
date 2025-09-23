@@ -1,9 +1,9 @@
 // src/components/Hero.tsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Badge } from "./Ui/badge";
-import { Button } from "./Ui/button";
-import { Card, CardContent } from "./Ui/card";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
 import { Article } from "../Hooks/usefirestoredata";
 
 interface HeroProps {

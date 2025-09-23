@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { SearchBar } from "./Ui/search-bar";
-import { LanguageToggle } from "./Ui/language-toggle";
+import { SearchBar } from "./ui/search-bar";
+import { LanguageToggle } from "./ui/language-toggle";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

@@ -1,9 +1,9 @@
 // src/components/TrendingSidebar.tsx
 import { Link } from "react-router-dom";
 import { TrendingUp, Heart, Twitter, Linkedin, Youtube } from "lucide-react";
-import { Button } from "./Ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./Ui/card";
-import { Separator } from "./Ui/separator";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Separator } from "./ui/separator";
 import { useFirestoreData } from "../Hooks/usefirestoredata";
 
 export default function TrendingSidebar() {
