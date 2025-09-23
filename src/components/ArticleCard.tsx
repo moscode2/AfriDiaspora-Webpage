@@ -49,6 +49,8 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
     article.featured_image_url ||
     "https://via.placeholder.com/800x450?text=No+Image";
   const category = article.category_id || "Uncategorized";
+  console.log("🖼️ Article image:", article.featured_image_url);
+
 
   if (featured) {
     return (

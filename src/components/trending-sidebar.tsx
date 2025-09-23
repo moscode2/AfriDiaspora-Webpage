@@ -1,21 +1,14 @@
+// src/components/TrendingSidebar.tsx
 import { Link } from "react-router-dom";
 import { TrendingUp, Heart, Twitter, Linkedin, Youtube } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "./Ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./Ui/card";
 import { Separator } from "./Ui/separator";
+import { useFirestoreData } from "../Hooks/usefirestoredata";
 
-interface TrendingArticle {
-  id: string;
-  title: string;
-  slug: string;
-  readCount?: number;
-}
+export default function TrendingSidebar() {
+  const { trendingArticles } = useFirestoreData(); // directly get the array
 
-interface TrendingSidebarProps {
-  trendingArticles: TrendingArticle[];
-}
-
-export function TrendingSidebar({ trendingArticles }: TrendingSidebarProps) {
   return (
     <aside className="w-80 space-y-6">
       {/* Trending Articles */}
@@ -27,26 +20,30 @@ export function TrendingSidebar({ trendingArticles }: TrendingSidebarProps) {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {trendingArticles.slice(0, 5).map((article, index) => (
-            <div key={article.id} className="flex gap-3">
-              <div className="flex-shrink-0 w-8 h-8 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-sm font-bold">
-                {index + 1}
+          {trendingArticles.length > 0 ? (
+            trendingArticles.slice(0, 5).map((article, index) => (
+              <div key={article.id} className="flex gap-3">
+                <div className="flex-shrink-0 w-8 h-8 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-sm font-bold">
+                  {index + 1}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <Link
+                    to={`/article/${article.slug}`}
+                    className="block text-sm font-medium leading-tight hover:text-accent transition-colors line-clamp-3"
+                  >
+                    {article.title}
+                  </Link>
+                  {article.readCount && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {article.readCount.toLocaleString()} reads
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <Link
-                  to={`/article/${article.slug}`}
-                  className="block text-sm font-medium leading-tight hover:text-accent transition-colors line-clamp-3"
-                >
-                  {article.title}
-                </Link>
-                {article.readCount && (
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {article.readCount.toLocaleString()} reads
-                  </p>
-                )}
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-sm text-muted-foreground">No trending articles yet.</p>
+          )}
         </CardContent>
       </Card>
 

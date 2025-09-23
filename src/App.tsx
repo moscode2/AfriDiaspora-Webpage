@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { analytics } from "./data/firebase";
-
 import NewHome from "./pages/NewHome.tsx";
 import CategoryPage from "./pages/Category.tsx";
 import ArticlePage from "./pages/Article.tsx";
@@ -13,8 +12,8 @@ import AdminLogin from "./pages/Admin/Login.tsx";
 import AdminDashboard from "./pages/Admin/Dashboard.tsx";
 import NewArticle from "./pages/Admin/New article.tsx"; // ✅ use new one
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
-
 import NewsletterBanner from "./components/Newsletter.tsx";
+import SearchResults from "./pages/SearchResults.tsx";
 
 // ✅ Wrapper ensures CategoryPage remounts on slug change
 function CategoryPageWrapper() {
@@ -36,7 +35,7 @@ export default function App() {
 
             {/* ✅ use wrapper instead of CategoryPage directly */}
             <Route path="/category/:slug" element={<CategoryPageWrapper />} />
-
+            <Route path="/search" element={<SearchResults />} />
             <Route path="/article/:slug" element={<ArticlePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />

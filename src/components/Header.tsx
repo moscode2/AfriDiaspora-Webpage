@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { SearchBar } from "./Ui/search-bar";
@@ -7,10 +7,11 @@ import { LanguageToggle } from "./Ui/language-toggle";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState("en");
+  const navigate = useNavigate();
 
   const navigation = [
-    { name: "Africa", href: "/category/africa" },
-    { name: "Europe", href: "/category/europe" },
+    { name: "Africa", href: "/category/africa-news" },
+    { name: "Europe", href: "/category/europe-news" },
     { name: "Diaspora Voices", href: "/category/diaspora-voices" },
     { name: "Opinion", href: "/category/opinion" },
     { name: "Business & Economy", href: "/category/business-economy" },
@@ -19,7 +20,9 @@ export default function Header() {
 
   const handleSearch = (query: string) => {
     console.log("Searching for:", query);
-    // Implement search functionality
+    if (query.trim()) {
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+    }
   };
 
   return (

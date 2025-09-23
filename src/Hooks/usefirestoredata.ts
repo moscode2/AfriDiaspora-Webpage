@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { db } from "../data/firebase";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
-// Types
 export type Article = {
   id: string;
   title: string;
@@ -12,36 +11,42 @@ export type Article = {
   content?: string;
   excerpt?: string;
   featured_image_url?: string;
-  published_at?: string | Date;
+  published_at?: Date;
   category_id?: string;
   is_featured?: boolean;
+  is_trending?: boolean;
+  is_breaking?: boolean;
+  readCount?: number;
 };
 
-export type Category = {
+export type MultimediaItem = {
   id: string;
-  name: string;
-  slug: string;
+  title: string;
+  type: "video" | "podcast" | "photo-gallery";
+  thumbnail: string;
+  duration?: string;
+  description?: string;
+  url: string;
 };
 
 export function useFirestoreData() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [multimedia, setMultimedia] = useState<MultimediaItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch articles ordered by published date
-        const articleQuery = query(
-          collection(db, "articles"),
-          orderBy("published_at", "desc")
+        // --- Fetch Articles ---
+        const articleSnap = await getDocs(
+          query(collection(db, "articles"), orderBy("published_at", "desc"))
         );
-        const articleSnap = await getDocs(articleQuery);
+
         const articlesData: Article[] = articleSnap.docs.map((doc) => {
           const data = doc.data();
           return {
             id: doc.id,
-            title: data.title || "Untitled",
+            title: data.title ?? "Untitled",
             slug: data.slug,
             author: data.author,
             content: data.content,
@@ -49,23 +54,30 @@ export function useFirestoreData() {
             featured_image_url: data.featured_image_url,
             published_at: data.published_at?.toDate
               ? data.published_at.toDate()
-              : data.published_at,
+              : new Date(data.published_at ?? Date.now()),
             category_id: data.category_id,
-            is_featured: data.is_featured || false,
+            is_featured: !!data.is_featured,
+            is_trending: !!data.is_trending,
+            is_breaking: !!data.is_breaking,
+            readCount: data.readCount ?? 0,
           };
         });
 
         setArticles(articlesData);
 
-        // Fetch categories
-        const categorySnap = await getDocs(collection(db, "categories"));
-        const categoriesData: Category[] = categorySnap.docs.map((doc) => ({
+        // --- Fetch Multimedia ---
+        const multimediaSnap = await getDocs(collection(db, "multimedia"));
+        const multimediaData: MultimediaItem[] = multimediaSnap.docs.map((doc) => ({
           id: doc.id,
-          name: doc.data().name,
-          slug: doc.data().slug,
+          title: doc.data().title,
+          type: doc.data().type,
+          thumbnail: doc.data().thumbnail,
+          duration: doc.data().duration,
+          description: doc.data().description,
+          url: doc.data().url,
         }));
+        setMultimedia(multimediaData);
 
-        setCategories(categoriesData);
       } catch (err) {
         console.error("Error fetching Firestore data:", err);
       } finally {
@@ -76,27 +88,29 @@ export function useFirestoreData() {
     fetchData();
   }, []);
 
-  // Helpers
-  const getArticlesByCategory = (slug: string) => {
-    const category = categories.find((c) => c.slug === slug);
-    if (!category) return [];
-    return articles.filter((a) => a.category_id === category.id);
-  };
+  // --- Helper Functions ---
+  const getFeaturedArticles = () =>
+    articles
+      .filter((a) => a.is_featured)
+      .sort((a, b) => (b.published_at?.getTime() ?? 0) - (a.published_at?.getTime() ?? 0));
 
-  const getArticleBySlug = (slug: string) => {
-    return articles.find((a) => a.slug === slug) || null;
-  };
+  const getTrendingArticles = (limit = 5) =>
+    articles
+      .filter((a) => a.is_trending)
+      .sort((a, b) => (b.published_at?.getTime() ?? 0) - (a.published_at?.getTime() ?? 0))
+      .slice(0, limit);
 
-  const getFeaturedArticles = () => {
-    return articles.filter((a) => a.is_featured);
-  };
+  const getBreakingNews = (limit = 5) =>
+    articles
+      .filter((a) => a.is_breaking)
+      .sort((a, b) => (b.published_at?.getTime() ?? 0) - (a.published_at?.getTime() ?? 0))
+      .slice(0, limit);
 
   return {
-    articles,
-    categories,
     loading,
-    getArticlesByCategory,
-    getArticleBySlug,
-    getFeaturedArticles,
+    featuredArticles: getFeaturedArticles(),
+    trendingArticles: getTrendingArticles(),
+    breakingNews: getBreakingNews(),
+    multimedia,
   };
 }
