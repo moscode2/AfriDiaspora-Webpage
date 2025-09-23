@@ -15,12 +15,19 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Path alias support */
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"]
 }
