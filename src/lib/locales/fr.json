@@ -1,0 +1,38 @@
+{
+  "brandName": "AfriEuropa Nouvelles",
+  "tagline": "Un pont entre les continents",
+
+  "footerText": "Un pont entre les continents",
+  "footerDescription": "Votre source fiable d’articles et d’opportunités pour la diaspora africaine en Europe.",
+  "categories": "Catégories",
+  "company": "Entreprise",
+  "followUs": "Suivez-nous",
+  "rights": "Tous droits réservés.",
+
+  "nav": {
+    "africa": "Afrique",
+    "europe": "Europe",
+    "diasporaVoices": "Voix de la diaspora",
+    "opinion": "Opinion",
+    "businessEconomy": "Affaires et Économie",
+    "cultureTravel": "Culture et Voyage"
+  },
+
+  "searchPlaceholder": "Rechercher des articles...",
+  
+    "hero": {
+      "breaking": "Flash:",
+      "breakingNews": "Dernières nouvelles",
+      "by": "Par",
+      "reads": "lectures",
+      "readFullStory": "Lire l'article complet"
+    },
+    "homepage": {
+      "loading": "Chargement...",
+      "featuredArticles": "Articles en vedette",
+      "reads": "lectures",
+      "multimedia": "Vidéos et Podcasts"
+    }
+  }
+    
+      

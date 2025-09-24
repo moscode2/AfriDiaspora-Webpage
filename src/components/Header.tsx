@@ -1,25 +1,27 @@
+// src/components/Header.tsx
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next"; // ✅ added import
 import { SearchBar } from "./ui/search-bar";
 import { LanguageToggle } from "./ui/language-toggle";
 
 export default function Header() {
+  const { t, i18n } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const navigate = useNavigate();
 
   const navigation = [
-    { name: "Africa", href: "/category/africa-news" },
-    { name: "Europe", href: "/category/europe-news" },
-    { name: "Diaspora Voices", href: "/category/diaspora-voices" },
-    { name: "Opinion", href: "/category/opinion" },
-    { name: "Business & Economy", href: "/category/business-economy" },
-    { name: "Culture & Travel", href: "/category/culture-travel" },
+    { name: t("nav.africa"), href: "/category/africa-news" },
+    { name: t("nav.europe"), href: "/category/europe-news" },
+    { name: t("nav.diasporaVoices"), href: "/category/diaspora-voices" },
+    { name: t("nav.opinion"), href: "/category/opinion" },
+    { name: t("nav.businessEconomy"), href: "/category/business-economy" },
+    { name: t("nav.cultureTravel"), href: "/category/culture-travel" }
   ];
 
   const handleSearch = (query: string) => {
-    console.log("Searching for:", query);
     if (query.trim()) {
       navigate(`/search?query=${encodeURIComponent(query)}`);
     }
@@ -37,10 +39,10 @@ export default function Header() {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-primary">
-                  AfriEuropa News
+                  {t("brandName")}
                 </span>
                 <span className="text-xs text-muted-foreground hidden sm:block">
-                  Bridge Between Continents
+                  {t("tagline")}
                 </span>
               </div>
             </Link>
@@ -67,7 +69,10 @@ export default function Header() {
             <div className="hidden md:block">
               <LanguageToggle
                 currentLanguage={currentLanguage}
-                onLanguageChange={setCurrentLanguage}
+                onLanguageChange={(lang) => {
+                  setCurrentLanguage(lang);
+                  i18n.changeLanguage(lang); // ✅ sync with i18n
+                }}
               />
             </div>
 
@@ -108,6 +113,7 @@ export default function Header() {
                     currentLanguage={currentLanguage}
                     onLanguageChange={(lang) => {
                       setCurrentLanguage(lang);
+                      i18n.changeLanguage(lang); // ✅ sync with i18n
                       setMobileMenuOpen(false);
                     }}
                   />

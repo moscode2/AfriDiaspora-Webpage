@@ -14,13 +14,13 @@ import NewArticle from "./pages/Admin/New article.tsx"; // ✅ use new one
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import NewsletterBanner from "./components/Newsletter.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
+import Support from "./pages/support.tsx"; 
 
 // ✅ Wrapper ensures CategoryPage remounts on slug change
 function CategoryPageWrapper() {
   const { slug } = useParams();
   return <CategoryPage key={slug} />;
 }
-
 export default function App() {
   useEffect(() => {
     console.log("Firebase initialized ✅", analytics);
@@ -41,6 +41,7 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/editorial" element={<EditorialPage />} />
+            <Route path="/support" element={<Support />} /> 
 
             {/* 🔑 Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />

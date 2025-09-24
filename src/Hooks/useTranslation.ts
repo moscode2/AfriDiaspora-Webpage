@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { doc, onSnapshot, DocumentData } from "firebase/firestore";
 import { db } from "../data/firebase";
-import i18n from "../src/i18n"; // Ensure this path is correct and the module exists
+import i18n from "../lib/i18n"; // Ensure this path is correct and the module exists
 
 /**
  * Loads translation bundles from Firestore document `translations/{namespace}`
@@ -37,10 +37,11 @@ export function useTranslations(namespace = "common") {
           try {
             // replace existing bundle to reflect remote updates
             i18n.addResourceBundle(lang, "translation", bundle, true, true);
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           } catch (err) {
             // fallback: try to remove then add
             try {
-              (i18n as any).removeResourceBundle?.(lang, "translation");
+              (i18n as unknown).removeResourceBundle?.(lang, "translation");
               i18n.addResourceBundle(lang, "translation", bundle, true, true);
             } catch (e) {
               console.error("i18n bundle error", e);
@@ -50,7 +51,7 @@ export function useTranslations(namespace = "common") {
 
         // set current language strings
         const current = i18n.language || "en";
-        setStrings((data as any)[current] || (data as any)["en"] || {});
+        setStrings((data as unknown)[current] || (data as unknown)["en"] || {});
         setLoading(false);
       },
       (err) => {

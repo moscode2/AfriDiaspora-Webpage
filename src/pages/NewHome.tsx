@@ -1,6 +1,7 @@
 // src/pages/NewHomePage.tsx
 import { Link } from "react-router-dom";
 import { Clock, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
@@ -12,6 +13,7 @@ import { Badge } from "../components/ui/badge";
 import { useFirestoreData } from "../Hooks/usefirestoredata";
 
 export default function NewHomePage() {
+  const { t } = useTranslation();
   const { loading, featuredArticles, trendingArticles, breakingNews, multimedia } =
     useFirestoreData();
 

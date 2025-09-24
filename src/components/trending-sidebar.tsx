@@ -48,49 +48,52 @@ export default function TrendingSidebar() {
       </Card>
 
       {/* Support Section */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Heart className="h-5 w-5 text-red-500" />
-            Support Our Work
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground mb-4">
-            Help us continue bringing you quality journalism about the African diaspora in Europe.
-          </p>
-          <Button className="w-full" size="sm">
-            Support AfriEuropa News
-          </Button>
-        </CardContent>
-      </Card>
+<Card>
+  <CardHeader className="pb-3">
+    <CardTitle className="flex items-center gap-2 text-lg">
+      <Heart className="h-5 w-5 text-red-500" />
+      Support Our Work
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p className="text-sm text-muted-foreground mb-4">
+      Help us continue bringing you quality journalism about the African diaspora in Europe.
+    </p>
+    <Button asChild className="w-full" size="sm">
+      <Link to="/support">Support AfriEuropa News</Link>
+    </Button>
+  </CardContent>
+</Card>
 
-      {/* Social Media */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Follow Us</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-2">
-            <Button variant="outline" size="sm" className="justify-start gap-2 w-full">
-              <Twitter className="h-4 w-4" />
-              Twitter
-            </Button>
-            <Separator className="my-2" />
+{/* Social Media */}
+<Card>
+  <CardHeader className="pb-3">
+    <CardTitle className="text-lg">Follow Us</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div className="flex flex-col gap-2">
+      <Button asChild variant="outline" size="sm" className="justify-start gap-2 w-full">
+        <a href="https://twitter.com/AfriEuropa" target="_blank" rel="noopener noreferrer">
+          <Twitter className="h-4 w-4" /> Twitter
+        </a>
+      </Button>
+      <Separator className="my-2" />
 
-            <Button variant="outline" size="sm" className="justify-start gap-2 w-full">
-              <Linkedin className="h-4 w-4" />
-              LinkedIn
-            </Button>
-            <Separator className="my-2" />
+      <Button asChild variant="outline" size="sm" className="justify-start gap-2 w-full">
+        <a href="https://linkedin.com/company/afrieuropa" target="_blank" rel="noopener noreferrer">
+          <Linkedin className="h-4 w-4" /> LinkedIn
+        </a>
+      </Button>
+      <Separator className="my-2" />
 
-            <Button variant="outline" size="sm" className="justify-start gap-2 w-full">
-              <Youtube className="h-4 w-4" />
-              YouTube
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      <Button asChild variant="outline" size="sm" className="justify-start gap-2 w-full">
+        <a href="https://youtube.com/@afrieuropa" target="_blank" rel="noopener noreferrer">
+          <Youtube className="h-4 w-4" /> YouTube
+        </a>
+      </Button>
+    </div>
+  </CardContent>
+</Card>
     </aside>
   );
 }

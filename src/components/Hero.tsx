@@ -1,10 +1,10 @@
-// src/components/Hero.tsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Article } from "../Hooks/usefirestoredata";
+import { useTranslation } from "react-i18next";
 
 interface HeroProps {
   featuredArticle: Article | null;
@@ -12,6 +12,7 @@ interface HeroProps {
 }
 
 const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
+  const { t } = useTranslation();
   const [currentTickerIndex, setCurrentTickerIndex] = useState(0);
 
   useEffect(() => {
@@ -27,44 +28,45 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
   return (
     <section className="relative">
       {/* 🔴 Breaking News Top Strip */}
-{breakingHeadlines.length > 0 && (
-  <div className="bg-red-600 text-white py-2 px-4">
-    <div className="max-w-7xl mx-auto flex items-center gap-6">
-      <span className="font-semibold">Breaking:</span>
+      {breakingHeadlines.length > 0 && (
+        <div className="bg-red-600 text-white py-2 px-4">
+          <div className="max-w-7xl mx-auto flex items-center gap-6">
+            <span className="font-semibold">{t("hero.breaking")}</span>
 
-      {/* Rotating ticker (like sidebar) */}
-      <div className="flex-1 overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${currentTickerIndex * 100}%)` }}
-        >
-          {breakingHeadlines.map((item) => (
-            <Link
-              key={item.id}
-              to={`/article/${item.slug}`}
-              className="block min-w-full hover:underline truncate"
-            >
-              {item.title}
-            </Link>
-          ))}
+            {/* Rotating ticker */}
+            <div className="flex-1 overflow-hidden">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentTickerIndex * 100}%)` }}
+              >
+                {breakingHeadlines.map((item) => (
+                  <Link
+                    key={item.id}
+                    to={`/article/${item.slug}`}
+                    className="block min-w-full hover:underline truncate"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Dots navigation */}
+            <div className="flex gap-1">
+              {breakingHeadlines.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTickerIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentTickerIndex ? "bg-white" : "bg-red-400"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Dots navigation */}
-      <div className="flex gap-1">
-        {breakingHeadlines.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentTickerIndex(index)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentTickerIndex ? "bg-white" : "bg-red-400"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  </div>
-)}
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-black/50 to-black/30 min-h-[500px] lg:min-h-[600px]">
         <img
@@ -90,13 +92,13 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
               </p>
 
               <div className="flex items-center gap-4 text-sm text-gray-300">
-                <span>By {featuredArticle.author}</span>
+                <span>{t("hero.by")} {featuredArticle.author}</span>
                 <span>•</span>
-                <span>{featuredArticle.readCount || 0} reads</span>
+                <span>{featuredArticle.readCount || 0} {t("hero.reads")}</span>
               </div>
 
               <Button asChild size="lg" className="mt-6">
-                <Link to={`/article/${featuredArticle.slug}`}>Read Full Story</Link>
+                <Link to={`/article/${featuredArticle.slug}`}>{t("hero.readFullStory")}</Link>
               </Button>
             </div>
 
@@ -106,7 +108,7 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
                 <CardContent className="p-6">
                   <h3 className="font-semibold text-accent mb-4 flex items-center gap-2">
                     <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                    Breaking News
+                    {t("hero.breakingNews")}
                   </h3>
 
                   <div className="space-y-3">
@@ -150,7 +152,7 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <h3 className="font-semibold text-accent mb-4 flex items-center gap-2">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-            Breaking News
+            {t("hero.breakingNews")}
           </h3>
           <div className="space-y-3">
             {breakingHeadlines.map((item) => (

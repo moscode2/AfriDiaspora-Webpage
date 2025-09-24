@@ -1,0 +1,38 @@
+
+{
+  "brandName": "AfriEuropa News",
+  "tagline": "Bridge Between Continents",
+
+  "footerText": "Bridge Between Continents",
+  "footerDescription": "Your trusted source for African diaspora articles and opportunities across Europe.",
+  "categories": "Categories",
+  "company": "Company",
+  "followUs": "Follow Us",
+  "rights": "All rights reserved.",
+
+  "nav": {
+    "africa": "Africa",
+    "europe": "Europe",
+    "diasporaVoices": "Diaspora Voices",
+    "opinion": "Opinion",
+    "businessEconomy": "Business & Economy",
+    "cultureTravel": "Culture & Travel"
+  },
+
+  "searchPlaceholder": "Search articles...",
+
+  "hero": {
+    "breaking": "Breaking:",
+    "breakingNews": "Breaking News",
+    "by": "By",
+    "reads": "reads",
+    "readFullStory": "Read Full Story"
+  },
+
+  "homepage": {
+    "loading": "Loading...",
+    "featuredArticles": "Featured Articles",
+    "reads": "reads",
+    "multimedia": "Videos & Podcasts"
+  }
+}

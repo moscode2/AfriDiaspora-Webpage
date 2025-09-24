@@ -13,19 +13,24 @@ interface Language {
   flag: string;
 }
 
-interface LanguageToggleProps {
-  currentLanguage: string;
-  onLanguageChange: (language: string) => void;
-}
-
 const languages: Language[] = [
   { code: "en", label: "English", flag: "gb" },
   { code: "de", label: "Deutsch", flag: "de" },
   { code: "fr", label: "Français", flag: "fr" },
+  { code: "es", label: "Español", flag: "es" },
 ];
 
-export function LanguageToggle({ currentLanguage, onLanguageChange }: LanguageToggleProps) {
-  const currentLang = languages.find(lang => lang.code === currentLanguage) || languages[0];
+interface LanguageToggleProps {
+  currentLanguage: string;
+  onLanguageChange: (lang: string) => void;
+}
+
+export function LanguageToggle({
+  currentLanguage,
+  onLanguageChange,
+}: LanguageToggleProps) {
+  const currentLang =
+    languages.find((lang) => lang.code === currentLanguage) || languages[0];
 
   return (
     <DropdownMenu>

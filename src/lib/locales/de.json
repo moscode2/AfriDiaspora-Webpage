@@ -1,0 +1,37 @@
+{
+  "brandName": "AfriEuropa Nachrichten",
+  "tagline": "Brücke zwischen den Kontinenten",
+
+  "footerText": "Brücke zwischen den Kontinenten",
+  "footerDescription": "Ihre verlässliche Quelle für Artikel und Chancen der afrikanischen Diaspora in Europa.",
+  "categories": "Kategorien",
+  "company": "Unternehmen",
+  "followUs": "Folgen Sie uns",
+  "rights": "Alle Rechte vorbehalten.",
+
+  "nav": {
+    "africa": "Afrika",
+    "europe": "Europa",
+    "diasporaVoices": "Diaspora-Stimmen",
+    "opinion": "Meinung",
+    "businessEconomy": "Wirtschaft & Finanzen",
+    "cultureTravel": "Kultur & Reisen"
+  },
+
+  "searchPlaceholder": "Artikel suchen...",
+
+  "hero": {
+    "breaking": "Eilmeldung:",
+    "breakingNews": "Aktuelle Nachrichten",
+    "by": "Von",
+    "reads": "Aufrufe",
+    "readFullStory": "Ganze Geschichte lesen"
+  },
+
+  "homepage": {
+    "loading": "Wird geladen...",
+    "featuredArticles": "Top-Artikel",
+    "reads": "Aufrufe",
+    "multimedia": "Videos & Podcasts"
+  }
+}

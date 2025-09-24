@@ -16,11 +16,10 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-
-          {/* Brand Section + Donation Button */}
+          
+          {/* Brand Section */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
@@ -32,28 +31,18 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-400 mb-4">{t("footerDescription")}</p>
-
-            {/* Donation Button */}
-            <div className="mt-4">
-              <a
-                href="/buy-us-coffee"
-                className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-5 py-3 rounded-lg transition-colors"
-              >
-                {t("buyUsCoffee")}
-              </a>
-            </div>
           </div>
 
           {/* Categories Section */}
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("categories")}</h3>
             <ul className="space-y-2 text-gray-400">
-              <li><Link to="/category/africa-news">{t("africaNews")}</Link></li>
-              <li><Link to="/category/europe-news">{t("europeNews")}</Link></li>
-              <li><Link to="/category/diaspora-voices">{t("diasporaVoices")}</Link></li>
-              <li><Link to="/category/opinion">{t("opinion")}</Link></li>
-              <li><Link to="/category/business-economy">{t("businessEconomy")}</Link></li>
-              <li><Link to="/category/culture-travel">{t("cultureTravel")}</Link></li>
+              <li><Link to="/category/africa-news">{t("AfricaNews")}</Link></li>
+              <li><Link to="/category/europe-news">{t("EuropeNews")}</Link></li>
+              <li><Link to="/category/diaspora-voices">{t("DiasporaVoices")}</Link></li>
+              <li><Link to="/category/opinion">{t("Opinion")}</Link></li>
+              <li><Link to="/category/business-economy">{t("BusinessEconomy")}</Link></li>
+              <li><Link to="/category/culture-travel">{t("CultureTravel")}</Link></li>
               <li><Link to="/impressum">{t("impressum")}</Link></li>
             </ul>
           </div>
@@ -62,10 +51,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("company")}</h3>
             <ul className="space-y-2 text-gray-400">
-              <li><Link to="/about">{t("about")}</Link></li>
-              <li><Link to="/editorial">{t("editorial")}</Link></li>
-              <li><Link to="/contact">{t("contact")}</Link></li>
-              <li><Link to="/privacy">{t("privacy")}</Link></li>
+              <li><Link to="/about">{t("About")}</Link></li>
+              <li><Link to="/editorial">{t("Editorial")}</Link></li>
+              <li><Link to="/contact">{t("Contact")}</Link></li>
+              <li><Link to="/privacy">{t("Privacy")}</Link></li>
             </ul>
           </div>
 

@@ -1,0 +1,37 @@
+{
+  "brandName": "AfriEuropa Noticias",
+  "tagline": "Puente entre continentes",
+
+  "footerText": "Puente entre continentes",
+  "footerDescription": "Tu fuente confiable de artículos y oportunidades de la diáspora africana en Europa.",
+  "categories": "Categorías",
+  "company": "Compañía",
+  "followUs": "Síguenos",
+  "rights": "Todos los derechos reservados.",
+
+  "nav": {
+    "africa": "África",
+    "europe": "Europa",
+    "diasporaVoices": "Voces de la diáspora",
+    "opinion": "Opinión",
+    "businessEconomy": "Negocios y Economía",
+    "cultureTravel": "Cultura y Viajes"
+  },
+
+  "searchPlaceholder": "Buscar artículos...",
+  
+    "hero": {
+      "breaking": "Última hora:",
+      "breakingNews": "Noticias de última hora",
+      "by": "Por",
+      "reads": "lecturas",
+      "readFullStory": "Leer la historia completa"
+    },
+    "homepage": {
+      "loading": "Cargando...",
+      "featuredArticles": "Artículos destacados",
+      "reads": "lecturas",
+      "multimedia": "Videos y Podcasts"
+    }
+  }
+  
