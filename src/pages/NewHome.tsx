@@ -17,7 +17,7 @@ export default function NewHomePage() {
   const { loading, featuredArticles, trendingArticles, breakingNews, multimedia } =
     useFirestoreData();
 
-  if (loading) return <p className="text-center mt-12">Loading...</p>;
+  if (loading) return <p className="text-center mt-12">{t("homepage.loading")}</p>;
 
   const featuredStories = featuredArticles;
   const trendingArticlesList = trendingArticles;
@@ -40,11 +40,14 @@ export default function NewHomePage() {
             {/* Featured Articles Grid */}
             <section>
               <h2 className="font-serif text-3xl font-bold mb-8 border-b border-border pb-4">
-                Featured Articles
+                {t("homepage.featuredArticles")}
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {featuredStories.map((story) => (
-                  <Card key={story.id} className="group hover:shadow-lg transition-shadow overflow-hidden">
+                  <Card
+                    key={story.id}
+                    className="group hover:shadow-lg transition-shadow overflow-hidden"
+                  >
                     <div className="aspect-[4/3] overflow-hidden">
                       <img
                         src={story.featured_image_url}
@@ -56,7 +59,9 @@ export default function NewHomePage() {
                       <div className="flex items-center gap-2 mb-3">
                         <Badge variant="secondary">{story.category_id}</Badge>
                         <span className="text-xs text-muted-foreground">•</span>
-                        <span className="text-xs text-muted-foreground">{story.readCount || 0} reads</span>
+                        <span className="text-xs text-muted-foreground">
+                          {story.readCount || 0} {t("homepage.reads")}
+                        </span>
                       </div>
                       <h3 className="font-serif text-xl font-semibold mb-3 leading-tight group-hover:text-accent transition-colors">
                         <Link to={`/article/${story.slug}`}>{story.title}</Link>
@@ -71,7 +76,9 @@ export default function NewHomePage() {
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          <span>{new Date(story.published_at || "").toLocaleDateString()}</span>
+                          <span>
+                            {new Date(story.published_at || "").toLocaleDateString()}
+                          </span>
                         </div>
                       </div>
                     </CardContent>
@@ -81,7 +88,10 @@ export default function NewHomePage() {
             </section>
 
             {/* Multimedia Section */}
-            <MultimediaCarousel items={multimedia} title="Videos & Podcasts" />
+            <MultimediaCarousel
+              items={multimedia}
+              title={t("homepage.multimedia")}
+            />
           </div>
 
           {/* Trending Sidebar */}

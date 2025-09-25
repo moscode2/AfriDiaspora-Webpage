@@ -1,25 +1,35 @@
 {
-  "brandName": "AfriEuropa Noticias",
-  "tagline": "Puente entre continentes",
-
-  "footerText": "Puente entre continentes",
-  "footerDescription": "Tu fuente confiable de artículos y oportunidades de la diáspora africana en Europa.",
-  "categories": "Categorías",
-  "company": "Compañía",
-  "followUs": "Síguenos",
-  "rights": "Todos los derechos reservados.",
-
-  "nav": {
-    "africa": "África",
-    "europe": "Europa",
-    "diasporaVoices": "Voces de la diáspora",
-    "opinion": "Opinión",
-    "businessEconomy": "Negocios y Economía",
-    "cultureTravel": "Cultura y Viajes"
-  },
-
-  "searchPlaceholder": "Buscar artículos...",
-  
+    "brandName": "AfriEuropa News",
+    "tagline": "Puente entre continentes",
+    "footerText": "Puente entre continentes",
+    "footerDescription": "Su fuente confiable de artículos y oportunidades de la diáspora africana en Europa.",
+    "categories": "Categorías",
+    "categoriesList": {
+      "africa": "Noticias de África",
+      "europe": "Noticias de Europa",
+      "diasporaVoices": "Voces de la diáspora",
+      "opinion": "Opinión",
+      "businessEconomy": "Negocios y Economía",
+      "cultureTravel": "Cultura y Viajes"
+    },
+    "company": "Compañía",
+    "companyList": {
+      "about": "Acerca de",
+      "editorial": "Editorial",
+      "contact": "Contacto",
+      "privacy": "Privacidad"
+    },
+    "followUs": "Síguenos",
+    "rights": "Todos los derechos reservados.",
+    "nav": {
+      "africa": "África",
+      "europe": "Europa",
+      "diasporaVoices": "Voces de la diáspora",
+      "opinion": "Opinión",
+      "businessEconomy": "Negocios y Economía",
+      "cultureTravel": "Cultura y Viajes"
+    },
+    "searchPlaceholder": "Buscar artículos...",
     "hero": {
       "breaking": "Última hora:",
       "breakingNews": "Noticias de última hora",
@@ -32,6 +42,142 @@
       "featuredArticles": "Artículos destacados",
       "reads": "lecturas",
       "multimedia": "Videos y Podcasts"
+    },
+    "newsletter": {
+      "title": "Únete al boletín semanal de AfriEuropa",
+      "subtitle": "Tu resumen de noticias y oportunidades de la diáspora",
+      "placeholder": "Ingresa tu correo electrónico",
+      "subscribe": "Suscribirse",
+      "alreadySubscribed": "¡Ya estás suscrito!",
+      "error": "No se pudo suscribir. Por favor, inténtalo de nuevo.",
+      "thanks": "¡Gracias por suscribirte!"
+    },
+    "about": {
+      "title": "Acerca de AfriEuropa News",
+      "subtitle": "Conectando, informando y empoderando a las comunidades de la diáspora africana en Europa a través de periodismo y narración de calidad.",
+      "heroAlt": "Equipo diverso trabajando juntos",
+      "mission": {
+        "title": "Misión",
+        "text": "Cerrar la brecha de información para las comunidades de la diáspora africana en Europa, proporcionando noticias, oportunidades e historias que importan a nuestra comunidad."
+      },
+      "community": {
+        "title": "Comunidad",
+        "text": "Construyendo conexiones más fuertes dentro y entre las comunidades de la diáspora africana."
+      },
+      "global": {
+        "title": "Perspectiva global",
+        "text": "Conectando experiencias de la diáspora africana a través de las fronteras europeas y más allá."
+      },
+      "opportunities": {
+        "title": "Oportunidades",
+        "text": "Destacando oportunidades de carrera, educación y negocios para las comunidades de la diáspora."
+      },
+      "stories": {
+        "title": "Historias auténticas",
+        "text": "Compartiendo voces y experiencias auténticas que reflejan nuestra comunidad diversa."
+      },
+      "story": {
+        "title": "Historia",
+        "p1": "Fundado en 2025, AfriEuropa News es la plataforma de referencia para los africanos que viven en Europa. Creado por periodistas, emprendedores y líderes comunitarios de la diáspora, contamos las historias que importan: noticias, oportunidades y voces que reflejan nuestras experiencias cotidianas.",
+        "p2": "Existimos para informar, conectar y celebrar a las comunidades africanas en toda Europa mientras cerramos la brecha entre el hogar y la diáspora.",
+        "p3": "Hoy servimos a más de 50,000 lectores en 15 países europeos, brindando actualizaciones diarias de noticias, boletines semanales y reportajes en profundidad que celebran los logros de nuestra comunidad y abordan nuestros desafíos."
+      },
+      "storyAlt": "Colaboración en equipo",
+      "team": {
+        "title": "Nuestro equipo",
+        "subtitle": "Conoce a los profesionales dedicados que dan vida a la visión de AfriEuropa",
+        "ceoRole": "CEO",
+        "ceoBio": "Periodista experimentado con más de 10 años de experiencia en medios, estrategia y narración. Henry lidera AfriEuropa News con la visión de conectar a las comunidades de la diáspora africana en Europa mediante reportajes precisos e impactantes.",
+        "cooRole": "COO",
+        "cooBio": "Diseñadora de productos creativa y narradora apasionada por el diseño centrado en el usuario. Elizabeth se especializa en crear experiencias digitales significativas que amplifican las voces de la diáspora, con un fuerte enfoque en migración e integración cultural.",
+        "ctoRole": "CTO",
+        "ctoBio": "Periodista dinámica y organizadora de eventos dedicada a capturar experiencias auténticas de la diáspora. Hae-Won combina habilidades de redacción con un compromiso práctico con la comunidad, brindando historias y eventos que resuenan con los africanos en toda Europa."
+      },
+      "values": {
+        "title": "Nuestros valores",
+        "authenticity": {
+          "title": "Autenticidad",
+          "text": "Contamos historias auténticas que reflejan las experiencias reales de las comunidades de la diáspora africana, celebrando tanto las luchas como los éxitos."
+        },
+        "excellence": {
+          "title": "Excelencia",
+          "text": "Mantenemos los más altos estándares de periodismo, asegurando precisión, imparcialidad y ética en todos nuestros contenidos."
+        },
+        "empowerment": {
+          "title": "Empoderamiento",
+          "text": "Empoderamos a nuestra comunidad brindando información, oportunidades y plataformas que ayudan a individuos y comunidades a prosperar."
+        },
+        "unity": {
+          "title": "Unidad",
+          "text": "Fomentamos la unidad y la solidaridad entre las comunidades de la diáspora africana mientras celebramos nuestra diversidad y nuestras contribuciones culturales únicas."
+        }
+      }
+    },
+      "contact": {
+        "title": "Contáctanos",
+        "intro": "Nos encantaría saber de ti.",
+        "form": {
+          "title": "Enviar un mensaje",
+          "labels": {
+            "name": "Nombre",
+            "email": "Correo electrónico",
+            "subject": "Asunto",
+            "message": "Mensaje"
+          },
+          "placeholders": {
+            "name": "Escribe tu nombre",
+            "email": "Escribe tu correo electrónico",
+            "message": "Escribe tu mensaje aquí..."
+          },
+          "subjects": {
+            "default": "Selecciona un asunto",
+            "general": "General",
+            "editorial": "Editorial",
+            "advertising": "Publicidad",
+            "partnership": "Colaboración",
+            "technical": "Técnico",
+            "feedback": "Comentarios"
+          },
+          "submit": "Enviar",
+          "success": "¡Tu mensaje se ha enviado con éxito!",
+          "error": "Algo salió mal. Inténtalo de nuevo."
+        },
+        "info": {
+          "title": "Nuestros datos de contacto",
+          "email": "Correo electrónico",
+          "emailValue": "contact@diasporalens.eu",
+          "editorialHotline": "Línea editorial",
+          "phoneValue": "+33 1 23 45 67 89",
+          "hours": "Disponible de lunes a viernes, 9h–18h",
+          "office": "Oficina principal",
+          "address": "Calle Ejemplo 123\n75000 París\nFrancia"
+        },
+        "tips": {
+          "title": "Envíanos información",
+          "text": "Si tienes noticias, historias o consejos, no dudes en compartirlos con nosotros.",
+          "send": "Enviar un consejo"
+        }
+      },
+      "privacy": {
+        "title": "Política de Privacidad",
+        "lastUpdated": "Última actualización: Septiembre, 2025",
+        "introTitle": "Introducción",
+        "introText": "AfriEuropa (\"nosotros\") respeta su privacidad y está comprometida a proteger su información personal. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos su información cuando visita nuestro sitio web o se suscribe a nuestros servicios.",
+        "infoTitle": "Información que Recopilamos",
+        "personalInfo": "Información Personal",
+        "personalInfoText": "Podemos recopilar la siguiente información personal:",
+        "autoInfo": "Información Recopilada Automáticamente",
+        "useTitle": "Cómo Usamos su Información",
+        "useText": "Usamos la información recopilada para:",
+        "sharingTitle": "Compartición de Información",
+        "cookiesTitle": "Cookies y Seguimiento",
+        "securityTitle": "Seguridad de los Datos",
+        "rightsTitle": "Sus Derechos (GDPR)",
+        "unsubscribeTitle": "Cancelar Suscripción al Boletín",
+        "childrenTitle": "Privacidad de los Niños",
+        "changesTitle": "Cambios en Esta Política",
+        "contactTitle": "Contáctenos",
+        "contactEmail": "privacy@Europanews.com",
+        "contactAddress": "AfriEuropa Media, 123 Berlín, Alemania"
+      }
     }
-  }
-  

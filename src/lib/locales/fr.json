@@ -1,38 +1,184 @@
-{
-  "brandName": "AfriEuropa Nouvelles",
-  "tagline": "Un pont entre les continents",
-
-  "footerText": "Un pont entre les continents",
-  "footerDescription": "Votre source fiable d’articles et d’opportunités pour la diaspora africaine en Europe.",
-  "categories": "Catégories",
-  "company": "Entreprise",
-  "followUs": "Suivez-nous",
-  "rights": "Tous droits réservés.",
-
-  "nav": {
-    "africa": "Afrique",
-    "europe": "Europe",
-    "diasporaVoices": "Voix de la diaspora",
-    "opinion": "Opinion",
-    "businessEconomy": "Affaires et Économie",
-    "cultureTravel": "Culture et Voyage"
-  },
-
-  "searchPlaceholder": "Rechercher des articles...",
-  
+{ 
+    "brandName": "AfriEuropa News",
+    "tagline": "Un pont entre les continents",
+    "footerText": "Un pont entre les continents",
+    "footerDescription": "Votre source fiable d’articles et d’opportunités pour la diaspora africaine en Europe.",
+    "categories": "Catégories",
+    "categoriesList": {
+      "africa": "Actualités d’Afrique",
+      "europe": "Actualités d’Europe",
+      "diasporaVoices": "Voix de la diaspora",
+      "opinion": "Opinion",
+      "businessEconomy": "Économie et Affaires",
+      "cultureTravel": "Culture et Voyages"
+    },
+    "company": "Entreprise",
+    "companyList": {
+      "about": "À propos",
+      "editorial": "Éditorial",
+      "contact": "Contact",
+      "privacy": "Confidentialité"
+    },
+    "followUs": "Suivez-nous",
+    "rights": "Tous droits réservés.",
+    "nav": {
+      "africa": "Afrique",
+      "europe": "Europe",
+      "diasporaVoices": "Voix de la diaspora",
+      "opinion": "Opinion",
+      "businessEconomy": "Économie et Affaires",
+      "cultureTravel": "Culture et Voyages"
+    },
+    "searchPlaceholder": "Rechercher des articles...",
     "hero": {
-      "breaking": "Flash:",
-      "breakingNews": "Dernières nouvelles",
+      "breaking": "Dernière minute :",
+      "breakingNews": "Actualités de dernière heure",
       "by": "Par",
       "reads": "lectures",
-      "readFullStory": "Lire l'article complet"
+      "readFullStory": "Lire l’article complet"
     },
     "homepage": {
       "loading": "Chargement...",
-      "featuredArticles": "Articles en vedette",
+      "featuredArticles": "Articles à la une",
       "reads": "lectures",
       "multimedia": "Vidéos et Podcasts"
+    },
+    "newsletter": {
+      "title": "Rejoignez la newsletter hebdomadaire d’AfriEuropa",
+      "subtitle": "Votre récapitulatif des actualités et opportunités de la diaspora",
+      "placeholder": "Entrez votre adresse e-mail",
+      "subscribe": "S’abonner",
+      "alreadySubscribed": "Vous êtes déjà abonné !",
+      "error": "Impossible de vous abonner. Veuillez réessayer.",
+      "thanks": "Merci pour votre abonnement !"
+    },
+    "about": {
+      "title": "À propos d’AfriEuropa News",
+      "subtitle": "Connecter, informer et autonomiser les communautés de la diaspora africaine en Europe grâce à un journalisme et une narration de qualité.",
+      "heroAlt": "Équipe diversifiée travaillant ensemble",
+      "mission": {
+        "title": "Mission",
+        "text": "Combler le fossé informationnel pour les communautés de la diaspora africaine en Europe, en fournissant des nouvelles, des opportunités et des histoires qui comptent pour notre communauté."
+      },
+      "community": {
+        "title": "Communauté",
+        "text": "Construire des liens plus forts au sein et entre les communautés de la diaspora africaine."
+      },
+      "global": {
+        "title": "Perspective globale",
+        "text": "Relier les expériences de la diaspora africaine à travers les frontières européennes et au-delà."
+      },
+      "opportunities": {
+        "title": "Opportunités",
+        "text": "Mettre en lumière les opportunités professionnelles, éducatives et commerciales pour les communautés de la diaspora."
+      },
+      "stories": {
+        "title": "Histoires authentiques",
+        "text": "Partager des voix et des expériences authentiques qui reflètent notre communauté diversifiée."
+      },
+      "story": {
+        "title": "Histoire",
+        "p1": "Fondé en 2025, AfriEuropa News est la plateforme de référence pour les Africains vivant en Europe. Créé par des journalistes, entrepreneurs et leaders communautaires issus de la diaspora, nous racontons les histoires qui comptent : nouvelles, opportunités et voix reflétant nos expériences quotidiennes.",
+        "p2": "Nous existons pour informer, connecter et célébrer les communautés africaines à travers l’Europe tout en comblant le fossé entre le pays d’origine et la diaspora.",
+        "p3": "Aujourd’hui, nous servons plus de 50 000 lecteurs dans 15 pays européens, en offrant des mises à jour quotidiennes, des newsletters hebdomadaires et des reportages approfondis célébrant les réussites de notre communauté et abordant nos défis."
+      },
+      "storyAlt": "Collaboration en équipe",
+      "team": {
+        "title": "Notre équipe",
+        "subtitle": "Découvrez les professionnels dévoués qui donnent vie à la vision d’AfriEuropa",
+        "ceoRole": "PDG",
+        "ceoBio": "Journaliste chevronné avec plus de 10 ans d’expérience en médias, stratégie et narration. Henry dirige AfriEuropa News avec la vision de connecter les communautés de la diaspora africaine en Europe grâce à un reportage précis et percutant.",
+        "cooRole": "Directrice des opérations",
+        "cooBio": "Designer de produits créative et conteuse passionnée par le design centré sur l’utilisateur. Elizabeth se spécialise dans la création d’expériences numériques significatives qui amplifient les voix de la diaspora, avec un fort accent sur la migration et l’intégration culturelle.",
+        "ctoRole": "Directrice technique",
+        "ctoBio": "Journaliste dynamique et organisatrice d’événements, dédiée à capturer des expériences authentiques de la diaspora. Hae-Won combine des compétences rédactionnelles avec un engagement communautaire actif, livrant des histoires et événements qui résonnent auprès des Africains à travers l’Europe."
+      },
+      "values": {
+        "title": "Nos valeurs",
+        "authenticity": {
+          "title": "Authenticité",
+          "text": "Nous racontons des histoires authentiques reflétant les expériences réelles des communautés de la diaspora africaine, en célébrant à la fois les luttes et les succès."
+        },
+        "excellence": {
+          "title": "Excellence",
+          "text": "Nous maintenons les normes les plus élevées en matière de journalisme, en garantissant précision, impartialité et éthique dans tous nos contenus."
+        },
+        "empowerment": {
+          "title": "Autonomisation",
+          "text": "Nous donnons à notre communauté les moyens de réussir en fournissant des informations, des opportunités et des plateformes qui aident les individus et les communautés à prospérer."
+        },
+        "unity": {
+          "title": "Unité",
+          "text": "Nous favorisons l’unité et la solidarité entre les communautés de la diaspora africaine tout en célébrant notre diversité et nos contributions culturelles uniques."
+        }
+      }
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "intro": "Nous serions ravis d'avoir de vos nouvelles.",
+      "form": {
+        "title": "Envoyer un message",
+        "labels": {
+          "name": "Nom",
+          "email": "E-mail",
+          "subject": "Sujet",
+          "message": "Message"
+        },
+        "placeholders": {
+          "name": "Entrez votre nom",
+          "email": "Entrez votre adresse e-mail",
+          "message": "Écrivez votre message ici..."
+        },
+        "subjects": {
+          "default": "Sélectionnez un sujet",
+          "general": "Général",
+          "editorial": "Rédaction",
+          "advertising": "Publicité",
+          "partnership": "Partenariat",
+          "technical": "Technique",
+          "feedback": "Retour"
+        },
+        "submit": "Envoyer",
+        "success": "Votre message a été envoyé avec succès !",
+        "error": "Une erreur s'est produite. Veuillez réessayer."
+      },
+      "info": {
+        "title": "Nos coordonnées",
+        "email": "Adresse e-mail",
+        "emailValue": "contact@diasporalens.eu",
+        "editorialHotline": "Hotline rédactionnelle",
+        "phoneValue": "+33 1 23 45 67 89",
+        "hours": "Disponible du lundi au vendredi, 9h-18h",
+        "office": "Bureau principal",
+        "address": "123 Rue Exemple\n75000 Paris\nFrance"
+      },
+      "tips": {
+        "title": "Envoyez-nous des informations",
+        "text": "Si vous avez des nouvelles, des histoires ou des conseils, n'hésitez pas à les partager avec nous.",
+        "send": "Envoyer un conseil"
+      }
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité",
+      "lastUpdated": "Dernière mise à jour : Septembre 2025",
+      "introTitle": "Introduction",
+      "introText": "AfriEuropa (\"nous\") respecte votre vie privée et s’engage à protéger vos informations personnelles. Cette Politique de Confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous visitez notre site web ou vous abonnez à nos services.",
+      "infoTitle": "Informations que Nous Collectons",
+      "personalInfo": "Informations Personnelles",
+      "personalInfoText": "Nous pouvons collecter les informations personnelles suivantes :",
+      "autoInfo": "Informations Collectées Automatiquement",
+      "useTitle": "Comment Nous Utilisons Vos Informations",
+      "useText": "Nous utilisons les informations collectées pour :",
+      "sharingTitle": "Partage des Informations",
+      "cookiesTitle": "Cookies et Suivi",
+      "securityTitle": "Sécurité des Données",
+      "rightsTitle": "Vos Droits (RGPD)",
+      "unsubscribeTitle": "Désinscription à la Newsletter",
+      "childrenTitle": "Confidentialité des Enfants",
+      "changesTitle": "Modifications de Cette Politique",
+      "contactTitle": "Contactez-nous",
+      "contactEmail": "privacy@Europanews.com",
+      "contactAddress": "AfriEuropa Media, 123 Berlin, Allemagne"
     }
   }
-    
-      
+  

@@ -37,13 +37,12 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("categories")}</h3>
             <ul className="space-y-2 text-gray-400">
-              <li><Link to="/category/africa-news">{t("AfricaNews")}</Link></li>
-              <li><Link to="/category/europe-news">{t("EuropeNews")}</Link></li>
-              <li><Link to="/category/diaspora-voices">{t("DiasporaVoices")}</Link></li>
-              <li><Link to="/category/opinion">{t("Opinion")}</Link></li>
-              <li><Link to="/category/business-economy">{t("BusinessEconomy")}</Link></li>
-              <li><Link to="/category/culture-travel">{t("CultureTravel")}</Link></li>
-              <li><Link to="/impressum">{t("impressum")}</Link></li>
+              <li><Link to="/category/africa-news">{t("categoriesList.africa")}</Link></li>
+              <li><Link to="/category/europe-news">{t("categoriesList.europe")}</Link></li>
+              <li><Link to="/category/diaspora-voices">{t("categoriesList.diasporaVoices")}</Link></li>
+              <li><Link to="/category/opinion">{t("categoriesList.opinion")}</Link></li>
+              <li><Link to="/category/business-economy">{t("categoriesList.businessEconomy")}</Link></li>
+              <li><Link to="/category/culture-travel">{t("categoriesList.cultureTravel")}</Link></li>
             </ul>
           </div>
 
@@ -51,13 +50,12 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("company")}</h3>
             <ul className="space-y-2 text-gray-400">
-              <li><Link to="/about">{t("About")}</Link></li>
-              <li><Link to="/editorial">{t("Editorial")}</Link></li>
-              <li><Link to="/contact">{t("Contact")}</Link></li>
-              <li><Link to="/privacy">{t("Privacy")}</Link></li>
+              <li><Link to="/about">{t("companyList.about")}</Link></li>
+              <li><Link to="/editorial">{t("companyList.editorial")}</Link></li>
+              <li><Link to="/contact">{t("companyList.contact")}</Link></li>
+              <li><Link to="/privacy">{t("companyList.privacy")}</Link></li>
             </ul>
           </div>
-
           {/* Social Media */}
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("followUs")}</h3>
