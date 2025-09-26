@@ -1,181 +1,287 @@
 {
-    "brandName": "AfriEuropa News",
-    "tagline": "Bridge Between Continents",
-    "footerText": "Bridge Between Continents",
-    "footerDescription": "Your trusted source for African diaspora articles and opportunities across Europe.",
-    "categories": "Categories",
-    "categoriesList": {
-      "africa": "Africa News",
-      "europe": "Europe News",
-      "diasporaVoices": "Diaspora Voices",
-      "opinion": "Opinion",
-      "businessEconomy": "Business & Economy",
-      "cultureTravel": "Culture & Travel"
+  "brandName": "AfriEuropa News",
+  "tagline": "Bridge Between Continents",
+  "footerText": "Bridge Between Continents",
+  "footerDescription": "Your trusted source for African diaspora articles and opportunities across Europe.",
+  "categories": "Categories",
+  "categoriesList": {
+    "africa": "Africa News",
+    "europe": "Europe News",
+    "diasporaVoices": "Diaspora Voices",
+    "opinion": "Opinion",
+    "businessEconomy": "Business & Economy",
+    "cultureTravel": "Culture & Travel"
+  },
+  "company": "Company",
+  "companyList": {
+    "about": "About",
+    "editorial": "Editorial",
+    "contact": "Contact",
+    "privacy": "Privacy"
+  },
+  "followUs": "Follow Us",
+  "rights": "All rights reserved.",
+  "nav": {
+    "africa": "Africa",
+    "europe": "Europe",
+    "diasporaVoices": "Diaspora Voices",
+    "opinion": "Opinion",
+    "businessEconomy": "Business & Economy",
+    "cultureTravel": "Culture & Travel"
+  },
+  "searchPlaceholder": "Search articles...",
+  "hero": {
+    "breaking": "Breaking:",
+    "breakingNews": "Breaking News",
+    "by": "By",
+    "reads": "reads",
+    "readFullStory": "Read Full Story"
+  },
+  "homepage": {
+    "loading": "Loading...",
+    "featuredArticles": "Featured Articles",
+    "reads": "reads",
+    "multimedia": "Videos & Podcasts"
+  },
+  "newsletter": {
+    "title": "Join AfriEuropa Weekly",
+    "subtitle": "Your diaspora news & opportunities digest",
+    "placeholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "alreadySubscribed": "You're already subscribed!",
+    "error": "Failed to subscribe. Please try again.",
+    "thanks": "Thanks for subscribing!"
+  },
+  "about": {
+    "title": "About AfriEuropa News",
+    "subtitle": "Connecting, informing, and empowering African diaspora communities across Europe through quality journalism and storytelling.",
+    "heroAlt": "Diverse team working together",
+    "mission": {
+      "title": "Mission",
+      "text": "To bridge the information gap for African diaspora communities in Europe, providing news, opportunities, and stories that matter to our community."
     },
-    "company": "Company",
-    "companyList": {
-      "about": "About",
-      "editorial": "Editorial",
-      "contact": "Contact",
-      "privacy": "Privacy"
+    "community": {
+      "title": "Community",
+      "text": "Building stronger connections within and across African diaspora communities."
     },
-    "followUs": "Follow Us",
-    "rights": "All rights reserved.",
-    "nav": {
-      "africa": "Africa",
-      "europe": "Europe",
-      "diasporaVoices": "Diaspora Voices",
-      "opinion": "Opinion",
-      "businessEconomy": "Business & Economy",
-      "cultureTravel": "Culture & Travel"
+    "global": {
+      "title": "Global Perspective",
+      "text": "Connecting African diaspora experiences across European borders and beyond."
     },
-    "searchPlaceholder": "Search articles...",
-    "hero": {
-      "breaking": "Breaking:",
-      "breakingNews": "Breaking News",
-      "by": "By",
-      "reads": "reads",
-      "readFullStory": "Read Full Story"
+    "opportunities": {
+      "title": "Opportunities",
+      "text": "Highlighting career, education, and business opportunities for diaspora communities."
     },
-    "homepage": {
-      "loading": "Loading...",
-      "featuredArticles": "Featured Articles",
-      "reads": "reads",
-      "multimedia": "Videos & Podcasts"
+    "stories": {
+      "title": "Authentic Stories",
+      "text": "Sharing authentic voices and experiences that reflect our diverse community."
     },
-    "newsletter": {
-      "title": "Join AfriEuropa Weekly",
-      "subtitle": "Your diaspora news & opportunities digest",
-      "placeholder": "Enter your email",
-      "subscribe": "Subscribe",
-      "alreadySubscribed": "You're already subscribed!",
-      "error": "Failed to subscribe. Please try again.",
-      "thanks": "Thanks for subscribing!"
+    "story": {
+      "title": "Story",
+      "p1": "Founded in 2025, AfriEuropa News is the go-to platform for Africans living in Europe. Built by journalists, entrepreneurs, and community leaders from the diaspora, we tell the stories that matter—news, opportunities, and voices that reflect our everyday experiences.",
+      "p2": "We exist to inform, connect, and celebrate African communities across Europe while bridging the gap between home and diaspora.",
+      "p3": "Today, we serve over 50,000 readers across 15 European countries, providing daily news updates, weekly newsletters, and in-depth features that celebrate our community's achievements and address our challenges."
     },
-    "about": {
-      "title": "About AfriEuropa News",
-      "subtitle": "Connecting, informing, and empowering African diaspora communities across Europe through quality journalism and storytelling.",
-      "heroAlt": "Diverse team working together",
-      "mission": {
-        "title": "Mission",
-        "text": "To bridge the information gap for African diaspora communities in Europe, providing news, opportunities, and stories that matter to our community."
+    "storyAlt": "Team collaboration",
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Meet the dedicated professionals bringing AfriEuropa’s vision to life",
+      "ceoRole": "CEO",
+      "ceoBio": "A seasoned journalist with over 10 years of experience in media, strategy, and storytelling. Henry leads AfriEuropa News with a vision of connecting African diaspora communities across Europe through accurate and impactful reporting.",
+      "cooRole": "COO",
+      "cooBio": "A creative product designer and storyteller passionate about user-centered design. Elizabeth specializes in creating meaningful digital experiences that amplify diaspora voices, with a strong focus on migration and cultural integration.",
+      "ctoRole": "CTO",
+      "ctoBio": "A dynamic journalist and event organizer dedicated to capturing authentic diaspora experiences. Hae-Won combines sharp writing skills with hands-on community engagement, bringing stories and events that resonate with Africans across Europe."
+    },
+    "values": {
+      "title": "Our Values",
+      "authenticity": {
+        "title": "Authenticity",
+        "text": "We tell authentic stories that reflect the real experiences of African diaspora communities, celebrating both struggles and successes."
       },
-      "community": {
-        "title": "Community",
-        "text": "Building stronger connections within and across African diaspora communities."
+      "excellence": {
+        "title": "Excellence",
+        "text": "We maintain the highest standards of journalism, ensuring accuracy, fairness, and ethical reporting in all our content."
       },
-      "global": {
-        "title": "Global Perspective",
-        "text": "Connecting African diaspora experiences across European borders and beyond."
+      "empowerment": {
+        "title": "Empowerment",
+        "text": "We empower our community by providing information, opportunities, and platforms that help individuals and communities thrive."
       },
-      "opportunities": {
-        "title": "Opportunities",
-        "text": "Highlighting career, education, and business opportunities for diaspora communities."
-      },
-      "stories": {
-        "title": "Authentic Stories",
-        "text": "Sharing authentic voices and experiences that reflect our diverse community."
-      },
-      "story": {
-        "title": "Story",
-        "p1": "Founded in 2025, AfriEuropa News is the go-to platform for Africans living in Europe. Built by journalists, entrepreneurs, and community leaders from the diaspora, we tell the stories that matter—news, opportunities, and voices that reflect our everyday experiences.",
-        "p2": "We exist to inform, connect, and celebrate African communities across Europe while bridging the gap between home and diaspora.",
-        "p3": "Today, we serve over 50,000 readers across 15 European countries, providing daily news updates, weekly newsletters, and in-depth features that celebrate our community's achievements and address our challenges."
-      },
-      "storyAlt": "Team collaboration",
-      "team": {
-        "title": "Our Team",
-        "subtitle": "Meet the dedicated professionals bringing AfriEuropa’s vision to life",
-        "ceoRole": "CEO",
-        "ceoBio": "A seasoned journalist with over 10 years of experience in media, strategy, and storytelling. Henry leads AfriEuropa News with a vision of connecting African diaspora communities across Europe through accurate and impactful reporting.",
-        "cooRole": "COO",
-        "cooBio": "A creative product designer and storyteller passionate about user-centered design. Elizabeth specializes in creating meaningful digital experiences that amplify diaspora voices, with a strong focus on migration and cultural integration.",
-        "ctoRole": "CTO",
-        "ctoBio": "A dynamic journalist and event organizer dedicated to capturing authentic diaspora experiences. Hae-Won combines sharp writing skills with hands-on community engagement, bringing stories and events that resonate with Africans across Europe."
-      },
-      "values": {
-        "title": "Our Values",
-        "authenticity": {
-          "title": "Authenticity",
-          "text": "We tell authentic stories that reflect the real experiences of African diaspora communities, celebrating both struggles and successes."
-        },
-        "excellence": {
-          "title": "Excellence",
-          "text": "We maintain the highest standards of journalism, ensuring accuracy, fairness, and ethical reporting in all our content."
-        },
-        "empowerment": {
-          "title": "Empowerment",
-          "text": "We empower our community by providing information, opportunities, and platforms that help individuals and communities thrive."
-        },
-        "unity": {
-          "title": "Unity",
-          "text": "We foster unity and solidarity among African diaspora communities while celebrating our diversity and unique cultural contributions."
-        }
+      "unity": {
+        "title": "Unity",
+        "text": "We foster unity and solidarity among African diaspora communities while celebrating our diversity and unique cultural contributions."
       }
-    },
-    "contact": {
-      "title": "Contact Us",
-      "intro": "We’d love to hear from you.",
-      "form": {
-        "title": "Send a Message",
-        "labels": {
-          "name": "Name",
-          "email": "Email",
-          "subject": "Subject",
-          "message": "Message"
-        },
-        "placeholders": {
-          "name": "Enter your name",
-          "email": "Enter your email address",
-          "message": "Write your message here..."
-        },
-        "subjects": {
-          "default": "Select a subject",
-          "general": "General",
-          "editorial": "Editorial",
-          "advertising": "Advertising",
-          "partnership": "Partnership",
-          "technical": "Technical",
-          "feedback": "Feedback"
-        },
-        "submit": "Submit",
-        "success": "Your message has been sent successfully!",
-        "error": "Something went wrong. Please try again."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "intro": "We’d love to hear from you.",
+    "form": {
+      "title": "Send a Message",
+      "labels": {
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message"
       },
-      "info": {
-        "title": "Our Contact Details",
-        "email": "Email Address",
-        "emailValue": "contact@diasporalens.eu",
-        "editorialHotline": "Editorial Hotline",
-        "phoneValue": "+33 1 23 45 67 89",
-        "hours": "Available Monday to Friday, 9am–6pm",
-        "office": "Head Office",
-        "address": "123 Example Street\n75000 Paris\nFrance"
+      "placeholders": {
+        "name": "Enter your name",
+        "email": "Enter your email address",
+        "message": "Write your message here..."
       },
-      "tips": {
-        "title": "Send Us Tips",
-        "text": "If you have news, stories, or tips, feel free to share them with us.",
-        "send": "Send a Tip"
-      }
+      "subjects": {
+        "default": "Select a subject",
+        "general": "General",
+        "editorial": "Editorial",
+        "advertising": "Advertising",
+        "partnership": "Partnership",
+        "technical": "Technical",
+        "feedback": "Feedback"
+      },
+      "submit": "Submit",
+      "success": "Your message has been sent successfully!",
+      "error": "Something went wrong. Please try again."
     },
+    "info": {
+      "title": "Our Contact Details",
+      "email": "Email Address",
+      "emailValue": "contact@diasporalens.eu",
+      "editorialHotline": "Editorial Hotline",
+      "phoneValue": "+33 1 23 45 67 89",
+      "hours": "Available Monday to Friday, 9am–6pm",
+      "office": "Head Office",
+      "address": "123 Example Street\n75000 Paris\nFrance"
+    },
+    "tips": {
+      "title": "Send Us Tips",
+      "text": "If you have news, stories, or tips, feel free to share them with us.",
+      "send": "Send a Tip"
+    }
+  },
+  "title": "Editorial Policy",
+  "commitment": "Our commitment to accurate, fair, and responsible journalism for the African diaspora in Europe.",
+  "missionTitle": "Our Editorial Mission",
+  "missionText": "We are committed to providing accurate, fair, and balanced news coverage that serves the African diaspora communities across Europe. We strive to inform, educate, and empower our readers with quality journalism that respects diversity and promotes understanding.",
+  "standardsTitle": "Editorial Standards",
+  "accuracyTitle": "Accuracy and Verification",
+  "accuracyList": [
+    "All facts are verified through multiple reliable sources",
+    "We distinguish clearly between news reporting and opinion pieces",
+    "Corrections are published promptly and prominently when errors occur",
+    "Sources are identified whenever possible, with anonymity granted only when necessary for safety or story validity"
+  ],
+  "fairnessTitle": "Fairness and Balance",
+  "fairnessList": [
+    "We present multiple perspectives on controversial issues",
+    "All parties affected by our reporting are given the opportunity to respond",
+    "We avoid stereotypes and generalizations about communities or individuals",
+    "Personal bias does not influence our news reporting"
+  ],
+  "independenceTitle": "Independence",
+  "independenceList": [
+    "Our editorial content is independent of commercial and political interests",
+    "Sponsored content is clearly labeled and separated from editorial content",
+    "We do not accept payment for editorial coverage",
+    "Conflicts of interest are disclosed transparently"
+  ],
+  "guidelinesTitle": "Content Guidelines",
+  "culturalTitle": "Cultural Sensitivity",
+  "culturalText": "We are committed to reporting with cultural awareness and sensitivity. Our coverage respects the diversity of African diaspora experiences while avoiding generalizations that may misrepresent communities or individuals.",
+  "languageTitle": "Language and Tone",
+  "languageList": [
+    "We use clear, accessible language appropriate for our diverse readership",
+    "Respectful tone is maintained in all content",
+    "Inflammatory or divisive language is avoided",
+    "Technical terms are explained when necessary"
+  ],
+  "protectionTitle": "Source Protection",
+  "protectionText": "We protect the identity of sources who request anonymity for legitimate reasons, including personal safety, legal concerns, or professional retaliation. Source confidentiality is taken seriously and maintained even under legal pressure.",
+  "processTitle": "Editorial Process",
+  "developmentTitle": "Story Development",
+  "developmentList": [
+    "Story ideas are evaluated for relevance to our diaspora audience",
+    "Research and fact-checking are conducted before publication",
+    "Multiple sources are consulted for complex or controversial topics",
+    "Editorial review ensures adherence to our standards"
+  ],
+  "oversightTitle": "Editorial Oversight",
+  "oversightText": "All content undergoes editorial review to ensure accuracy, clarity, and adherence to our editorial standards. The editorial team reserves the right to edit content for length, clarity, and editorial standards.",
+  "correctionsTitle": "Corrections and Complaints",
+  "correctionsPolicyTitle": "Corrections Policy",
+  "correctionsPolicyText": "When errors are identified, we publish corrections promptly and prominently. Significant corrections are noted at the top of the corrected article with the date of correction.",
+  "feedbackTitle": "Reader Feedback",
+  "feedbackText": "We welcome reader feedback and take complaints seriously. Concerns about editorial content can be directed to our editorial team at editorial@diasporalens.eu.",
+  "communityTitle": "Community Guidelines",
+  "communityText": "Comments and user-generated content must be respectful and constructive. We reserve the right to moderate or remove content that violates our community standards, including:",
+  "communityList": [
+    "Hate speech or discriminatory language",
+    "Personal attacks or harassment",
+    "Spam or promotional content",
+    "Misinformation or false claims"
+  ],
+  "contactTitle": "Contact Editorial Team",
+  "contactText": "For editorial inquiries, story tips, or concerns about our coverage, please contact:",
+  "contactEmail": "Editorial Email: afrieuropamedia.com",
+  "contactTips": "News Tips: afrieuropamedia.com",
+  "contactCorrections": "Corrections: afrieuropamedia.com",
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: September, 2025",
     "introTitle": "Introduction",
-    "introText": "AfriEuropa (\"we,\" \"our,\" or \"us\") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or subscribe to our services.",
+    "introText": "AfriEuropa (\"we,\" \"our,\" or \"us\") respects your privacy...",
     "infoTitle": "Information We Collect",
     "personalInfo": "Personal Information",
     "personalInfoText": "We may collect the following personal information:",
+    "personalInfoList": [
+      "Email address (for newsletter subscriptions)",
+      "Name and contact information (when you contact us)",
+      "Comments and feedback you provide"
+    ],
     "autoInfo": "Automatically Collected Information",
+    "autoInfoList": [
+      "IP address and browser information",
+      "Pages visited and time spent on our site",
+      "Referring website information",
+      "Device type and operating system"
+    ],
     "useTitle": "How We Use Your Information",
     "useText": "We use collected information to:",
+    "useList": [
+      "Deliver our newsletter and content updates",
+      "Respond to your inquiries and provide customer support",
+      "Improve our website and user experience",
+      "Analyze website traffic and usage patterns",
+      "Comply with legal obligations"
+    ],
     "sharingTitle": "Information Sharing",
+    "sharingText": "We do not sell, trade, or rent your personal information to third parties. We may share information only in the following circumstances:",
+    "sharingList": [
+      "With your explicit consent",
+      "To comply with legal requirements or court orders",
+      "To protect our rights, privacy, safety, or property",
+      "With trusted service providers who assist in our operations (under strict confidentiality agreements)"
+    ],
     "cookiesTitle": "Cookies and Tracking",
+    "cookiesText": "We use cookies and similar technologies to enhance your browsing experience, analyze site traffic, and remember your preferences. You can control cookie settings through your browser preferences.",
     "securityTitle": "Data Security",
+    "securityText": "We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is 100% secure, and we cannot guarantee absolute security.",
     "rightsTitle": "Your Rights (GDPR)",
+    "rightsText": "Under the General Data Protection Regulation (GDPR), you have the right to:",
+    "rightsList": [
+      "Access your personal data",
+      "Rectify inaccurate personal data",
+      "Erase your personal data",
+      "Restrict processing of your personal data",
+      "Data portability",
+      "Object to processing",
+      "Withdraw consent at any time"
+    ],
     "unsubscribeTitle": "Newsletter Unsubscribe",
+    "unsubscribeText": "You can unsubscribe from our newsletter at any time by clicking the 'unsubscribe' link in any newsletter email or by contacting us directly at hello@diasporalens.eu.",
     "childrenTitle": "Children's Privacy",
+    "childrenText": "Our services are not intended for children under 16 years of age. We do not knowingly collect personal information from children under 16.",
     "changesTitle": "Changes to This Policy",
+    "changesText": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the 'Last updated' date.",
     "contactTitle": "Contact Us",
     "contactEmail": "privacy@Europanews.com",
     "contactAddress": "AfriEuropa Media, 123 Berlin, Germany"
