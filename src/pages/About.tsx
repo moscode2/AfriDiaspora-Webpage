@@ -64,32 +64,32 @@ export default function AboutPage() {
             <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Users className="h-8 w-8 text-orange-600" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.mission.community.title")}</h3>
-            <p className="text-gray-600">{t("about.mission.community.text")}</p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.community.title")}</h3>
+            <p className="text-gray-600">{t("about.community.text")}</p>
           </div>
 
           <div className="text-center">
             <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Globe className="h-8 w-8 text-orange-600" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.mission.global.title")}</h3>
-            <p className="text-gray-600">{t("about.mission.global.text")}</p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.global.title")}</h3>
+            <p className="text-gray-600">{t("about.global.text")}</p>
           </div>
 
           <div className="text-center">
             <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Target className="h-8 w-8 text-orange-600" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.mission.opportunities.title")}</h3>
-            <p className="text-gray-600">{t("about.mission.opportunities.text")}</p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.opportunities.title")}</h3>
+            <p className="text-gray-600">{t("about.opportunities.text")}</p>
           </div>
 
           <div className="text-center">
             <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Heart className="h-8 w-8 text-orange-600" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.mission.stories.title")}</h3>
-            <p className="text-gray-600">{t("about.mission.stories.text")}</p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t("about.stories.title")}</h3>
+            <p className="text-gray-600">{t("about.stories.text")}</p>
           </div>
         </div>
       </section>
