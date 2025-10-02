@@ -33,22 +33,21 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">AEN</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold text-primary">
-                  {t("brandName")}
-                </span>
-                <span className="text-xs text-muted-foreground hidden sm:block">
-                  {t("tagline")}
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
+  <Link to="/" className="flex items-center space-x-3">
+    <img
+      src="/images/Logo.png"
+      alt="AfriEuropa News Logo"
+      className="h-10 w-auto"  // adjust size as needed
+    />
+    <div className="flex flex-col">
+      <span className="text-xl font-bold text-primary">{t("brandName")}</span>
+      <span className="text-xs text-muted-foreground hidden sm:block">
+        {t("tagline")}
+      </span>
+    </div>
+  </Link>
+</div>
+       {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navigation.map((item) => (
               <Link

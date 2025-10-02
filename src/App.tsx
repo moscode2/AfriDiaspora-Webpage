@@ -10,17 +10,19 @@ import PrivacyPage from "./pages/Privacy.tsx";
 import EditorialPage from "./pages/Editorial.tsx";
 import AdminLogin from "./pages/Admin/Login.tsx";
 import AdminDashboard from "./pages/Admin/Dashboard.tsx";
-import NewArticle from "./pages/Admin/New article.tsx"; // ✅ use new one
+import NewArticle from "./pages/Admin/New article.tsx"; // ✅
+import HeroSettings from "./pages/Admin/HeroSettings.tsx"; // ✅ new page
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import NewsletterBanner from "./components/Newsletter.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
-import Support from "./pages/support.tsx"; 
+import Support from "./pages/support.tsx";
 
 // ✅ Wrapper ensures CategoryPage remounts on slug change
 function CategoryPageWrapper() {
   const { slug } = useParams();
   return <CategoryPage key={slug} />;
 }
+
 export default function App() {
   useEffect(() => {
     console.log("Firebase initialized ✅", analytics);
@@ -41,7 +43,7 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/editorial" element={<EditorialPage />} />
-            <Route path="/support" element={<Support />} /> 
+            <Route path="/support" element={<Support />} />
 
             {/* 🔑 Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -57,7 +59,7 @@ export default function App() {
               path="/admin/articles/new"
               element={
                 <ProtectedRoute requireAdmin>
-                  <NewArticle /> {/* ✅ swapped */}
+                  <NewArticle />
                 </ProtectedRoute>
               }
             />
@@ -65,7 +67,15 @@ export default function App() {
               path="/admin/articles/edit/:id"
               element={
                 <ProtectedRoute requireAdmin>
-                  <NewArticle /> {/* reuse form for editing later */}
+                  <NewArticle /> {/* reuse form for editing */}
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/hero-settings"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <HeroSettings /> {/* ✅ new hero settings route */}
                 </ProtectedRoute>
               }
             />

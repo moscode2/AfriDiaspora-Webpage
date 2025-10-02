@@ -20,18 +20,23 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           
           {/* Brand Section */}
-          <div>
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">AEN</span>
-              </div>
-              <div>
-                <span className="text-xl font-bold">{t("brandName")}</span>
-                <div className="text-xs text-gray-400 -mt-1">{t("footerText")}</div>
-              </div>
-            </div>
-            <p className="text-gray-400 mb-4">{t("footerDescription")}</p>
-          </div>
+<div>
+  <div className="flex items-center space-x-3 mb-4">
+    {/* Logo Image */}
+    <img
+      src="/images/Logo.png"   // ✅ place your logo in public/images/logo.png
+      alt="AfriEuropa News Logo"
+      className="h-10 w-auto"
+    />
+
+    <div>
+      <span className="text-xl font-bold">{t("brandName")}</span>
+      <div className="text-xs text-gray-400 -mt-1">{t("footerText")}</div>
+    </div>
+  </div>
+  <p className="text-gray-400 mb-4">{t("footerDescription")}</p>
+</div>
+
 
           {/* Categories Section */}
           <div>

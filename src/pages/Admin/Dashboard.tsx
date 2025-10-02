@@ -1,3 +1,4 @@
+
 // src/pages/admin/Dashboard.tsx
 import { JSX, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -244,37 +245,40 @@ export default function AdminDashboard(): JSX.Element {
 
       {/* header */}
       <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white font-bold text-sm">AEN</span>
-              </div>
-              <h1 className="text-xl font-bold text-gray-900"> Admin Section</h1>
-            </div>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-between items-center h-16">
+      <div className="flex items-center">
+        {/* Replace with real logo */}
+        <img
+          src="/images/Logo.png"   // <-- your homepage logo path
+          alt="AfriEuropa News Logo"
+          className="h-8 w-auto mr-3"
+        />
+        <h1 className="text-xl font-bold text-gray-900">Admin Section</h1>
+      </div>
 
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/"
-                aria-label="View site"
-                className="text-gray-600 hover:text-gray-900 flex items-center"
-              >
-                <Eye className="h-5 w-5 mr-2" />
-                <span>View site</span>
-              </Link>
+      <div className="flex items-center space-x-4">
+        <Link
+          to="/"
+          aria-label="View site"
+          className="text-gray-600 hover:text-gray-900 flex items-center"
+        >
+          <Eye className="h-5 w-5 mr-2" />
+          <span>View site</span>
+        </Link>
 
-              <button
-                onClick={handleLogout}
-                aria-label="Logout"
-                className="text-gray-600 hover:text-gray-900 flex items-center"
-              >
-                <LogOut className="h-5 w-5 mr-2" />
-                <span>Logout</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+        <button
+          onClick={handleLogout}
+          aria-label="Logout"
+          className="text-gray-600 hover:text-gray-900 flex items-center"
+        >
+          <LogOut className="h-5 w-5 mr-2" />
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
 
       {/* content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
 import { Article } from "../Hooks/usefirestoredata";
 import { useTranslation } from "react-i18next";
+import { useHeroSettings } from "../Hooks/useHeroSettings"; // 👈 import hook
 
 interface HeroProps {
   featuredArticle: Article | null;
@@ -14,6 +13,7 @@ interface HeroProps {
 const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
   const { t } = useTranslation();
   const [currentTickerIndex, setCurrentTickerIndex] = useState(0);
+  const { sidebarImageUrl } = useHeroSettings(); // 👈 fetch sidebar image from hook
 
   useEffect(() => {
     if (!breakingHeadlines.length) return;
@@ -69,6 +69,7 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
 
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-black/50 to-black/30 min-h-[500px] lg:min-h-[600px]">
+        {/* Background image */}
         <img
           src={featuredArticle.featured_image_url}
           alt={featuredArticle.title}
@@ -76,13 +77,9 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="grid lg:grid-cols-3 gap-8 h-full items-end pb-12">
+          <div className="grid lg:grid-cols-3 gap-8 h-full items-stretch pb-12">
             {/* Main Story */}
-            <div className="lg:col-span-2 text-white space-y-6">
-              <Badge variant="secondary" className="bg-accent text-accent-foreground">
-                {featuredArticle.category_id}
-              </Badge>
-
+            <div className="lg:col-span-2 text-white space-y-6 self-center">
               <h1 className="font-serif text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
                 {featuredArticle.title}
               </h1>
@@ -92,78 +89,32 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
               </p>
 
               <div className="flex items-center gap-4 text-sm text-gray-300">
-                <span>{t("hero.by")} {featuredArticle.author}</span>
+                <span>
+                  {t("hero.by")} {featuredArticle.author}
+                </span>
                 <span>•</span>
-                <span>{featuredArticle.readCount || 0} {t("hero.reads")}</span>
+                <span>
+                  {featuredArticle.readCount || 0} {t("hero.reads")}
+                </span>
               </div>
 
               <Button asChild size="lg" className="mt-6">
-                <Link to={`/article/${featuredArticle.slug}`}>{t("hero.readFullStory")}</Link>
+                <Link to={`/article/${featuredArticle.slug}`}>
+                  {t("hero.readFullStory")}
+                </Link>
               </Button>
             </div>
 
-            {/* Breaking News Sidebar (Desktop) */}
-            <div className="hidden lg:block">
-              <Card className="bg-white/95 backdrop-blur-sm">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-accent mb-4 flex items-center gap-2">
-                    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                    {t("hero.breakingNews")}
-                  </h3>
-
-                  <div className="space-y-3">
-                    {breakingHeadlines.map((item, index) => (
-                      <div
-                        key={item.id}
-                        className={`transition-opacity duration-500 ${
-                          index === currentTickerIndex ? "opacity-100" : "opacity-50"
-                        }`}
-                      >
-                        <Link
-                          to={`/article/${item.slug}`}
-                          className="block font-medium text-sm leading-tight hover:text-accent transition-colors line-clamp-2"
-                        >
-                          {item.title}
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-1 mt-4">
-                    {breakingHeadlines.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentTickerIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-colors ${
-                          index === currentTickerIndex ? "bg-accent" : "bg-muted"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Breaking News */}
-      <div className="lg:hidden bg-secondary">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h3 className="font-semibold text-accent mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-            {t("hero.breakingNews")}
-          </h3>
-          <div className="space-y-3">
-            {breakingHeadlines.map((item) => (
-              <Link
-                key={item.id}
-                to={`/article/${item.slug}`}
-                className="block font-medium text-sm border-b border-border pb-3 hover:text-accent transition-colors"
-              >
-                {item.title}
-              </Link>
-            ))}
+            {/* Sidebar Image */}
+            {sidebarImageUrl && (
+              <div className="hidden lg:block h-full">
+                <img
+                  src={sidebarImageUrl}
+                  alt="Sidebar Promo"
+                  className="w-full h-full object-cover rounded-lg shadow-md"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
