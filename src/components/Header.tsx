@@ -55,12 +55,12 @@ export default function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors
-                    ${
-                      location.pathname === item.href
-                        ? "text-orange-600 font-bold bg-orange-50"
-                        : "text-gray-700 hover:text-orange-600 hover:bg-orange-100"
-                    }`}
+                  className={`px-3 py-2 text-sm font-bold rounded-md transition-colors
+  ${
+    location.pathname === item.href
+      ? "text-orange-600 bg-orange-50"
+      : "text-gray-700 hover:text-orange-600 hover:bg-orange-100"
+  }`}
                 >
                   {item.name}
                 </Link>
@@ -72,7 +72,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <div className="hidden md:block">
               {/* Shrink search bar */}
-              <SearchBar onSearch={handleSearch} className="w-40" />
+              <SearchBar onSearch={handleSearch} className="w-32" />
             </div>
             <div className="hidden md:block">
               <LanguageToggle
