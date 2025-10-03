@@ -26,7 +26,7 @@ export default function Footer() {
     <img
       src="/images/Logo.png"   // ✅ place your logo in public/images/logo.png
       alt="AfriEuropa News Logo"
-      className="h-10 w-auto"
+      className="h-16 w-auto"
     />
 
     <div>

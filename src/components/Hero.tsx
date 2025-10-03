@@ -68,27 +68,28 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
       )}
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-black/50 to-black/30 min-h-[500px] lg:min-h-[600px]">
-        {/* Background image */}
+      <div className="relative bg-white min-h-[500px] lg:min-h-[600px] overflow-hidden">
+        {/* Background image faded */}
         <img
           src={featuredArticle.featured_image_url}
           alt={featuredArticle.title}
-          className="absolute inset-0 w-full h-full object-cover -z-10"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 -z-10"
         />
 
+        {/* Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="grid lg:grid-cols-3 gap-8 h-full items-stretch pb-12">
             {/* Main Story */}
-            <div className="lg:col-span-2 text-white space-y-6 self-center">
+            <div className="lg:col-span-2 text-gray-900 space-y-6 self-center">
               <h1 className="font-serif text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
                 {featuredArticle.title}
               </h1>
 
-              <p className="text-lg lg:text-xl text-gray-100 max-w-3xl leading-relaxed">
+              <p className="text-lg lg:text-xl text-gray-700 max-w-3xl leading-relaxed">
                 {featuredArticle.excerpt}
               </p>
 
-              <div className="flex items-center gap-4 text-sm text-gray-300">
+              <div className="flex items-center gap-4 text-sm text-gray-600">
                 <span>
                   {t("hero.by")} {featuredArticle.author}
                 </span>

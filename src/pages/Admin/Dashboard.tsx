@@ -252,7 +252,7 @@ export default function AdminDashboard(): JSX.Element {
         <img
           src="/images/Logo.png"   // <-- your homepage logo path
           alt="AfriEuropa News Logo"
-          className="h-8 w-auto mr-3"
+          className="h-16 w-auto mr-3"
         />
         <h1 className="text-xl font-bold text-gray-900">Admin Section</h1>
       </div>

@@ -1,8 +1,8 @@
 // src/components/Header.tsx
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next"; // ✅ added import
+import { useTranslation } from "react-i18next";
 import { SearchBar } from "./ui/search-bar";
 import { LanguageToggle } from "./ui/language-toggle";
 
@@ -11,6 +11,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navigation = [
     { name: t("nav.africa"), href: "/category/africa-news" },
@@ -33,27 +34,33 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-  <Link to="/" className="flex items-center space-x-3">
-    <img
-      src="/images/Logo.png"
-      alt="AfriEuropa News Logo"
-      className="h-10 w-auto"  // adjust size as needed
-    />
-    <div className="flex flex-col">
-      <span className="text-xl font-bold text-primary">{t("brandName")}</span>
-      <span className="text-xs text-muted-foreground hidden sm:block">
-        {t("tagline")}
-      </span>
-    </div>
-  </Link>
-</div>
-       {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
+            <Link to="/" className="flex items-center space-x-3">
+              <img
+                src="/images/Logo.png"
+                alt="AfriEuropa News Logo"
+                className="h-16 w-auto"
+              />
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-primary">{t("brandName")}</span>
+                <span className="text-xs text-muted-foreground hidden sm:block">
+                  {t("tagline")}
+                </span>
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-4">
             {navigation.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
-                className="px-3 py-2 text-sm font-medium text-foreground hover:text-accent transition-colors rounded-md hover:bg-secondary"
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors
+                  ${
+                    location.pathname === item.href
+                      ? "text-orange-600 font-bold bg-orange-50"
+                      : "text-gray-700 hover:text-orange-600 hover:bg-orange-100"
+                  }`}
               >
                 {item.name}
               </Link>
@@ -70,7 +77,7 @@ export default function Header() {
                 currentLanguage={currentLanguage}
                 onLanguageChange={(lang) => {
                   setCurrentLanguage(lang);
-                  i18n.changeLanguage(lang); // ✅ sync with i18n
+                  i18n.changeLanguage(lang);
                 }}
               />
             </div>
@@ -78,7 +85,7 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2 rounded-md text-foreground hover:text-accent hover:bg-secondary"
+              className="lg:hidden p-2 rounded-md text-foreground hover:text-orange-600 hover:bg-orange-100"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -98,7 +105,12 @@ export default function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className="block px-3 py-2 text-base font-medium text-foreground hover:text-accent hover:bg-secondary rounded-md"
+                  className={`block px-3 py-2 text-base font-medium rounded-md
+                    ${
+                      location.pathname === item.href
+                        ? "text-orange-600 font-bold bg-orange-50"
+                        : "text-gray-700 hover:text-orange-600 hover:bg-orange-100"
+                    }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -112,7 +124,7 @@ export default function Header() {
                     currentLanguage={currentLanguage}
                     onLanguageChange={(lang) => {
                       setCurrentLanguage(lang);
-                      i18n.changeLanguage(lang); // ✅ sync with i18n
+                      i18n.changeLanguage(lang);
                       setMobileMenuOpen(false);
                     }}
                   />
