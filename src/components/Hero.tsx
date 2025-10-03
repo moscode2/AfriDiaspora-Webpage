@@ -1,9 +1,10 @@
+// src/components/Hero.tsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Article } from "../Hooks/usefirestoredata";
 import { useTranslation } from "react-i18next";
-import { useHeroSettings } from "../Hooks/useHeroSettings"; // 👈 import hook
+import { useHeroSettings } from "../Hooks/useHeroSettings";
 
 interface HeroProps {
   featuredArticle: Article | null;
@@ -13,7 +14,7 @@ interface HeroProps {
 const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
   const { t } = useTranslation();
   const [currentTickerIndex, setCurrentTickerIndex] = useState(0);
-  const { sidebarImageUrl } = useHeroSettings(); // 👈 fetch sidebar image from hook
+  const { sidebarImageUrl } = useHeroSettings();
 
   useEffect(() => {
     if (!breakingHeadlines.length) return;
@@ -26,14 +27,12 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
   if (!featuredArticle) return null;
 
   return (
-    <section className="relative">
+    <section className="relative w-full">
       {/* 🔴 Breaking News Top Strip */}
       {breakingHeadlines.length > 0 && (
         <div className="bg-red-600 text-white py-2 px-4">
           <div className="max-w-7xl mx-auto flex items-center gap-6">
             <span className="font-semibold">{t("hero.breaking")}</span>
-
-            {/* Rotating ticker */}
             <div className="flex-1 overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-in-out"
@@ -43,15 +42,13 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
                   <Link
                     key={item.id}
                     to={`/article/${item.slug}`}
-                    className="block min-w-full hover:underline truncate"
+                    className="block min-w-full hover:underline truncate text-sm sm:text-base"
                   >
                     {item.title}
                   </Link>
                 ))}
               </div>
             </div>
-
-            {/* Dots navigation */}
             <div className="flex gap-1">
               {breakingHeadlines.map((_, index) => (
                 <button
@@ -68,54 +65,50 @@ const Hero = ({ featuredArticle, breakingHeadlines }: HeroProps) => {
       )}
 
       {/* Hero Section */}
-      <div className="relative bg-white min-h-[500px] lg:min-h-[600px] overflow-hidden">
-        {/* Background image faded */}
+      <div className="relative w-full overflow-hidden bg-white">
+        {/* Background faded image (optional) */}
         <img
           src={featuredArticle.featured_image_url}
           alt={featuredArticle.title}
-          className="absolute inset-0 w-full h-full object-cover opacity-30 -z-10"
+          className="absolute inset-0 w-full h-full object-cover opacity-20 -z-10"
         />
 
-        {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="grid lg:grid-cols-3 gap-8 h-full items-stretch pb-12">
-            {/* Main Story */}
-            <div className="lg:col-span-2 text-gray-900 space-y-6 self-center">
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
-                {featuredArticle.title}
-              </h1>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 flex flex-col lg:flex-row gap-8 items-center">
+          {/* Left: Text Content */}
+          <div className="lg:flex-1 flex flex-col justify-center space-y-4 text-gray-900">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug">
+              {featuredArticle.title}
+            </h1>
 
-              <p className="text-lg lg:text-xl text-gray-700 max-w-3xl leading-relaxed">
-                {featuredArticle.excerpt}
-              </p>
+            <p className="text-base lg:text-lg text-gray-700 max-w-3xl leading-relaxed">
+              {featuredArticle.excerpt}
+            </p>
 
-              <div className="flex items-center gap-4 text-sm text-gray-600">
-                <span>
-                  {t("hero.by")} {featuredArticle.author}
-                </span>
-                <span>•</span>
-                <span>
-                  {featuredArticle.readCount || 0} {t("hero.reads")}
-                </span>
-              </div>
-
-              <Button asChild size="lg" className="mt-6">
-                <Link to={`/article/${featuredArticle.slug}`}>
-                  {t("hero.readFullStory")}
-                </Link>
-              </Button>
+            <div className="flex items-center gap-3 text-xs text-gray-600">
+              <span>
+                {t("hero.by")} {featuredArticle.author}
+              </span>
+              <span>•</span>
+              <span>
+                {featuredArticle.readCount || 0} {t("hero.reads")}
+              </span>
             </div>
 
-            {/* Sidebar Image */}
-            {sidebarImageUrl && (
-              <div className="hidden lg:block h-full">
-                <img
-                  src={sidebarImageUrl}
-                  alt="Sidebar Promo"
-                  className="w-full h-full object-cover rounded-lg shadow-md"
-                />
-              </div>
-            )}
+            <Button asChild size="lg" className="mt-4">
+              <Link to={`/article/${featuredArticle.slug}`}>
+                {t("hero.readFullStory")}
+              </Link>
+            </Button>
+          </div>
+
+          {/* Right: Featured Image */}
+          <div className="lg:flex-1 hidden lg:flex items-center justify-center">
+            <img
+              src={featuredArticle.featured_image_url}
+              alt={featuredArticle.title}
+              className="w-full h-full object-cover rounded-lg shadow-md"
+              style={{ maxHeight: "500px" }}
+            />
           </div>
         </div>
       </div>

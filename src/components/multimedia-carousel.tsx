@@ -45,8 +45,20 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
     }
   };
 
+  // ✅ Function to fix YouTube URL to embed
+  const getEmbedUrl = (url: string) => {
+    if (url.includes("youtube.com/watch?v=")) {
+      return url.replace("watch?v=", "embed/");
+    }
+    if (url.includes("youtu.be/")) {
+      return url.replace("youtu.be/", "www.youtube.com/embed/");
+    }
+    return url;
+  };
+
   return (
     <section className="space-y-6">
+      {/* Header with navigation */}
       <div className="flex items-center justify-between">
         <h2 className="font-serif text-3xl font-bold">{title}</h2>
         <div className="flex gap-2">
@@ -59,6 +71,7 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
         </div>
       </div>
 
+      {/* Carousel */}
       <div className="overflow-hidden">
         <div
           className="flex gap-6 transition-transform duration-300 ease-in-out"
@@ -102,7 +115,7 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
         </div>
       </div>
 
-      {/* Modal for Multimedia Playback */}
+      {/* Modal for Playback */}
       {activeItem && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="relative w-full max-w-3xl bg-background rounded-lg overflow-hidden">
@@ -113,11 +126,12 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
               <X className="h-6 w-6" />
             </button>
 
+            {/* Video */}
             {activeItem.type === "video" && (
               <div className="w-full aspect-video">
                 <iframe
                   className="w-full h-full"
-                  src={activeItem.url}
+                  src={getEmbedUrl(activeItem.url)} // ✅ Fixed here
                   title={activeItem.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -126,6 +140,7 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
               </div>
             )}
 
+            {/* Podcast */}
             {activeItem.type === "podcast" && (
               <audio controls autoPlay className="w-full mt-4">
                 <source src={activeItem.url} />
@@ -133,6 +148,7 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
               </audio>
             )}
 
+            {/* Gallery */}
             {activeItem.type === "photo-gallery" && (
               <div className="relative w-full h-[480px] flex items-center justify-center bg-black">
                 <img
@@ -144,7 +160,9 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
                   <>
                     <Button
                       className="absolute left-2 top-1/2 -translate-y-1/2"
-                      onClick={() => setGalleryIndex((galleryIndex - 1 + activeItem.url.length) % activeItem.url.length)}
+                      onClick={() =>
+                        setGalleryIndex((galleryIndex - 1 + activeItem.url.length) % activeItem.url.length)
+                      }
                     >
                       {"<"}
                     </Button>
@@ -159,6 +177,7 @@ export function MultimediaCarousel({ items, title = "Multimedia" }: MultimediaCa
               </div>
             )}
 
+            {/* Description */}
             <div className="p-4">
               <h3 className="font-bold text-xl">{activeItem.title}</h3>
               <p className="text-sm text-muted-foreground">{activeItem.description}</p>
