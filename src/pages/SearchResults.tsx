@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { db } from "../data/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { Article } from "../Hooks/usefirestoredata";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
+}
+
+// normalize text
+function normalize(str: string) {
+  return str.toLowerCase().replace(/\s+/g, " ").trim();
 }
 
 export default function SearchResults() {
@@ -19,13 +24,26 @@ export default function SearchResults() {
       setLoading(true);
 
       try {
-        const q = query(
-          collection(db, "articles"),
-          where("keywords", "array-contains", queryParam.toLowerCase())
-        );
-        const snapshot = await getDocs(q);
-        const articles = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as Article[];
-        setResults(articles);
+        const snapshot = await getDocs(collection(db, "articles"));
+        const articles = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Article[];
+
+        console.log("Articles from Firestore:", articles);
+        console.log("Search query:", queryParam);
+
+        const q = normalize(queryParam);
+        const qWords = q.split(" "); // split into words
+
+        const filtered = articles.filter((article) => {
+          const haystack = normalize(
+            `${article.title || ""} ${article.excerpt || ""} ${article.content || ""} ${article.category_name || ""}`
+          );
+          return qWords.every((word) => haystack.includes(word));
+        });
+
+        setResults(filtered);
       } catch (error) {
         console.error("Error fetching search results:", error);
       } finally {

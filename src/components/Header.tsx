@@ -19,7 +19,7 @@ export default function Header() {
     { name: t("nav.diasporaVoices"), href: "/category/diaspora-voices" },
     { name: t("nav.opinion"), href: "/category/opinion" },
     { name: t("nav.businessEconomy"), href: "/category/business-economy" },
-    { name: t("nav.cultureTravel"), href: "/category/culture-travel" }
+    { name: t("nav.cultureTravel"), href: "/category/culture-travel" },
   ];
 
   const handleSearch = (query: string) => {
@@ -32,45 +32,47 @@ export default function Header() {
     <header className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center space-x-3">
+          {/* Left: Logo + Navigation */}
+          <div className="flex items-center space-x-6">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
               <img
                 src="/images/Logo.png"
                 alt="AfriEuropa News Logo"
                 className="h-16 w-auto"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-primary">{t("brandName")}</span>
+                <span className="text-lg font-bold text-primary">{t("brandName")}</span>
                 <span className="text-xs text-muted-foreground hidden sm:block">
                   {t("tagline")}
                 </span>
               </div>
             </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors
+                    ${
+                      location.pathname === item.href
+                        ? "text-orange-600 font-bold bg-orange-50"
+                        : "text-gray-700 hover:text-orange-600 hover:bg-orange-100"
+                    }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors
-                  ${
-                    location.pathname === item.href
-                      ? "text-orange-600 font-bold bg-orange-50"
-                      : "text-gray-700 hover:text-orange-600 hover:bg-orange-100"
-                  }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Search + Language + Mobile Menu */}
-          <div className="flex items-center gap-4">
+          {/* Right: Search + Language + Mobile Menu */}
+          <div className="flex items-center gap-3">
             <div className="hidden md:block">
-              <SearchBar onSearch={handleSearch} className="w-64" />
+              {/* Shrink search bar */}
+              <SearchBar onSearch={handleSearch} className="w-40" />
             </div>
             <div className="hidden md:block">
               <LanguageToggle
