@@ -24,7 +24,7 @@ export default function Support() {
               className="w-full bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-semibold shadow-md"
             >
               <a
-                href="https://www.paypal.com/donate"
+                href="https://www.paypal.com/donate/?hosted_button_id=A2CABJPWJ38LY"
                 target="_blank"
                 rel="noopener noreferrer"
               >
