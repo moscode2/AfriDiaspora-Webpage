@@ -221,9 +221,9 @@
   ],
   "contactTitle": "Contacter l’équipe éditoriale",
   "contactText": "Pour toute demande éditoriale, suggestion ou question, contactez :",
-  "contactEmail": "Courriel éditorial : editorial@afrieuropamedia.com",
-  "contactTips": "Suggestions d’articles : tips@afrieuropamedia.com",
-  "contactCorrections": "Corrections : corrections@afrieuropamedia.com",
+  "contactEmail": "Courriel éditorial : editorial@afrieuropanews@gmail.com",
+  "contactTips": "Suggestions d’articles : tips@afrieuropanews@gmail.com",
+  "contactCorrections": "Corrections : corrections@afrieuropanews@gmail.com",
   "privacy": {
     "title": "Politique de confidentialité",
     "lastUpdated": "Dernière mise à jour : septembre 2025",
@@ -283,7 +283,7 @@
     "changesTitle": "Modifications de la politique",
     "changesText": "Nous pouvons mettre à jour cette politique et indiquer la date de 'dernière mise à jour'.",
     "contactTitle": "Nous contacter",
-    "contactEmail": "privacy@Europanews.com",
+    "contactEmail": "afrieuropanews@gmail.com",
     "contactAddress": "AfriEuropa Media, 123 Berlin, Germany"
   }
 }
