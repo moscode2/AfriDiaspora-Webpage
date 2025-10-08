@@ -145,7 +145,7 @@
     "info": {
       "title": "Our Contact Details",
       "email": "Email Address",
-      "emailValue": "contact@diasporalens.eu",
+      "emailValue": "afrieuropanews@gmail.com",
       "editorialHotline": "Editorial Hotline",
       "phoneValue": "+33 1 23 45 67 89",
       "hours": "Available Monday to Friday, 9am–6pm",
@@ -226,7 +226,7 @@
   "contactCorrections": "Corrections: afrieuropamedia.com",
   "privacy": {
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: September, 2025",
+    "lastUpdated": "Last updated: October, 2025",
     "introTitle": "Introduction",
     "introText": "AfriEuropa (\"we,\" \"our,\" or \"us\") respects your privacy...",
     "infoTitle": "Information We Collect",
@@ -283,7 +283,7 @@
     "changesTitle": "Changes to This Policy",
     "changesText": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the 'Last updated' date.",
     "contactTitle": "Contact Us",
-    "contactEmail": "privacy@AfriEuropa.com",
+    "contactEmail": "afrieuropanews@gmail.com",
     "contactAddress": "AfriEuropa Media, 123 Berlin, Germany"
   }
 }
